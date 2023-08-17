@@ -5,8 +5,8 @@
 Подразумевается, что коэффициенты и корни уравнения действительные числа*/
 
 void coefficients_scanf(double *a, double *b, double *c); //ввод и проверка коэффициентов
-void linear_equation(double b, double c, double *x1); //решение линейного уравнения(если квадратное сводится к таковому)
-void quadratic_equation(double a, double b, double c, double *x1, double *x2); //решение квадратного уравнения
+void linear_equation(double b, double c); //решение линейного уравнения(если квадратное сводится к таковому)
+void quadratic_equation(double a, double b, double c); //решение квадратного уравнения
 
 int main(void)
 {
@@ -14,19 +14,16 @@ int main(void)
     double a = 0;
     double b = 0;
     double c = 0;
-    //корни
-    double x1 = 0;
-    double x2 = 0;
 
     coefficients_scanf(&a, &b, &c);
 
     if (fabs(a) < __DBL_EPSILON__)
     {
-        linear_equation(b, c, &x1);
+        linear_equation(b, c);
     }
     else
     {
-        quadratic_equation(a, b, c, &x1, &x2);
+        quadratic_equation(a, b, c);
 
     }
     return 0;
@@ -56,7 +53,7 @@ void coefficients_scanf(double *a, double *b, double *c)
     }
 }
 
-void linear_equation(double b, double c, double *x1)
+void linear_equation(double b, double c)
 {
     if(fabs(b) < __DBL_EPSILON__ && fabs(c) < __DBL_EPSILON__)
     {
@@ -68,19 +65,19 @@ void linear_equation(double b, double c, double *x1)
     }
     else
     {
-        *x1 = - (c / b);
-        printf("%lf - корень уравнения\n", *x1);
+        double x = - (c / b);
+        printf("%lf - корень уравнения\n", x);
     }
 }
 
-void quadratic_equation(double a, double b, double c, double *x1, double *x2)
+void quadratic_equation(double a, double b, double c)
 {
     double D = b * b - 4 * a * c; //дискриминант
 
     if(fabs(D) < __DBL_EPSILON__)
     {
-        *x1 = - (b / (2 * a));
-        printf("%lf - корень уравнения\n", *x1);
+        double x = - (b / (2 * a));
+        printf("%lf - корень уравнения\n", x);
     }
     else if(D < 0)
     {
@@ -88,8 +85,8 @@ void quadratic_equation(double a, double b, double c, double *x1, double *x2)
     }
     else
     {
-        *x1 = (-b - sqrt(D)) / (2 * a);
-        *x2 = (-b + sqrt(D)) / (2 * a);
-        printf("%lf и %lf - корни уравнения\n", *x1, *x2);
+        double x1 = (-b - sqrt(D)) / (2 * a);
+        double x2 = (-b + sqrt(D)) / (2 * a);
+        printf("%lf и %lf - корни уравнения\n", x1, x2);
     }
 }
