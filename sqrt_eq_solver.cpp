@@ -4,9 +4,9 @@
 /*программма решает уравнение вида a*x**2+b*x+c=0, получая на вход коэффициенты a, b и c.
 Подразумевается, что коэффициенты и корни уравнения действительные числа*/
 
-void c_scanf(double *a, double *b, double *c); //ввод и проверка коэффициентов
-void ln_eq(double b, double c, double *x1); //решение линейного уравнения(если квадратное сводится к таковому)
-void sq_eq(double a, double b, double c, double *x1, double *x2); //решение квадратного уравнения
+void coefficients_scanf(double *a, double *b, double *c); //ввод и проверка коэффициентов
+void linear_equation(double b, double c, double *x1); //решение линейного уравнения(если квадратное сводится к таковому)
+void quadratic_equation(double a, double b, double c, double *x1, double *x2); //решение квадратного уравнения
 
 int main(void)
 {
@@ -18,33 +18,45 @@ int main(void)
     double x1 = 0;
     double x2 = 0;
 
-    printf("Введите коэффициенты квадратного уравнения: ");
-    c_scanf(&a, &b, &c);
+    coefficients_scanf(&a, &b, &c);
 
     if (fabs(a) < __DBL_EPSILON__)
     {
-        ln_eq(b, c, &x1);
+        linear_equation(b, c, &x1);
     }
     else
     {
-        sq_eq(a, b, c, &x1, &x2);
+        quadratic_equation(a, b, c, &x1, &x2);
 
     }
     return 0;
 }
 
-void c_scanf(double *k1, double *k2, double *k3)
+void coefficients_scanf(double *a, double *b, double *c)
 {
+    printf("Введите коэффициент перед x^2: ");
     while(1)
     {
-        scanf("%lf", k1);
-        scanf("%lf", k2);
-        scanf("%lf", k3);
+        scanf("%lf", a);
+        break;
+    }
+
+    printf("Введите коэффициент перед x: ");
+    while(1)
+    {
+        scanf("%lf", b);
+        break;
+    }
+
+    printf("Введите свободный член: ");
+    while(1)
+    {
+        scanf("%lf", c);
         break;
     }
 }
 
-void ln_eq(double b, double c, double *x1)
+void linear_equation(double b, double c, double *x1)
 {
     if(fabs(b) < __DBL_EPSILON__ && fabs(c) < __DBL_EPSILON__)
     {
@@ -61,7 +73,7 @@ void ln_eq(double b, double c, double *x1)
     }
 }
 
-void sq_eq(double a, double b, double c, double *x1, double *x2)
+void quadratic_equation(double a, double b, double c, double *x1, double *x2)
 {
     double D = b * b - 4 * a * c; //дискриминант
 
