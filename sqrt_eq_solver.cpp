@@ -11,10 +11,11 @@ void clean_buff(void); //очищает буфер для корректного
 
 int main(void)
 {
-    //коэффициенты
+    //коэффициенты уравнения
     double a = 0;
     double b = 0;
     double c = 0;
+
     printf("Введите коэффициент перед x^2: ");
     check_scanf(&a);
 
