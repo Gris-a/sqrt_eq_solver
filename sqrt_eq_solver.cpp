@@ -4,9 +4,10 @@
 /*программма решает уравнение вида a*x**2+b*x+c=0, получая на вход коэффициенты a, b и c.
 Подразумевается, что коэффициенты и корни уравнения действительные числа*/
 
-void coefficients_scanf(double *a, double *b, double *c); //ввод и проверка коэффициентов
+void check_scanf(double *a, double *b, double *c); //ввод и проверка коэффициентов
 void linear_equation(double b, double c); //решение линейного уравнения(если квадратное сводится к таковому)
 void quadratic_equation(double a, double b, double c); //решение квадратного уравнения
+void clean_buff(void); //очищает буфер для корректного считывания scanf
 
 int main(void)
 {
@@ -15,7 +16,7 @@ int main(void)
     double b = 0;
     double c = 0;
 
-    coefficients_scanf(&a, &b, &c);
+    check_scanf(&a, &b, &c);
 
     if (fabs(a) < __DBL_EPSILON__)
     {
@@ -29,27 +30,54 @@ int main(void)
     return 0;
 }
 
-void coefficients_scanf(double *a, double *b, double *c)
+void check_scanf(double *a, double *b, double *c)
 {
+    char ncheck = '\0'; //проверка строки на \n после числа
+    int scanf_out = 0;
+
     printf("Введите коэффициент перед x^2: ");
     while(1)
     {
-        scanf("%lf", a);
-        break;
+        scanf_out = scanf("%lf%c", a, &ncheck);
+        if((scanf_out != 2) || (ncheck != '\n'))
+        {
+            printf("Некорректный ввод, попробуйте снова: ");
+            clean_buff();
+        }
+        else
+        {
+            break;
+        }
     }
 
     printf("Введите коэффициент перед x: ");
     while(1)
     {
-        scanf("%lf", b);
-        break;
+        scanf_out = scanf("%lf%c", b, &ncheck);
+        if((scanf_out != 2) || (ncheck != '\n'))
+        {
+            printf("Некорректный ввод, попробуйте снова: ");
+            clean_buff();
+        }
+        else
+        {
+            break;
+        }
     }
 
-    printf("Введите свободный член: ");
+    printf("Введите свободный коэффициент: ");
     while(1)
     {
-        scanf("%lf", c);
-        break;
+        scanf_out = scanf("%lf%c", c, &ncheck);
+        if((scanf_out != 2) || (ncheck != '\n'))
+        {
+            printf("Некорректный ввод, попробуйте снова: ");
+            clean_buff();
+        }
+        else
+        {
+            break;
+        }
     }
 }
 
@@ -66,6 +94,7 @@ void linear_equation(double b, double c)
     else
     {
         double x = - (c / b);
+
         printf("%lf - корень уравнения\n", x);
     }
 }
@@ -77,6 +106,7 @@ void quadratic_equation(double a, double b, double c)
     if(fabs(D) < __DBL_EPSILON__)
     {
         double x = - (b / (2 * a));
+
         printf("%lf - корень уравнения\n", x);
     }
     else if(D < 0)
@@ -87,6 +117,17 @@ void quadratic_equation(double a, double b, double c)
     {
         double x1 = (-b - sqrt(D)) / (2 * a);
         double x2 = (-b + sqrt(D)) / (2 * a);
+
         printf("%lf и %lf - корни уравнения\n", x1, x2);
+    }
+}
+
+void clean_buff(void)
+{
+    int ch = 0;
+
+    while(ch != '\n' && ch != EOF)
+    {
+        ch = getchar();
     }
 }
