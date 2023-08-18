@@ -25,7 +25,6 @@ int main(void)
     else
     {
         quadratic_equation(a, b, c);
-
     }
     return 0;
 }
