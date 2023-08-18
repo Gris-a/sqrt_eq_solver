@@ -101,7 +101,7 @@ void clean_buff(void)
 {
     int ch = 0;
 
-    while(ch != '\n' && ch != EOF)
+    while(ch != '\n')
     {
         ch = getchar();
     }
