@@ -16,6 +16,7 @@ int quadratic_equation(double a, double b, double c, double *x1, double *x2); //
 int qlinear_equation(double b, double c, double *x1, double *x2); //решение линейного уравнения
 
 void get_coefficients(double *a, double *b, double *c);
+void print_rts(int num, double x1, double x2);
 void check_scan_f(double *k); //проверка ввода на float
 void clean_buff(void);
 
@@ -38,23 +39,7 @@ int main(void)
 
     get_coefficients(&a, &b, &c);
     num = solve_equation(a, b, c, &x1, &x2);
-    switch(num)
-    {
-        case INF_RTS:
-            printf("Корнем может быть любое действительное число.\n");
-            break;
-        case 0:
-            printf("Нет корней.\n");
-            break;
-        case 1:
-            printf("%g - корень уравнения.\n", x1);
-            break;
-        case 2:
-            printf("%g и %g - корни уравнения.\n", x1, x2);
-            break;
-        default:
-            break;
-    }
+    print_rts(num, x1, x2);
     */
 
     run_all_tests();
@@ -120,6 +105,27 @@ void get_coefficients(double *a, double *b, double *c)
 
     printf("Введите свободный член: ");
     check_scan_f(c);
+}
+
+void print_rts(int num, double x1, double x2)
+{
+        switch(num)
+    {
+        case INF_RTS:
+            printf("Корнем может быть любое действительное число.\n");
+            break;
+        case 0:
+            printf("Нет корней.\n");
+            break;
+        case 1:
+            printf("%g - корень уравнения.\n", x1);
+            break;
+        case 2:
+            printf("%g и %g - корни уравнения.\n", x1, x2);
+            break;
+        default:
+            break;
+    }
 }
 
 void check_scan_f(double *k)
