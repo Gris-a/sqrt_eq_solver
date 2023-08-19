@@ -1,19 +1,22 @@
 #include <stdio.h>
 #include <math.h>
 
-#define M_ERR 0.00000001
-#define INF_RTS -1
+/*решение квадратного уравнения с действительнами коэффициентами a, b и c и корнями x1 и x2*/
+
+#define M_ERR 0.00000001 //погрешность сравнения float
+#define INF_RTS -1 //бесконечное количество корней
+
 #define RUN_TEST(a, b, c, x1_exp, x2_exp, num_exp)\
 	counter++;\
     if (test_solve_equation(a, b, c, x1_exp, x2_exp, num_exp))\
         counter_true++;
 
-int solve_equation(double a, double b, double c, double *x1, double *x2);
-int quadratic_equation(double a, double b, double c, double *x1, double *x2);
-int qlinear_equation(double b, double c, double *x1, double *x2);
+int solve_equation(double a, double b, double c, double *x1, double *x2); //решение уравнения
+int quadratic_equation(double a, double b, double c, double *x1, double *x2); //решение квадратного уравнения
+int qlinear_equation(double b, double c, double *x1, double *x2); //решение линейного уравнения
 
 void get_coefficients(double *a, double *b, double *c);
-void check_scan_lf(double *k);
+void check_scan_f(double *k); //проверка ввода на float
 void clean_buff(void);
 
 int test_solve_equation(double a, double b, double c, double x1_exp, double x2_exp, int num_exp);
@@ -21,11 +24,38 @@ void run_all_tests(void);
 
 int main(void)
 {
-    /*double a = 0, b = 0, c = 0;
-    double x1 = 0, x2 = 0;
-    int num = 0;
+    /*
+    //коэффициенты уравнения
+    double a = 0;
+    double b = 0;
+    double c = 0;
+
+    //корни уравнения
+    double x1 = 0;
+    double x2 = 0;
+
+    int num = 0; //количество корней
+
     get_coefficients(&a, &b, &c);
-    num = solve_equation(a, b, c, &x1, &x2);*/
+    num = solve_equation(a, b, c, &x1, &x2);
+    switch(num)
+    {
+        case INF_RTS:
+            printf("Корнем может быть любое действительное число.\n");
+            break;
+        case 0:
+            printf("Нет корней.\n");
+            break;
+        case 1:
+            printf("%g - корень уравнения.\n", x1);
+            break;
+        case 2:
+            printf("%g и %g - корни уравнения.\n", x1, x2);
+            break;
+        default:
+            break;
+    }
+    */
 
     run_all_tests();
 }
@@ -41,7 +71,7 @@ int solve_equation(double a, double b, double c, double *x1, double *x2)
 
 int quadratic_equation(double a, double b, double c, double *x1, double *x2)
 {
-    double D = b * b - 4 * a * c;
+    double D = b * b - 4 * a * c; //дискриминант
 
     if(fabs(D) < M_ERR)
     {
@@ -83,18 +113,18 @@ int qlinear_equation(double b, double c, double *x1, double *x2)
 void get_coefficients(double *a, double *b, double *c)
 {
     printf("Введите коэффициент перед x^2: ");
-    check_scan_lf(a);
+    check_scan_f(a);
 
     printf("Введите коэффициент перед x: ");
-    check_scan_lf(b);
+    check_scan_f(b);
 
     printf("Введите свободный член: ");
-    check_scan_lf(c);
+    check_scan_f(c);
 }
 
-void check_scan_lf(double *k)
+void check_scan_f(double *k)
 {
-    char ncheck = '\0'; //проверка строки на \n после числа
+    char ncheck = '\0';
     int scanf_out = 0;
 
     while(1)
@@ -138,9 +168,12 @@ void run_all_tests(void)
 
 	RUN_TEST(0, 0, 0, 0, 0, INF_RTS);
     RUN_TEST(0, 0, 5, 0, 0, 0);
+    RUN_TEST(0, 2, 5, -2.5, -2.5, 1);
     RUN_TEST(1, -4, 4, 2, 2, 1);
     RUN_TEST(1, -5, 6, 2, 3, 2);
     RUN_TEST(1, 1, 1, 0, 0, 0);
+    RUN_TEST(1, 0, 0, 0, 0, 1);
+    RUN_TEST(1, 0, -1, -1, 1, 2);
 
 	printf("%zu/%zu tests passed\n", counter_true, counter);
 }
