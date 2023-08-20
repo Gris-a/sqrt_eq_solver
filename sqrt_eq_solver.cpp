@@ -8,7 +8,7 @@
 
 #define RUN_TEST(a, b, c, x1_exp, x2_exp, num_exp)\
 	counter++;\
-    if (test_solve_equation(a, b, c, x1_exp, x2_exp, num_exp))\
+    if(test_solve_equation(a, b, c, x1_exp, x2_exp, num_exp))\
         counter_true++;
 
 int solve_equation(double a, double b, double c, double *x1, double *x2); //решение уравнения
@@ -109,7 +109,7 @@ void get_coefficients(double *a, double *b, double *c)
 
 void print_rts(int num, double x1, double x2)
 {
-        switch(num)
+    switch(num)
     {
         case INF_RTS:
             printf("Корнем может быть любое действительное число.\n");
