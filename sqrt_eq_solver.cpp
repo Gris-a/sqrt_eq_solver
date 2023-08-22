@@ -23,15 +23,15 @@ void run_all_tests(void);
 
 struct coefficients
 {
-    double a;
-    double b;
-    double c;
+    double a = 0;
+    double b = 0;
+    double c = 0;
 };
 
 struct roots
 {
-    double x1;
-    double x2;
+    double x1 = 0;
+    double x2 = 0;
 };
 
 int main(void)
