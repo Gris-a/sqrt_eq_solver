@@ -25,7 +25,7 @@ void run_all_tests(void);
 
 int main(void)
 {
-    printf("Программа решает квадратное уравнение.\n");
+    /*printf("Программа решает квадратное уравнение.\n");
     printf("ZAG, 2023.\n\n");
     //коэффициенты уравнения
     double a = 0;
@@ -58,14 +58,15 @@ int main(void)
         default:
             printf("Не ожидаемое количество корней.\n");
             break;
-    }
+    }*/
+    run_all_tests();
 }
 
 int solve_equation(double a, double b, double c, double *x1, double *x2)
 {
-    assert(isfinite(a) && a != NULL);
-    assert(isfinite(b) && b != NULL);
-    assert(isfinite(c) && c != NULL);
+    assert(isfinite(a));
+    assert(isfinite(b));
+    assert(isfinite(c));
     assert(x1 != x2);
 
     return (fabs(a) < M_ERR) ? qlinear_equation(b, c, x1, x2) : quadratic_equation(a, b, c, x1, x2);
@@ -170,12 +171,15 @@ void run_all_tests(void)
 
 	RUN_TEST(0, 0, 0, 0, 0, INF_RTS, counter, counter_true);
     RUN_TEST(0, 0, 5, 0, 0, 0, counter, counter_true);
+    RUN_TEST(0, 5, 0, 0, 0, 1, counter, counter_true);
     RUN_TEST(0, 2, 5, -2.5, -2.5, 1, counter, counter_true);
+    RUN_TEST(1, 0, 5, 0, 0, 0, counter, counter_true);
+    RUN_TEST(1, 1, 0, -1, 0, 2, counter, counter_true);
     RUN_TEST(1, -4, 4, 2, 2, 1, counter, counter_true);
     RUN_TEST(1, -5, 6, 2, 3, 2, counter, counter_true);
     RUN_TEST(1, 1, 1, 0, 0, 0, counter, counter_true);
     RUN_TEST(1, 0, 0, 0, 0, 1, counter, counter_true);
     RUN_TEST(1, 0, -1, -1, 1, 2, counter, counter_true);
 
-	printf("%llu/%lluu tests passed\n", counter_true, counter);
+	printf("%llu/%llu tests passed\n", counter_true, counter);
 }
