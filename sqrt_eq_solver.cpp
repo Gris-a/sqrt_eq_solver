@@ -63,9 +63,9 @@ int main(void)
 
 int solve_equation(double a, double b, double c, double *x1, double *x2)
 {
-    assert(isfinite(a));
-    assert(isfinite(b));
-    assert(isfinite(c));
+    assert(isfinite(a) && !isnan(a));
+    assert(isfinite(b) && !isnan(b));
+    assert(isfinite(c) && !isnan(c));
     assert(x1 != x2);
 
     if(fabs(a) < M_ERR)
