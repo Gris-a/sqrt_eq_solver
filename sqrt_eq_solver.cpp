@@ -63,16 +63,12 @@ int main(void)
 
 int solve_equation(double a, double b, double c, double *x1, double *x2)
 {
-    assert(isfinite(a) && !isnan(a));
-    assert(isfinite(b) && !isnan(b));
-    assert(isfinite(c) && !isnan(c));
+    assert(isfinite(a) && a != NULL);
+    assert(isfinite(b) && b != NULL);
+    assert(isfinite(c) && c != NULL);
     assert(x1 != x2);
 
-    if(fabs(a) < M_ERR)
-    {
-        return qlinear_equation(b, c, x1, x2);
-    }
-    return quadratic_equation(a, b, c, x1, x2);
+    return (fabs(a) < M_ERR) ? qlinear_equation(b, c, x1, x2) : quadratic_equation(a, b, c, x1, x2);
 }
 
 int quadratic_equation(double a, double b, double c, double *x1, double *x2)
