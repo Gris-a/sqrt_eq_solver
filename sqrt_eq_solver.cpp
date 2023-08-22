@@ -23,15 +23,15 @@ void run_all_tests(void);
 
 struct coefficients
 {
-    double a = 0;
-    double b = 0;
-    double c = 0;
+    double a = 0.0;
+    double b = 0.0;
+    double c = 0.0;
 };
 
 struct roots
 {
-    double x1 = 0;
-    double x2 = 0;
+    double x1 = 0.0;
+    double x2 = 0.0;
 };
 
 int main(void)
@@ -39,9 +39,9 @@ int main(void)
     printf("Программа решает квадратное уравнение.\n");
     printf("ZAG, 2023.\n\n");
     //коэффициенты уравнения
-    struct coefficients coef = {0, 0, 0};
+    struct coefficients coef = {0.0, 0.0, 0.0};
     //корни уравнения
-    struct roots rts = {0, 0};
+    struct roots rts = {0.0, 0.0};
     //количество корней
     int num = 0;
 
@@ -147,7 +147,7 @@ void check_scan_f(double *k)
 
     while(1)
     {
-        scanf_out = scanf("%lf%c", k, &ncheck);
+        scanf_out = scanf("%lg%c", k, &ncheck);
         if((scanf_out != 2) || (ncheck != '\n'))
         {
             printf("Некорректный ввод, попробуйте снова: ");
@@ -162,12 +162,7 @@ void check_scan_f(double *k)
 
 void clean_buff(void)
 {
-    int ch = 0;
-
-    while(ch != '\n')
-    {
-        ch = getchar();
-    }
+    while(getchar() != '\n');
 }
 
 void run_test(struct coefficients coef, struct roots rts_exp, int num_exp, size_t* counter, size_t* counter_true)
