@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <math.h>
+#include<assert.h>
 
 /*решение квадратного уравнения с действительнами коэффициентами a, b и c и корнями x1 и x2*/
 
 #define M_ERR 0.00000001 //погрешность сравнения float
 #define INF_RTS -1 //бесконечное количество корней
 
-#define RUN_TEST(a, b, c, x1_exp, x2_exp, num_exp)\
+#define RUN_TEST(a, b, c, x1_exp, x2_exp, num_exp, counter, counter_true)\
 	counter++;\
     if(test_solve_equation(a, b, c, x1_exp, x2_exp, num_exp))\
         counter_true++;
@@ -16,7 +17,6 @@ int quadratic_equation(double a, double b, double c, double *x1, double *x2); //
 int qlinear_equation(double b, double c, double *x1, double *x2); //решение линейного уравнения
 
 void get_coefficients(double *a, double *b, double *c);
-void print_rts(int num, double x1, double x2);
 void check_scan_f(double *k); //проверка ввода на float
 void clean_buff(void);
 
@@ -40,11 +40,34 @@ int main(void)
 
     get_coefficients(&a, &b, &c);
     num = solve_equation(a, b, c, &x1, &x2);
-    print_rts(num, x1, x2);
+
+    switch(num)
+    {
+        case INF_RTS:
+            printf("Корнем может быть любое действительное число.\n");
+            break;
+        case 0:
+            printf("Нет корней.\n");
+            break;
+        case 1:
+            printf("%lg - корень уравнения.\n", x1);
+            break;
+        case 2:
+            printf("%lg и %lg - корни уравнения.\n", x1, x2);
+            break;
+        default:
+            printf("Не ожидаемое количество корней.\n");
+            break;
+    }
 }
 
 int solve_equation(double a, double b, double c, double *x1, double *x2)
 {
+    assert(isfinite(a));
+    assert(isfinite(b));
+    assert(isfinite(c));
+    assert(x1 != x2);
+
     if(fabs(a) < M_ERR)
     {
         return qlinear_equation(b, c, x1, x2);
@@ -105,28 +128,6 @@ void get_coefficients(double *a, double *b, double *c)
     check_scan_f(c);
 }
 
-void print_rts(int num, double x1, double x2)
-{
-    switch(num)
-    {
-        case INF_RTS:
-            printf("Корнем может быть любое действительное число.\n");
-            break;
-        case 0:
-            printf("Нет корней.\n");
-            break;
-        case 1:
-            printf("%g - корень уравнения.\n", x1);
-            break;
-        case 2:
-            printf("%g и %g - корни уравнения.\n", x1, x2);
-            break;
-        default:
-            printf("Не ожидаемое количество корней.\n");
-            break;
-    }
-}
-
 void check_scan_f(double *k)
 {
     char ncheck = '\0';
@@ -168,17 +169,17 @@ int test_solve_equation(double a, double b, double c, double x1_exp, double x2_e
 
 void run_all_tests(void)
 {
-	size_t counter = 0;
-	size_t counter_true = 0;
+	unsigned long long counter = 0;
+	unsigned long long counter_true = 0;
 
-	RUN_TEST(0, 0, 0, 0, 0, INF_RTS);
-    RUN_TEST(0, 0, 5, 0, 0, 0);
-    RUN_TEST(0, 2, 5, -2.5, -2.5, 1);
-    RUN_TEST(1, -4, 4, 2, 2, 1);
-    RUN_TEST(1, -5, 6, 2, 3, 2);
-    RUN_TEST(1, 1, 1, 0, 0, 0);
-    RUN_TEST(1, 0, 0, 0, 0, 1);
-    RUN_TEST(1, 0, -1, -1, 1, 2);
+	RUN_TEST(0, 0, 0, 0, 0, INF_RTS, counter, counter_true);
+    RUN_TEST(0, 0, 5, 0, 0, 0, counter, counter_true);
+    RUN_TEST(0, 2, 5, -2.5, -2.5, 1, counter, counter_true);
+    RUN_TEST(1, -4, 4, 2, 2, 1, counter, counter_true);
+    RUN_TEST(1, -5, 6, 2, 3, 2, counter, counter_true);
+    RUN_TEST(1, 1, 1, 0, 0, 0, counter, counter_true);
+    RUN_TEST(1, 0, 0, 0, 0, 1, counter, counter_true);
+    RUN_TEST(1, 0, -1, -1, 1, 2, counter, counter_true);
 
-	printf("%zu/%zu tests passed\n", counter_true, counter);
+	printf("%llu/%lluu tests passed\n", counter_true, counter);
 }
