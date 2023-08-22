@@ -75,8 +75,8 @@ int solve_equation(struct coefficients coef, struct roots *rts)
     assert(isfinite(coef.a));
     assert(isfinite(coef.b));
     assert(isfinite(coef.c));
-    assert(&(*rts).x1 != NULL);
-    assert(&(*rts).x1 != NULL);
+    assert(&rts->x1 != NULL);
+    assert(&rts->x1 != NULL);
 
 
     return (float_comp(coef.a, 0)) ? qlinear_equation(coef, rts) : quadratic_equation(coef, rts);
@@ -88,7 +88,7 @@ int quadratic_equation(struct coefficients coef, struct roots *rts)
 
     if(float_comp(D, 0))
     {
-        (*rts).x1 = (*rts).x2 = - (coef.b / (2 * coef.a));
+        rts->x1 = rts->x2 = - (coef.b / (2 * coef.a));
 
         return ONE_RT;
     }
@@ -98,8 +98,8 @@ int quadratic_equation(struct coefficients coef, struct roots *rts)
     }
     else
     {
-        (*rts).x1 = (-coef.b - sqrt(D)) / (2 * coef.a);
-        (*rts).x2 = (-coef.b + sqrt(D)) / (2 * coef.a);
+        rts->x1 = (-coef.b - sqrt(D)) / (2 * coef.a);
+        rts->x2 = (-coef.b + sqrt(D)) / (2 * coef.a);
 
         return TWO_RTS;
     }
@@ -117,7 +117,7 @@ int qlinear_equation(struct coefficients coef, struct roots *rts)
     }
     else
     {
-        (*rts).x1 = (*rts).x2 = - (coef.c / coef.b);
+        rts->x1 = rts->x2 = - (coef.c / coef.b);
 
         return ONE_RT;
     }
@@ -131,13 +131,13 @@ int float_comp(double a, double b)
 void get_coefficients(struct coefficients *coef)
 {
     printf("Введите коэффициент перед x^2: ");
-    check_scan_f(&(*coef).a);
+    check_scan_f(&coef->a);
 
     printf("Введите коэффициент перед x: ");
-    check_scan_f(&(*coef).b);
+    check_scan_f(&coef->b);
 
     printf("Введите свободный член: ");
-    check_scan_f(&(*coef).c);
+    check_scan_f(&coef->c);
 }
 
 void check_scan_f(double *k)
