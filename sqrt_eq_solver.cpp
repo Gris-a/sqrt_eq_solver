@@ -7,11 +7,6 @@
 #define M_ERR 0.00000001 //погрешность сравнения float
 #define INF_RTS -1 //бесконечное количество корней
 
-#define RUN_TEST(a, b, c, x1_exp, x2_exp, num_exp, counter, counter_true)\
-	counter++;\
-    if(test_solve_equation(a, b, c, x1_exp, x2_exp, num_exp))\
-        counter_true++;
-
 int solve_equation(double a, double b, double c, double *x1, double *x2); //решение уравнения
 int quadratic_equation(double a, double b, double c, double *x1, double *x2); //решение квадратного уравнения
 int qlinear_equation(double b, double c, double *x1, double *x2); //решение линейного уравнения
@@ -21,6 +16,7 @@ void check_scan_f(double *k); //проверка ввода на float
 void clean_buff(void); //очистка буффера ввода
 
 int test_solve_equation(double a, double b, double c, double x1_exp, double x2_exp, int num_exp);
+void run_test(double a, double b, double c, double x1_exp, double x2_exp, int num_exp, size_t* counter, size_t* counter_true);
 void run_all_tests(void);
 
 int main(void)
@@ -164,22 +160,31 @@ int test_solve_equation(double a, double b, double c, double x1_exp, double x2_e
 	return (num == num_exp && ((fabs(x1 - x1_exp) < M_ERR && fabs(x2 - x2_exp) < M_ERR) || (fabs(x1 - x2_exp) < M_ERR && fabs(x2 - x1_exp) < M_ERR)));
 }
 
+void run_test(double a, double b, double c, double x1_exp, double x2_exp, int num_exp, size_t* counter, size_t* counter_true)
+{
+	(*counter)++;
+    if(test_solve_equation(a, b, c, x1_exp, x2_exp, num_exp))
+    {
+        (*counter_true)++;
+    }
+}
+
 void run_all_tests(void)
 {
-	unsigned long long counter = 0;
-	unsigned long long counter_true = 0;
+    size_t counter = 0;
+	size_t counter_true = 0;
 
-	RUN_TEST(0, 0, 0, 0, 0, INF_RTS, counter, counter_true);
-    RUN_TEST(0, 0, 5, 0, 0, 0, counter, counter_true);
-    RUN_TEST(0, 5, 0, 0, 0, 1, counter, counter_true);
-    RUN_TEST(0, 2, 5, -2.5, -2.5, 1, counter, counter_true);
-    RUN_TEST(1, 0, 5, 0, 0, 0, counter, counter_true);
-    RUN_TEST(1, 1, 0, -1, 0, 2, counter, counter_true);
-    RUN_TEST(1, -4, 4, 2, 2, 1, counter, counter_true);
-    RUN_TEST(1, -5, 6, 2, 3, 2, counter, counter_true);
-    RUN_TEST(1, 1, 1, 0, 0, 0, counter, counter_true);
-    RUN_TEST(1, 0, 0, 0, 0, 1, counter, counter_true);
-    RUN_TEST(1, 0, -1, -1, 1, 2, counter, counter_true);
+	run_test(0, 0, 0, 0, 0, INF_RTS, &counter, &counter_true);
+    run_test(0, 0, 5, 0, 0, 0, &counter, &counter_true);
+    run_test(0, 5, 0, 0, 0, 1, &counter, &counter_true);
+    run_test(0, 2, 5, -2.5, -2.5, 1, &counter, &counter_true);
+    run_test(1, 0, 5, 0, 0, 0, &counter, &counter_true);
+    run_test(1, 1, 0, -1, 0, 2, &counter, &counter_true);
+    run_test(1, -4, 4, 2, 2, 1, &counter, &counter_true);
+    run_test(1, -5, 6, 2, 3, 2, &counter, &counter_true);
+    run_test(1, 1, 1, 0, 0, 0, &counter, &counter_true);
+    run_test(1, 0, 0, 0, 0, 1, &counter, &counter_true);
+    run_test(1, 0, -1, -1, 1, 2, &counter, &counter_true);
 
-	printf("%llu/%llu tests passed\n", counter_true, counter);
+	printf("%zu/%zu tests passed\n", counter_true, counter);
 }
