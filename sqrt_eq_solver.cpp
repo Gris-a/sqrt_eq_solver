@@ -122,6 +122,7 @@ void print_rts(int num, double x1, double x2)
             printf("%g и %g - корни уравнения.\n", x1, x2);
             break;
         default:
+            printf("Не ожидаемое количество корней.\n");
             break;
     }
 }
