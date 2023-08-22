@@ -25,7 +25,8 @@ void run_all_tests(void);
 
 int main(void)
 {
-    /*
+    printf("Программа решает квадратное уравнение.\n");
+    printf("ZAG, 2023.\n\n");
     //коэффициенты уравнения
     double a = 0;
     double b = 0;
@@ -40,9 +41,6 @@ int main(void)
     get_coefficients(&a, &b, &c);
     num = solve_equation(a, b, c, &x1, &x2);
     print_rts(num, x1, x2);
-    */
-
-    run_all_tests();
 }
 
 int solve_equation(double a, double b, double c, double *x1, double *x2)
