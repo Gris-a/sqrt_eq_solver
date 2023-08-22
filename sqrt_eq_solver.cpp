@@ -13,7 +13,7 @@ int qlinear_equation(double b, double c, double *x1, double *x2); //решени
 
 void get_coefficients(double *a, double *b, double *c);
 void check_scan_f(double *k); //проверка ввода на float
-void clean_buff(void); //очистка буффера ввода
+void clean_buff(void);
 
 int test_solve_equation(double a, double b, double c, double x1_exp, double x2_exp, int num_exp);
 void run_test(double a, double b, double c, double x1_exp, double x2_exp, int num_exp, size_t* counter, size_t* counter_true);
