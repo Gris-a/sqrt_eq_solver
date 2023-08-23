@@ -19,6 +19,8 @@ void get_coefficients(struct coefficients *coef);
 void check_scan_f(double *k); //проверка ввода на float
 void clean_buff(void);
 
+void printf_roots(struct roots rts, int nRoots);
+
 void run_test(double a, double b, double c, double x1_exp, double x2_exp, int num_exp, size_t* counter, size_t* counter_true);
 void run_all_tests(void);
 
@@ -48,26 +50,7 @@ int main(void)
 
     get_coefficients(&coef);
     num = solve_equation(coef, &rts);
-
-    switch(num)
-    {
-        case INF_RTS:
-            printf("Корнем может быть любое действительное число.\n");
-            break;
-        case ZERO_RTS:
-            printf("Нет корней.\n");
-            break;
-        case ONE_RT:
-            printf("%lg - корень уравнения.\n", rts.x1);
-            break;
-        case TWO_RTS:
-            printf("%lg и %lg - корни уравнения.\n", rts.x1, rts.x2);
-            break;
-        default:
-            printf("Не ожидаемое количество корней.\n");
-            break;
-    }
-
+    printf_roots(rts, num);
     run_all_tests();
 }
 
@@ -163,6 +146,28 @@ void check_scan_f(double *k)
 void clean_buff(void)
 {
     while(getchar() != '\n');
+}
+
+void printf_roots(struct roots rts, int nRoots)
+{
+        switch(nRoots)
+    {
+        case INF_RTS:
+            printf("Корнем может быть любое действительное число.\n");
+            break;
+        case ZERO_RTS:
+            printf("Нет корней.\n");
+            break;
+        case ONE_RT:
+            printf("%lg - корень уравнения.\n", rts.x1);
+            break;
+        case TWO_RTS:
+            printf("%lg и %lg - корни уравнения.\n", rts.x1, rts.x2);
+            break;
+        default:
+            printf("Не ожидаемое количество корней.\n");
+            break;
+    }
 }
 
 void run_test(double a, double b, double c, double x1_exp, double x2_exp, int num_exp, size_t* counter, size_t* counter_true)
