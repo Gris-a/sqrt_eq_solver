@@ -2,7 +2,9 @@
 #include <math.h>
 #include<assert.h>
 #include<string.h>
-
+/**
+ * @mainpage Quadratic equation solver
+*/
 /**
  * @file sqrt_eq_solver.cpp
  * @note Program solves quadratic equation.
