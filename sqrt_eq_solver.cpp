@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include<ctype.h>
 #include<assert.h>
 
 /*решение квадратного уравнения с действительнами коэффициентами a, b и c и корнями x1 и x2*/
@@ -18,7 +19,7 @@ void get_coefficients(struct coefficients *coef);
 void check_scan_f(double *k); //проверка ввода на float
 void clean_buff(void);
 
-void run_test(struct coefficients coef, struct roots rts_exp, int num_exp, size_t* counter, size_t* counter_true);
+void run_test(double a, double b, double c, double x1_exp, double x2_exp, int num_exp, size_t* counter, size_t* counter_true);
 void run_all_tests(void);
 
 struct coefficients
@@ -77,7 +78,6 @@ int solve_equation(struct coefficients coef, struct roots *rts)
     assert(isfinite(coef.c));
     assert(&rts->x1 != NULL);
     assert(&rts->x1 != NULL);
-
 
     return (float_comp(coef.a, 0)) ? qlinear_equation(coef, rts) : quadratic_equation(coef, rts);
 }
@@ -165,8 +165,10 @@ void clean_buff(void)
     while(getchar() != '\n');
 }
 
-void run_test(struct coefficients coef, struct roots rts_exp, int num_exp, size_t* counter, size_t* counter_true)
+void run_test(double a, double b, double c, double x1_exp, double x2_exp, int num_exp, size_t* counter, size_t* counter_true)
 {
+    struct coefficients coef = {a, b, c};
+    struct roots rts_exp = {x1_exp, x2_exp};
     struct roots rts = {0, 0};
 
 	int num = solve_equation(coef, &rts);
@@ -188,17 +190,17 @@ void run_all_tests(void)
     size_t counter = 0;
 	size_t counter_true = 0;
 
-	run_test({0, 0, 0}, {0, 0}, INF_RTS, &counter, &counter_true);
-    run_test({0, 0, 5}, {0, 0}, ZERO_RTS, &counter, &counter_true);
-    run_test({0, 5, 0}, {0, 0}, ONE_RT, &counter, &counter_true);
-    run_test({0, 2, 5}, {-2.5, -2.5}, ONE_RT, &counter, &counter_true);
-    run_test({1, 0, 5}, {0, 0}, ZERO_RTS, &counter, &counter_true);
-    run_test({1, 1, 0}, {-1, 0}, TWO_RTS, &counter, &counter_true);
-    run_test({1, -4, 4}, {2, 2}, ONE_RT, &counter, &counter_true);
-    run_test({1, -5, 6}, {2, 3}, TWO_RTS, &counter, &counter_true);
-    run_test({1, 1, 1}, {0, 0}, ZERO_RTS, &counter, &counter_true);
-    run_test({1, 0, 0}, {0, 0}, ONE_RT, &counter, &counter_true);
-    run_test({1, 0, -1}, {-1, 1}, TWO_RTS, &counter, &counter_true);
+	run_test(0, 0, 0, 0, 0, INF_RTS, &counter, &counter_true);
+    run_test(0, 0, 5, 0, 0, ZERO_RTS, &counter, &counter_true);
+    run_test(0, 5, 0, 0, 0, ONE_RT, &counter, &counter_true);
+    run_test(0, 2, 5, -2.5, -2.5, ONE_RT, &counter, &counter_true);
+    run_test(1, 0, 5, 0, 0, ZERO_RTS, &counter, &counter_true);
+    run_test(1, 1, 0, -1, 0, TWO_RTS, &counter, &counter_true);
+    run_test(1, -4, 4, 2, 2, ONE_RT, &counter, &counter_true);
+    run_test(1, -5, 6, 2, 3, TWO_RTS, &counter, &counter_true);
+    run_test(1, 1, 1, 0, 0, ZERO_RTS, &counter, &counter_true);
+    run_test(1, 0, 0, 0, 0, ONE_RT, &counter, &counter_true);
+    run_test(1, 0, -1, -1, 1, TWO_RTS, &counter, &counter_true);
 
 	printf("%zu/%zu tests passed\n", counter_true, counter);
 }
