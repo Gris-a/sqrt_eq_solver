@@ -5,103 +5,108 @@
 
 /**
  * @file sqrt_eq_solver.cpp
- * @note program that solves quadratic equation.
+ * @note Program solves quadratic equation.
  * @author Gris-a.
 */
+
 /**
  * @def M_ERR
- * @brief a measurement error.
- * used when compare float type.
+ * @brief A measurement error.
+ * Used when comparing @a float type.
  *
  * @def float_cmp(a, b)
- * @brief
+ * @brief Macros for comparing @a float variables @a a and @a b.
+ * Equals @b 1 if @b a == @b b otherwise @b 0.
  *
  * @enum nRoots
- * @brief number of quadratic equasion's roots constants.
- * @a INF_ROOTS for infinite number of roots, @a ZERO_ROOTS for zero roots, @a ONE_ROOT for one root and @a TWO_ROOTS for two roots.
+ * @brief Number of quadratic equasion's roots constants.
+ * @b INF_ROOTS for infinite number of roots, @b ZERO_ROOTS for zero roots, @b ONE_ROOT for one root and @b TWO_ROOTS for two roots.
  *
  * @struct coefficients
- * @brief
+ * @brief Coefficients of the quadratic equation.
+ * Contains three @a double variables.
  *
  * @struct roots
- * @brief
+ * @brief Roots of the quadratic equation.
+ * Contains two @a double variables.
  */
 //*****************************************solve equation functions*************************************************************************
 /**
  * @fn int solve_equation(struct coefficients, struct roots *)
- * @brief function that solves quadratic equation.
- * @param coef coefficients of the equation.
- * @param rts pointer on roots of the equation.
- * @return returns number of roots of the equation according to nRoots.
+ * @brief Solves quadratic equation.
+ * @param coef Coefficients of the equation.
+ * @param rts Pointer on roots of the equation.
+ * @return Returns number of roots of the equation according to @b nRoots.
+ * @note Checks if coefficients of equation are finite and @b rts is not a NULL pointer, then if @b rts->a equal to zero, calls linear_equation() otherwise quadratic_equation().
+Compares roots with zero.
  *
  * @fn void solve_equation_user(void)
- * @brief function that solves quadratic equation with user input-output.
+ * @brief Solves quadratic equation with user input-output.
+ * @note Generating coefficients and roots, calls get_coefficients(), checks on @b EOF, calls solve_equation() to solve equation and then printf_roots() to print the solution.
  *
  * @fn int quadratic_equation(struct coefficients, struct roots *)
- * @brief function that solves quadratic equation.
- * @param coef coefficients of the equation.
- * @param rts pointer on roots of the equation.
- * @return returns number of roots of the equation  according to @a nRoots.
- * @note in this function coef.a != 0.
+ * @brief Solves quadratic equation.
+ * @param coef Coefficients of the equation.
+ * @param rts Pointer on roots of the equation.
+ * @return Returns number of roots of the equation  according to @b nRoots.
  *
  * @fn int linear_equation(struct coefficients, struct roots *)
- * @brief function that solves linear equation.
- * @param coef coefficients of the equation.
- * @param rts pointer on roots of the equation.
- * @return returns number of roots of the equation according to nRoots.
- * @note in this function coef.a == 0.
+ * @brief FSlves linear equation.
+ * @param coef Coefficients of the equation.
+ * @param rts Pointer on roots of the equation.
+ * @return Returns number of roots of the equation according to @b nRoots.
 */
 //*****************************************input-output functions***************************************************************************
 /**
  * @fn int get_coefficients(struct coefficients *)
- * @brief function that gets coefficients of equation from stdin.
- * @param coef pointer on coefficients of equation.
- * @return @b 1 if EOF otherwise @b 0.
+ * @brief Gets coefficients of equation from @b stdin.
+ * @param coef Pointer on coefficients of equation.
+ * @return @b 1 if @b EOF otherwise @b 0.
+ * @note Calls check_scan_f() three times for @b coef->a, @b coef->b and @b coef->c, breaks when check_scan_f() finds @b EOF.
  *
  * @fn int check_scan_f(double *)
- * @brief function that gets double from stdout and checks it.
- * @param k pointer on coefficient of equation.
- * @return @b 1 if EOF otherwise @b 0.
+ * @brief Gets @a double from @b stdout and checks it.
+ * @param dbl Pointer on coefficient of equation.
+ * @return @b 1 If EOF otherwise @b 0.
+ * @note Checks input for @a double variable otherwise calls clean_buff() and asks to repeat input, breaks when clean_buff() finds @b EOF.
  *
  * @fn int clean_buff(void)
- * @brief function that clears buffer.
- * @return first founded @b '\n' or @b EOF.
+ * @brief Clears @b stdin buffer.
+ * @return First founded @b '\n' or @b EOF.
+ * @note calls getchar() until @b '\n' or @b EOF.
  *
  * @fn void printf_roots(struct roots, int)
- * @brief function that analyzes the number of roots and prints them.
+ * @brief Analyzes the number of roots and prints them properly.
  * @param rts roots of the equation.
  * @param nRoots number of roots of the equation.
 */
 //*****************************************unit tests***************************************************************************************
 /**
  * @fn int is_tested(int, char *[], const char [])
- * @brief function that checks if arg in argv[]
- * @param argc number of command line arguments.
- * @param argv array with pointers on command line arguments.
- * @param arg argument that is searching in @a argv.
- * @return @b 1 if @a arg in @a argv otherwise @b 0.
+ * @brief Checks if @b arg in @b argv[].
+ * @param argc Number of command line arguments.
+ * @param argv Array with pointers on command line arguments.
+ * @param arg Argument that is searching in @b argv.
+ * @return @b 1 if @b arg in @b argv otherwise @b 0.
  *
  * @fn void run_test(double, double, double, double, double, int, size_t *, size_t *)
- * @brief function that tests programm.
- * @param a
- * @param b
- * @param c
- * @param x1_exp
- * @param x2_exp
- * @param nRoots_exp
- * @param counter
- * @param counter_true
+ * @brief Function that tests programm.
+ * @param a, b, c Coefficients of quadratic equation.
+ * @param x1_exp, x2_exp Expected roots of the equation.
+ * @param nRoots_exp Expected number of roots.
+ * @param counter Counter of tests.
+ * @param counter_true Counter of sucсessful tests.
+ * @note  Prints if test is not succeeded.
  *
  * @fn void run_all_tests(void)
- * @brief
- *
+ * @brief Function that runs all test and prints number of successful tests.
+ * @note Initialize counter and counter_true for run_test() and run tests.
 */
 
 #define M_ERR 1e-6
-
 #define float_cmp(a, b) (fabs(a - b) < M_ERR)
 
-enum nRoots{INF_ROOTS = -1,@b
+enum nRoots{INF_ROOTS = -1,
             ZERO_ROOTS,
             ONE_ROOT,
             TWO_ROOTS
@@ -113,7 +118,7 @@ int quadratic_equation(struct coefficients coef, struct roots *rts);
 int linear_equation(struct coefficients coef, struct roots *rts);
 
 int get_coefficients(struct coefficients *coef);
-int check_scan_f(double *k);
+int check_scan_f(double *dbl);
 int clean_buff(void);
 void printf_roots(struct roots rts, int nRoots);
 
@@ -123,15 +128,15 @@ void run_all_tests(void);
 
 struct coefficients
 {
-    double a = 0.0;
-    double b = 0.0;
-    double c = 0.0;
+    double a = 0.0; ///< Coefficient before x^2
+    double b = 0.0; ///< Coefficient before x
+    double c = 0.0; ///< Free coefficient
 };
 
 struct roots
 {
-    double x1 = 0.0;
-    double x2 = 0.0;
+    double x1 = 0.0; ///< Smallest root of the equation
+    double x2 = 0.0; ///< Biggest root of the equation
 };
 
 int main(int argc, char *argv[])
@@ -241,13 +246,13 @@ int get_coefficients(struct coefficients *coef)
     return 0;
 }
 
-int check_scan_f(double *k)
+int check_scan_f(double *dbl)
 {
-    int ncheck = '\0';
+    char ncheck = '\0';
     int scanf_out = 0;
     while(1)
     {
-        scanf_out = scanf("%lg%c", k, &ncheck);
+        scanf_out = scanf("%lg%c", dbl, &ncheck);
         if((scanf_out != 2) || (ncheck != '\n'))
         {
             if(clean_buff())
