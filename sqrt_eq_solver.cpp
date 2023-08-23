@@ -8,7 +8,6 @@
  * @note Program solves quadratic equation.
  * @author Gris-a.
 */
-
 /**
  * @def M_ERR
  * @brief A measurement error.
@@ -51,7 +50,7 @@ Compares roots with zero.
  * @return Returns number of roots of the equation  according to @b nRoots.
  *
  * @fn int linear_equation(struct coefficients, struct roots *)
- * @brief FSlves linear equation.
+ * @brief Solves linear equation.
  * @param coef Coefficients of the equation.
  * @param rts Pointer on roots of the equation.
  * @return Returns number of roots of the equation according to @b nRoots.
