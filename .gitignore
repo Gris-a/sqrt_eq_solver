@@ -1,0 +1,13 @@
+
+Doxyfile
+*.html
+*.png
+*.js
+*.svg
+*.css
+*.md5
+*.map
+*.tex
+*.sty
+latex/Makefile
+*.pdf
