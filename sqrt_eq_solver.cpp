@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <math.h>
-#include<ctype.h>
 #include<assert.h>
+#include<string.h>
 
 /*решение квадратного уравнения с действительнами коэффициентами a, b и c и корнями x1 и x2*/
 
@@ -21,6 +21,7 @@ void clean_buff(void);
 
 void printf_roots(struct roots rts, int nRoots);
 
+int istested(int argc, char *argv[], const char arg[]);
 void run_test(double a, double b, double c, double x1_exp, double x2_exp, int num_exp, size_t* counter, size_t* counter_true);
 void run_all_tests(void);
 
@@ -37,7 +38,7 @@ struct roots
     double x2 = 0.0;
 };
 
-int main(void)
+int main(int argc, char *argv[])
 {
     printf("Программа решает квадратное уравнение.\n");
     printf("ZAG, 2023.\n\n");
@@ -51,7 +52,8 @@ int main(void)
     get_coefficients(&coef);
     num = solve_equation(coef, &rts);
     printf_roots(rts, num);
-    run_all_tests();
+    if(istested(argc, argv, "--test"))
+        run_all_tests();
 }
 
 int solve_equation(struct coefficients coef, struct roots *rts)
@@ -186,8 +188,22 @@ void run_test(double a, double b, double c, double x1_exp, double x2_exp, int nu
     }
     else
     {
-        printf("Ошибка в тесте №%zu", *counter);
+        printf("FAILED TEST №%zu.\nEXPECTED: x1=%lg, x2=%lg, num=%d.\n  SOLVED: x1=%lg, x2=%lg, num=%d.\n", *counter, x1_exp, x2_exp, num_exp, rts.x1, rts.x2, num);
     }
+}
+
+int istested(int argc, char *argv[], const char arg[])
+{
+    int i = 0;
+    if(argc > 1)
+    {
+        while(--argc > 0)
+        {
+            if(!strcmp(arg, argv[++i]))
+                return 1;
+        }
+    }
+    return 0;
 }
 
 void run_all_tests(void)
