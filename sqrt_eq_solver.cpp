@@ -136,12 +136,12 @@ void printf_roots(const struct roots *const rts, const int nRoots);
 */
 int flag_check(int argc, char *argv[], const char arg[]);
 /**
- * @brief Checks command line arguments.
+ * @brief Runs programm.
  * @param argc Number of command line arguments.
  * @param argv Array with pointers on command line arguments.
  * Depending on the arguments calls run_all_tests() or solve_equation_user() or prints info.
 */
-void args_check(int argc, char *argv[]);
+void run_prog(int argc, char *argv[]);
 
 /**
  * @brief Function that tests programm on test_input.
@@ -159,13 +159,13 @@ void run_all_tests(void);
  * @param argc Number of command line arguments.
  * @param argv Array with pointers to command line arguments.
  * @return returns @b 0;
- * Function prints programm info and calls args_check().
+ * Function prints programm info and calls run_prog().
 */
 int main(int argc, char *argv[])
 {
     printf("This programm solves quadratic equation.\n");
     printf("ZAG, 2023.\n\n");
-    args_check(argc, argv);
+    run_prog(argc, argv);
 }
 
 int solve_equation(const struct coefficients *const coef, struct roots *const rts)
@@ -401,7 +401,7 @@ int flag_check(int argc, char *argv[], const char arg[])
     return 0;
 }
 
-void args_check(int argc, char *argv[])
+void run_prog(int argc, char *argv[])
 {
     if(argc == 1)
     {
