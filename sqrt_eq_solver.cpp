@@ -141,7 +141,7 @@ int flag_check(int argc, char *argv[], const char arg[]);
  * @param argv Array with pointers on command line arguments.
  * Depending on the arguments calls run_all_tests() or solve_equation_user() or prints info.
 */
-void run_prog(int argc, char *argv[]);
+void run_prog(const int argc, char *argv[]);
 
 /**
  * @brief Function that tests programm on test_input.
@@ -401,7 +401,7 @@ int flag_check(int argc, char *argv[], const char arg[])
     return 0;
 }
 
-void run_prog(int argc, char *argv[])
+void run_prog(const int argc, char *argv[])
 {
     if(argc == 1)
     {
