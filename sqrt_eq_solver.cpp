@@ -1,6 +1,5 @@
 #include <stdio.h>
 #include <math.h>
-#include<assert.h>
 #include<string.h>
 
 /**
@@ -9,7 +8,7 @@
  * @author Gris-a.
  * @brief Program solves quadratic equation.
  * @bug If you get two different roots close to zero, then the solution will give @b x1 = 0, @b x2 = 0, @b nRoots = 2.
- * @todo Change assert on if. Check documentation.
+ * @todo DOPILIT documentation.
 */
 
 /**
@@ -24,11 +23,21 @@
 /**
  * @brief Number of quadratic equasion's roots constants.
 */
-enum nRoots{INF_ROOTS = -1,
-            ZERO_ROOTS, ///< infinite number of roots
-            ONE_ROOT,   ///< one root
-            TWO_ROOTS   ///< two roots
-            };
+enum nRoots
+{
+    INF_ROOTS = -1, ///< infinite number of roots
+    ZERO_ROOTS,     ///< zero roots
+    ONE_ROOT,       ///< one root
+    TWO_ROOTS       ///< two roots
+};
+/**
+ *
+*/
+enum errors
+{
+    IS_INFINITE,
+    IS_NULL
+};
 
 /**
  * @brief Solves quadratic equation.
@@ -152,7 +161,12 @@ int main(int argc, char *argv[])
 {
     printf("This programm solves quadratic equation.\n");
     printf("ZAG, 2023.\n\n");
-    printf("--test to test the program.\n\n--uio to solve equation with user input-output.\n\n");
+
+    if(flag_check(argc, argv, "--help"))
+    {
+        printf("--test to test the program.\n\n--uio to solve equation with user input-output.\n\n");
+    }
+
     if(flag_check(argc, argv, "--uio"))
     {
         solve_equation_user();
@@ -166,16 +180,36 @@ int main(int argc, char *argv[])
 
 int solve_equation(const struct coefficients *const coef, struct roots *const rts)
 {
-    assert(isfinite(coef->a));
-    assert(isfinite(coef->b));
-    assert(isfinite(coef->c));
-    assert(rts != NULL);
-    assert(coef != NULL);
+    if(!isfinite(coef->a))
+    {
+        printf("Error in line %d.\nError code %d.\n", __LINE__, IS_INFINITE);
+    }
+    if(!isfinite(coef->b))
+    {
+        printf("Error in line %d.\nError code %d.\n", __LINE__, IS_INFINITE);
+    }
+    if(!isfinite(coef->c))
+    {
+        printf("Error in line %d.\nError code %d.\n", __LINE__, IS_INFINITE);
+    }
+    if(rts != NULL)
+    {
+        printf("Error in line %d.\nError code %d.\n", __LINE__, IS_NULL);
+    }
+    if(coef != NULL)
+    {
+        printf("Error in line %d.\nError code %d.\n", __LINE__, IS_NULL);
+    }
 
     int nRoots = (float_cmp(coef->a, 0.0)) ? linear_equation(coef, rts) : quadratic_equation(coef, rts);
 
     rts->x1 = (float_cmp(rts->x1, 0.0)) ? 0.0 : rts->x1;
     rts->x2 = (float_cmp(rts->x2, 0.0)) ? 0.0 : rts->x2;
+    if(nRoots == 2 && float_cmp(rts->x1, rts->x2))
+    {
+        nRoots = 1;
+        rts->x2 = rts->x1;
+    }
 
     return nRoots;
 }
@@ -240,7 +274,10 @@ int linear_equation(const struct coefficients *const coef, struct roots *const r
 
 int get_coefficients(struct coefficients *const coef)
 {
-    assert(coef != NULL);
+    if(coef != NULL)
+    {
+        printf("Error in line %d.\nError code %d.\n", __LINE__, IS_NULL);
+    }
 
     printf("Введите коэффициент перед x^2: ");
     if(check_scanf_double(&coef->a))
@@ -264,10 +301,14 @@ int get_coefficients(struct coefficients *const coef)
 
 int check_scanf_double(double *const dbl)
 {
-    assert(dbl != NULL);
+    if(dbl != NULL)
+    {
+        printf("Error in line %d.\nError code %d.\n", __LINE__, IS_NULL);
+    }
 
     char ncheck = '\0';
     int scanf_out = 0;
+
     while(1)
     {
         scanf_out = scanf("%lg%c", dbl, &ncheck);
@@ -289,17 +330,21 @@ int check_scanf_double(double *const dbl)
 int clean_buff(void)
 {
     int ch = 0;
+
     while((ch = getchar()) != '\n' && ch != EOF)
     {
         ;
     }
-    return ch;
 
+    return ch;
 }
 
 void printf_roots(const struct roots *const rts, const int nRoots)
 {
-    assert(rts != NULL);
+    if(rts != NULL)
+    {
+        printf("Error in line %d.\nError code %d.\n", __LINE__, IS_NULL);
+    }
 
     switch(nRoots)
     {
@@ -324,7 +369,6 @@ void printf_roots(const struct roots *const rts, const int nRoots)
 void run_test(const struct test_input *const test)
 {
     struct roots rts = {0.0, 0.0};
-
 	int nRoots = solve_equation(&test->coef_exp, &rts);
 
 	(*test->counter)++;
@@ -346,6 +390,7 @@ void run_test(const struct test_input *const test)
 int flag_check(int argc, char *argv[], const char arg[])
 {
     int i = 0;
+
     if(argc > 1)
     {
         while(--argc > 0)
@@ -384,5 +429,6 @@ void run_all_tests(void)
     {
         run_test(&test_arr[i]);
     }
+
 	printf("%zu/%zu tests passed\n", counter_true, counter);
 }
