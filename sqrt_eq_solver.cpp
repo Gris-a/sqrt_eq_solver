@@ -82,7 +82,7 @@ struct test_input
 int solve_equation(const struct coefficients *const coef, struct roots *rts);
 /**
  * @brief Solves quadratic equation with user input-output.
- * calls get_coefficients(), checks on @b EOF, calls solve_equation() to solve equation and printf_roots() to print the solution.
+ * Calls get_coefficients(), checks on @b EOF, calls solve_equation() to solve equation and printf_roots() to print the solution.
 */
 void solve_equation_user(void);
 /**
@@ -155,7 +155,7 @@ void run_test(const struct test_input *const test);
 void run_all_tests(void);
 
 /**
- * @brief main function.
+ * @brief Main function.
  * @param argc Number of command line arguments.
  * @param argv Array with pointers to command line arguments.
  * @return returns @b 0;
