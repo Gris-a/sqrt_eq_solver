@@ -28,7 +28,7 @@ int main(int argc, char *argv[])
         printf("--help for more info.\n\n");
         return 0;
     }
-    if(flag_check(argc, argv, "--help"))
+    if(flag_check(argc, argv, my_args.help))
     {
         printf("Usage: ./prog.out [options]\n"
                "Options:\n"
@@ -38,11 +38,11 @@ int main(int argc, char *argv[])
                "\n");
         return 0;
     }
-    if(flag_check(argc, argv, "--test"))
+    if(flag_check(argc, argv, my_args.test))
     {
         run_all_tests();
     }
-    if(flag_check(argc, argv, "--uio"))
+    if(flag_check(argc, argv, my_args.uio))
     {
         solve_equation_user();
     }

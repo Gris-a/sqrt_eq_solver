@@ -61,10 +61,25 @@ struct roots
 */
 struct test_input
 {
-    struct coefficients coef_exp; ///< Coefficients of equation.
-    struct roots rts_exp;         ///< Expected roots of equation.
-    int nRoots_exp;               ///< Expected number of roots.
+    const struct coefficients coef_exp; ///< Coefficients of equation.
+    const struct roots rts_exp;         ///< Expected roots of equation.
+    const int nRoots_exp;               ///< Expected number of roots.
 
-    size_t *counter;              ///< Counter of tested inputs.
-    size_t *counter_true;         ///< Counter of successfully tested inputs.
+    size_t *const counter;              ///< Counter of tested inputs.
+    size_t *const counter_true;         ///< Counter of successfully tested inputs.
 };
+/**
+ * @brief Command line arguments for programm.
+*/
+struct arguments
+{
+    char help[7]; ///< For more info.
+    char test[7]; ///< For testing.
+    char uio[6]; ///< For user input-output.
+};
+const struct arguments my_args = {"--help", "--test", "--uio"}; ///< Struct object with command line arguments.
+
+/**
+ * Max length of argument from my_args.
+*/
+#define MAX_ARG_LEN 6
