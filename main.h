@@ -7,7 +7,9 @@
 */
 # define soft_assert(expr, err_code) if(!(expr))\
     {\
-        printf("Error in line %d.\nError code %d.\n", __LINE__, err_code);\
+        printf("\033[1;31mError in line %d.\n"\
+               "Error code %d.\n"\
+               "\n\033[0m", __LINE__, err_code);\
     }\
 
 /**
