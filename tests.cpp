@@ -1,5 +1,7 @@
 #include <stdio.h>
-#include "prog.h"
+#include "main.h"
+#include "solve.h"
+#include "tests.h"
 
 /**
  * @file tests.cpp
@@ -19,9 +21,9 @@ void run_test(const struct test_input *const test)
     }
     else
     {
-        printf("FAILED TEST №%zu.\n"
-               "EXPECTED: x1= %10lg, x2= %10lg, nRoots=%3d.\n"
-               "RECEIVED: x1= %10lg, x2= %10lg, nRoots=%3d.\n",
+        printf("\033[1;31mFAILED TEST №%zu\033[1;0m.\n"
+               "\033[1;32mEXPECTED: x1= %10lg, x2= %10lg, nRoots=%3d\033[1;0m.\n"
+               "\033[1;31mRECEIVED: x1= %10lg, x2= %10lg, nRoots=%3d\033[1;0m.\n",
                *test->counter, test->rts_exp.x1, test->rts_exp.x2, test->nRoots_exp, rts.x1, rts.x2, nRoots);
     }
 }
@@ -49,5 +51,17 @@ void run_all_tests(void)
     {
         run_test(&test_arr[i]);
     }
-	printf("%zu/%zu tests passed\n", counter_true, counter);
+    if(counter == counter_true)
+    {
+	    printf("\033[1;32m%zu/%zu tests passed\033[1;0m\n", counter_true, counter);
+    }
+    else if(counter == 0)
+    {
+        printf("\033[1;31m%zu/%zu tests passed\033[1;0m\n", counter_true, counter);
+    }
+    else
+    {
+        printf("\033[1;33m%zu/%zu tests passed\033[1;0m\n", counter_true, counter);
+    }
+
 }

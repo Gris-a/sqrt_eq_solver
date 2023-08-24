@@ -1,5 +1,7 @@
 #include <stdio.h>
-#include "prog.h"
+#include "main.h"
+#include "solve.h"
+#include "user.h"
 
 /**
  * @file user.cpp
@@ -23,10 +25,7 @@ void solve_equation_user(void)
 
 int get_coefficients(struct coefficients *const coef)
 {
-    if(coef == NULL)
-    {
-        printf("Error in line %d.\nError code %d.\n", __LINE__, IS_NULL);
-    }
+    soft_assert(coef != NULL, IS_NULL);
     printf("Введите коэффициент перед x^2: ");
     if(check_scanf_double(&coef->a))
     {
@@ -47,10 +46,7 @@ int get_coefficients(struct coefficients *const coef)
 
 int check_scanf_double(double *const dbl)
 {
-    if(dbl == NULL)
-    {
-        printf("Error in line %d.\nError code %d.\n", __LINE__, IS_NULL);
-    }
+    soft_assert(dbl != NULL, IS_NULL);
     char ncheck = '\0';
     int scanf_out = 0;
     while(1)
@@ -83,10 +79,7 @@ int clean_buff(void)
 
 void printf_roots(const struct roots *const rts, const int nRoots)
 {
-    if(rts == NULL)
-    {
-        printf("Error in line %d.\nError code %d.\n", __LINE__, IS_NULL);
-    }
+    soft_assert(rts != NULL, IS_NULL);
     switch(nRoots)
     {
         case INF_ROOTS:

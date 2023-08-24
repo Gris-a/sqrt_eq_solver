@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <math.h>
-#include "prog.h"
+#include "main.h"
+#include "solve.h"
 
 /**
  * @file solve.cpp
@@ -10,26 +11,11 @@
 
 int solve_equation(const struct coefficients *const coef, struct roots *const rts)
 {
-    if(!isfinite(coef->a))
-    {
-        printf("Error in line %d.\nError code %d.\n", __LINE__, IS_INFINITE);
-    }
-    if(!isfinite(coef->b))
-    {
-        printf("Error in line %d.\nError code %d.\n", __LINE__, IS_INFINITE);
-    }
-    if(!isfinite(coef->c))
-    {
-        printf("Error in line %d.\nError code %d.\n", __LINE__, IS_INFINITE);
-    }
-    if(rts == NULL)
-    {
-        printf("Error in line %d.\nError code %d.\n", __LINE__, IS_NULL);
-    }
-    if(coef == NULL)
-    {
-        printf("Error in line %d.\nError code %d.\n", __LINE__, IS_NULL);
-    }
+    soft_assert(isfinite(coef->a), IS_INFINITE);
+    soft_assert(isfinite(coef->b), IS_INFINITE);
+    soft_assert(isfinite(coef->c), IS_INFINITE);
+    soft_assert(coef != NULL, IS_NULL);
+    soft_assert(rts != NULL, IS_NULL);
     int nRoots = (float_cmp(coef->a, 0.0, M_ERR)) ? linear_equation(coef, rts) : quadratic_equation(coef, rts);
     rts->x1 = (float_cmp(rts->x1, 0.0, M_ERR)) ? 0.0 : rts->x1;
     rts->x2 = (float_cmp(rts->x2, 0.0, M_ERR)) ? 0.0 : rts->x2;
