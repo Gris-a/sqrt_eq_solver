@@ -2,7 +2,7 @@
 #include "prog.h"
 
 /**
- * @file test.cpp
+ * @file tests.cpp
  * @author Gris-a
  * @brief Functions for testing.
 */

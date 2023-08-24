@@ -4,6 +4,12 @@
 #define M_ERR 1e-10
 
 /**
+ * @file prog.h
+ * @author Gris-a
+ * @brief Prog header file.
+*/
+
+/**
  * @brief Number of quadratic equasion's roots constants.
 */
 enum nRoots

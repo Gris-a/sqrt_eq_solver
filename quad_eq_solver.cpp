@@ -3,7 +3,7 @@
 
 /**
  * @mainpage Quadratic equation solver
- * @file sqrt_eq_solver.cpp
+ * @file quad_eq_solver.cpp
  * @author Gris-a.
  * @brief Program solves quadratic equation.
 */
