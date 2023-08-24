@@ -7,8 +7,6 @@
  * @file sqrt_eq_solver.cpp
  * @author Gris-a.
  * @brief Program solves quadratic equation.
- * @bug If you get two different roots close to zero, then the solution will give @b x1 = 0, @b x2 = 0, @b nRoots = 2.
- * @todo DOPILIT documentation.
 */
 
 /**
@@ -16,9 +14,9 @@
 */
 #define M_ERR 1e-10
 /**
- * Macros for comparing @a float variables @a a and @a b. Returns @b 1 if @b a == @b b otherwise @b 0.
+ * Macros for comparing @a float variables @a a and @a b with measurement еerror @b err. Returns @b 1 if @b a similar to @b b, otherwise @b 0.
 */
-#define float_cmp(a, b) (fabs(a - b) < M_ERR)
+#define float_cmp(a, b, err) (fabs(a - b) < err)
 
 /**
  * @brief Number of quadratic equasion's roots constants.
@@ -31,12 +29,45 @@ enum nRoots
     TWO_ROOTS       ///< two roots
 };
 /**
- *
+ * @brief Errors output code.
 */
 enum errors
 {
-    IS_INFINITE,
-    IS_NULL
+    IS_INFINITE, ///< variable is @a infinite
+    IS_NULL      ///< pointer is NULL
+};
+
+/**
+ * @brief Coefficients of the quadratic equation.
+ * Contains three coefficients.
+*/
+struct coefficients
+{
+    double a; ///< Coefficient before x^2
+    double b; ///< Coefficient before x
+    double c; ///< Free coefficient
+};
+/**
+ * @brief Roots of the quadratic equation.
+ * Contains two roots.
+*/
+struct roots
+{
+    double x1; ///< Smallest root of the equation
+    double x2; ///< Biggest root of the equation
+};
+/**
+ * @brief Test input.
+ * Contains coefficients, expected output of programm and counters.
+*/
+struct test_input
+{
+    struct coefficients coef_exp; ///< Coefficients of equation.
+    struct roots rts_exp;         ///< Expected roots of equation.
+    int nRoots_exp;               ///< Expected number of roots.
+
+    size_t *counter;              ///< Counter of tested inputs.
+    size_t *counter_true;         ///< Counter of successfully tested inputs.
 };
 
 /**
@@ -70,15 +101,15 @@ int linear_equation(const struct coefficients *const coef, struct roots *const r
 /**
  * @brief Gets coefficients of equation from @b stdin.
  * @param coef Pointer on coefficients of equation.
- * @return @b 1 if @b EOF otherwise @b 0.
+ * @return @b 1 if @b EOF, otherwise @b 0.
  * Calls check_scanf_double() three times for @b coef->a, @b coef->b and @b coef->c, breaks when check_scanf_double() finds @b EOF.
 */
 int get_coefficients(struct coefficients *const coef);
 /**
  * @brief Gets @a double from @b stdout and checks it.
  * @param dbl Pointer on coefficient of equation.
- * @return @b 1 If EOF otherwise @b 0.
- * Checks input for @a double variable otherwise calls clean_buff() and asks to repeat input, breaks when clean_buff() finds @b EOF.
+ * @return @b 1 If EOF, otherwise @b 0.
+ * Checks input for @a double variable, otherwise calls clean_buff() and asks to repeat input, breaks when clean_buff() finds @b EOF.
 */
 int check_scanf_double(double *const dbl);
 /**
@@ -99,62 +130,34 @@ void printf_roots(const struct roots *const rts, const int nRoots);
  * @param argc Number of command line arguments.
  * @param argv Array with pointers on command line arguments.
  * @param arg Argument that is searching in @b argv.
- * @return @b 1 if @b arg in @b argv otherwise @b 0.
+ * @return @b 1 if @b arg in @b argv, otherwise @b 0.
 */
 int flag_check(int argc, char *argv[], const char arg[]);
 /**
- * @brief Function that tests programm.
- * @param a, b, c Coefficients of quadratic equation.
- * @param x1_exp, x2_exp Expected roots of the equation.
- * @param nRoots_exp Expected number of roots.
- * @param counter Counter of tests.
- * @param counter_true Counter of sucсessful tests.
- * Prints if test is not succeeded.
+ * @brief Checks command line arguments.
+ * @param argc Number of command line arguments.
+ * @param argv Array with pointers on command line arguments.
+ * Depending on the arguments prints info, calls run_all_tests() or calls solve_equation_user().
+*/
+void args_check(int argc, char *argv[]);
+
+/**
+ * @brief Function that tests programm on test_input.
+ * @param test Pointer to struct test_input.
+ * Prints info if test is not succeeded, count succesful tests.
 */
 void run_test(const struct test_input *const test);
 /**
- * @brief Function that runs all test and prints number of successful tests.
- * Initialize counter and counter_true for run_test() and run tests.
+ * @brief Runs all test and prints number of successful tests.
 */
 void run_all_tests(void);
 
 /**
- * @brief Coefficients of the quadratic equation.
- * Contains three @a double variables.
-*/
-struct coefficients
-{
-    double a; ///< Coefficient before x^2
-    double b; ///< Coefficient before x
-    double c; ///< Free coefficient
-};
-/**
- * @brief Roots of the quadratic equation.
- * Contains two @a double variables.
-*/
-struct roots
-{
-    double x1; ///< Smallest root of the equation
-    double x2; ///< Biggest root of the equation
-};
-/**
- *
-*/
-struct test_input
-{
-    struct coefficients coef_exp;
-    struct roots rts_exp;
-    int nRoots_exp;
-
-    size_t *counter;
-    size_t *counter_true;
-};
-
-/**
- * @brief
- * @param argc
- * @param argv
- * @return
+ * @brief main function.
+ * @param argc Number of command line arguments.
+ * @param argv Array with pointers on command line arguments.
+ * @return returns @b 0;
+ * Function prints programm info and calls args_check().
  *
 */
 int main(int argc, char *argv[])
@@ -162,20 +165,7 @@ int main(int argc, char *argv[])
     printf("This programm solves quadratic equation.\n");
     printf("ZAG, 2023.\n\n");
 
-    if(flag_check(argc, argv, "--help"))
-    {
-        printf("--test to test the program.\n\n--uio to solve equation with user input-output.\n\n");
-    }
-
-    if(flag_check(argc, argv, "--uio"))
-    {
-        solve_equation_user();
-    }
-
-    if(flag_check(argc, argv, "--test"))
-    {
-        run_all_tests();
-    }
+    args_check(argc, argv);
 }
 
 int solve_equation(const struct coefficients *const coef, struct roots *const rts)
@@ -192,20 +182,20 @@ int solve_equation(const struct coefficients *const coef, struct roots *const rt
     {
         printf("Error in line %d.\nError code %d.\n", __LINE__, IS_INFINITE);
     }
-    if(rts != NULL)
+    if(rts == NULL)
     {
         printf("Error in line %d.\nError code %d.\n", __LINE__, IS_NULL);
     }
-    if(coef != NULL)
+    if(coef == NULL)
     {
         printf("Error in line %d.\nError code %d.\n", __LINE__, IS_NULL);
     }
 
-    int nRoots = (float_cmp(coef->a, 0.0)) ? linear_equation(coef, rts) : quadratic_equation(coef, rts);
+    int nRoots = (float_cmp(coef->a, 0.0, M_ERR)) ? linear_equation(coef, rts) : quadratic_equation(coef, rts);
 
-    rts->x1 = (float_cmp(rts->x1, 0.0)) ? 0.0 : rts->x1;
-    rts->x2 = (float_cmp(rts->x2, 0.0)) ? 0.0 : rts->x2;
-    if(nRoots == 2 && float_cmp(rts->x1, rts->x2))
+    rts->x1 = (float_cmp(rts->x1, 0.0, M_ERR)) ? 0.0 : rts->x1;
+    rts->x2 = (float_cmp(rts->x2, 0.0, M_ERR)) ? 0.0 : rts->x2;
+    if(nRoots == 2 && float_cmp(rts->x1, rts->x2, M_ERR))
     {
         nRoots = 1;
         rts->x2 = rts->x1;
@@ -234,7 +224,7 @@ int quadratic_equation(const struct coefficients *const coef, struct roots *cons
 {
     double D = coef->b * coef->b - 4 * coef->a * coef->c;
 
-    if(float_cmp(D, 0.0))
+    if(float_cmp(D, 0.0, M_ERR))
     {
         rts->x1 = rts->x2 = - (coef->b / (2 * coef->a));
 
@@ -256,9 +246,9 @@ int quadratic_equation(const struct coefficients *const coef, struct roots *cons
 
 int linear_equation(const struct coefficients *const coef, struct roots *const rts)
 {
-    if(float_cmp(coef->b, 0.0))
+    if(float_cmp(coef->b, 0.0, M_ERR))
     {
-        if(float_cmp(coef->c, 0.0))
+        if(float_cmp(coef->c, 0.0, M_ERR))
         {
             return INF_ROOTS;
         }
@@ -274,7 +264,7 @@ int linear_equation(const struct coefficients *const coef, struct roots *const r
 
 int get_coefficients(struct coefficients *const coef)
 {
-    if(coef != NULL)
+    if(coef == NULL)
     {
         printf("Error in line %d.\nError code %d.\n", __LINE__, IS_NULL);
     }
@@ -301,7 +291,7 @@ int get_coefficients(struct coefficients *const coef)
 
 int check_scanf_double(double *const dbl)
 {
-    if(dbl != NULL)
+    if(dbl == NULL)
     {
         printf("Error in line %d.\nError code %d.\n", __LINE__, IS_NULL);
     }
@@ -341,7 +331,7 @@ int clean_buff(void)
 
 void printf_roots(const struct roots *const rts, const int nRoots)
 {
-    if(rts != NULL)
+    if(rts == NULL)
     {
         printf("Error in line %d.\nError code %d.\n", __LINE__, IS_NULL);
     }
@@ -373,8 +363,8 @@ void run_test(const struct test_input *const test)
 
 	(*test->counter)++;
 
-    if((nRoots == test->nRoots_exp && ((float_cmp(rts.x1, test->rts_exp.x1) && float_cmp(rts.x2, test->rts_exp.x2)) ||
-                           (float_cmp(rts.x1, test->rts_exp.x2) && float_cmp(rts.x2, test->rts_exp.x1)))))
+    if((nRoots == test->nRoots_exp && ((float_cmp(rts.x1, test->rts_exp.x1, M_ERR) && float_cmp(rts.x2, test->rts_exp.x2, M_ERR)) ||
+                           (float_cmp(rts.x1, test->rts_exp.x2, M_ERR) && float_cmp(rts.x2, test->rts_exp.x1, M_ERR)))))
     {
         (*test->counter_true)++;
     }
@@ -385,24 +375,6 @@ void run_test(const struct test_input *const test)
                "RECEIVED: x1= %10lg, x2= %10lg, nRoots=%3d.\n",
                *test->counter, test->rts_exp.x1, test->rts_exp.x2, test->nRoots_exp, rts.x1, rts.x2, nRoots);
     }
-}
-
-int flag_check(int argc, char *argv[], const char arg[])
-{
-    int i = 0;
-
-    if(argc > 1)
-    {
-        while(--argc > 0)
-        {
-            i++;
-            if(!strncmp(arg, argv[i], (strlen(arg) <= strlen(argv[i])) ? strlen(arg) : strlen(argv[i])))
-            {
-                return 1;
-            }
-        }
-    }
-    return 0;
 }
 
 void run_all_tests(void)
@@ -431,4 +403,46 @@ void run_all_tests(void)
     }
 
 	printf("%zu/%zu tests passed\n", counter_true, counter);
+}
+
+int flag_check(int argc, char *argv[], const char arg[])
+{
+    int i = 0;
+
+    if(argc > 1)
+    {
+        while(--argc > 0)
+        {
+            i++;
+            if(!strncmp(arg, argv[i], (strlen(arg) <= strlen(argv[i])) ? strlen(arg) : strlen(argv[i])))
+            {
+                return 1;
+            }
+        }
+    }
+    return 0;
+}
+
+void args_check(int argc, char *argv[])
+{
+    if(argc == 1)
+    {
+        printf("--help for more info.\n\n");
+        return;
+    }
+
+    if(flag_check(argc, argv, "--help"))
+    {
+        printf("--test to test the program.\n\n--uio to solve equation with user input-output.\n\n");
+    }
+
+    if(flag_check(argc, argv, "--test"))
+    {
+        run_all_tests();
+    }
+
+    if(flag_check(argc, argv, "--uio"))
+    {
+        solve_equation_user();
+    }
 }
