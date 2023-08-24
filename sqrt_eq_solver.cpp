@@ -9,13 +9,13 @@
  * @author Gris-a.
  * @brief Program solves quadratic equation.
  * @bug If you get two different roots close to zero, then the solution will give @b x1 = 0, @b x2 = 0, @b nRoots = 2.
- * @todo Change assert on if. Check documentation. Check const. defence coding.
+ * @todo Change assert on if. Check documentation.
 */
 
 /**
  * A measurement error. Used when comparing @a float type.
 */
-#define M_ERR 1e-6
+#define M_ERR 1e-10
 /**
  * Macros for comparing @a float variables @a a and @a b. Returns @b 1 if @b a == @b b otherwise @b 0.
 */
@@ -37,10 +37,10 @@ enum nRoots{INF_ROOTS = -1,
  * @return Returns number of roots of the equation according to @b nRoots.
  * Checks if parameters are valid, then if @b rts->a equal to zero, calls linear_equation(), otherwise quadratic_equation().
 */
-int solve_equation(const struct coefficients *coef, struct roots *rts);
+int solve_equation(const struct coefficients *const coef, struct roots *rts);
 /**
  * @brief Solves quadratic equation with user input-output.
- * @note Generating coefficients and roots, calls get_coefficients(), checks on @b EOF, calls solve_equation() to solve equation and then printf_roots() to print the solution.
+ * Generating coefficients and roots, calls get_coefficients(), checks on @b EOF, calls solve_equation() to solve equation and then printf_roots() to print the solution.
 */
 void solve_equation_user(void);
 /**
@@ -49,33 +49,33 @@ void solve_equation_user(void);
  * @param rts Pointer on roots of the equation.
  * @return Returns number of roots of the equation  according to @b nRoots.
 */
-int quadratic_equation(const struct coefficients *coef, struct roots *rts);
+int quadratic_equation(const struct coefficients *const coef, struct roots *const rts);
 /**
  * @brief Solves linear equation.
  * @param coef Coefficients of the equation.
  * @param rts Pointer on roots of the equation.
  * @return Returns number of roots of the equation according to @b nRoots.
 */
-int linear_equation(const struct coefficients *coef, struct roots *rts);
+int linear_equation(const struct coefficients *const coef, struct roots *const rts);
 
 /**
  * @brief Gets coefficients of equation from @b stdin.
  * @param coef Pointer on coefficients of equation.
  * @return @b 1 if @b EOF otherwise @b 0.
- * @note Calls check_scan_f() three times for @b coef->a, @b coef->b and @b coef->c, breaks when check_scan_f() finds @b EOF.
+ * Calls check_scanf_double() three times for @b coef->a, @b coef->b and @b coef->c, breaks when check_scanf_double() finds @b EOF.
 */
-int get_coefficients(struct coefficients *coef);
+int get_coefficients(struct coefficients *const coef);
 /**
  * @brief Gets @a double from @b stdout and checks it.
  * @param dbl Pointer on coefficient of equation.
  * @return @b 1 If EOF otherwise @b 0.
- * @note Checks input for @a double variable otherwise calls clean_buff() and asks to repeat input, breaks when clean_buff() finds @b EOF.
+ * Checks input for @a double variable otherwise calls clean_buff() and asks to repeat input, breaks when clean_buff() finds @b EOF.
 */
-int check_scan_f(double *dbl);
+int check_scanf_double(double *const dbl);
 /**
  * @brief Clears @b stdin buffer.
  * @return First founded @b '\n' or @b EOF.
- * @note calls getchar() until @b '\n' or @b EOF.
+ * Calls getchar() until @b '\n' or @b EOF.
 */
 int clean_buff(void);
 /**
@@ -83,7 +83,7 @@ int clean_buff(void);
  * @param rts roots of the equation.
  * @param nRoots number of roots of the equation.
 */
-void printf_roots(const struct roots *rts, int nRoots);
+void printf_roots(const struct roots *const rts, const int nRoots);
 
 /**
  * @brief Checks if @b arg in @b argv[].
@@ -100,12 +100,12 @@ int flag_check(int argc, char *argv[], const char arg[]);
  * @param nRoots_exp Expected number of roots.
  * @param counter Counter of tests.
  * @param counter_true Counter of sucсessful tests.
- * @note  Prints if test is not succeeded.
+ * Prints if test is not succeeded.
 */
-void run_test(struct test_input *test);
+void run_test(const struct test_input *const test);
 /**
  * @brief Function that runs all test and prints number of successful tests.
- * @note Initialize counter and counter_true for run_test() and run tests.
+ * Initialize counter and counter_true for run_test() and run tests.
 */
 void run_all_tests(void);
 
@@ -133,12 +133,8 @@ struct roots
 */
 struct test_input
 {
-    double a;
-    double b;
-    double c;
-
-    double x1_exp;
-    double x2_exp;
+    struct coefficients coef_exp;
+    struct roots rts_exp;
     int nRoots_exp;
 
     size_t *counter;
@@ -150,13 +146,13 @@ struct test_input
  * @param argc
  * @param argv
  * @return
- * @note
+ *
 */
 int main(int argc, char *argv[])
 {
     printf("This programm solves quadratic equation.\n");
     printf("ZAG, 2023.\n\n");
-    printf("--test to test the program.\n\n--uio to solve equation with user input-output");
+    printf("--test to test the program.\n\n--uio to solve equation with user input-output.\n\n");
     if(flag_check(argc, argv, "--uio"))
     {
         solve_equation_user();
@@ -168,7 +164,7 @@ int main(int argc, char *argv[])
     }
 }
 
-int solve_equation(const struct coefficients *coef, struct roots *rts)
+int solve_equation(const struct coefficients *const coef, struct roots *const rts)
 {
     assert(isfinite(coef->a));
     assert(isfinite(coef->b));
@@ -177,6 +173,7 @@ int solve_equation(const struct coefficients *coef, struct roots *rts)
     assert(coef != NULL);
 
     int nRoots = (float_cmp(coef->a, 0.0)) ? linear_equation(coef, rts) : quadratic_equation(coef, rts);
+
     rts->x1 = (float_cmp(rts->x1, 0.0)) ? 0.0 : rts->x1;
     rts->x2 = (float_cmp(rts->x2, 0.0)) ? 0.0 : rts->x2;
 
@@ -199,7 +196,7 @@ void solve_equation_user(void)
     printf_roots(&rts, nRoots);
 }
 
-int quadratic_equation(const struct coefficients *coef, struct roots *rts)
+int quadratic_equation(const struct coefficients *const coef, struct roots *const rts)
 {
     double D = coef->b * coef->b - 4 * coef->a * coef->c;
 
@@ -223,7 +220,7 @@ int quadratic_equation(const struct coefficients *coef, struct roots *rts)
     }
 }
 
-int linear_equation(const struct coefficients *coef, struct roots *rts)
+int linear_equation(const struct coefficients *const coef, struct roots *const rts)
 {
     if(float_cmp(coef->b, 0.0))
     {
@@ -241,30 +238,34 @@ int linear_equation(const struct coefficients *coef, struct roots *rts)
     }
 }
 
-int get_coefficients(struct coefficients *coef)
+int get_coefficients(struct coefficients *const coef)
 {
+    assert(coef != NULL);
+
     printf("Введите коэффициент перед x^2: ");
-    if(check_scan_f(&coef->a))
+    if(check_scanf_double(&coef->a))
     {
         return 1;
     }
 
     printf("Введите коэффициент перед x: ");
-    if(check_scan_f(&coef->b))
+    if(check_scanf_double(&coef->b))
     {
         return 1;
     }
 
     printf("Введите свободный член: ");
-    if(check_scan_f(&coef->c))
+    if(check_scanf_double(&coef->c))
     {
         return 1;
     }
     return 0;
 }
 
-int check_scan_f(double *dbl)
+int check_scanf_double(double *const dbl)
 {
+    assert(dbl != NULL);
+
     char ncheck = '\0';
     int scanf_out = 0;
     while(1)
@@ -296,8 +297,10 @@ int clean_buff(void)
 
 }
 
-void printf_roots(const struct roots *rts, int nRoots)
+void printf_roots(const struct roots *const rts, const int nRoots)
 {
+    assert(rts != NULL);
+
     switch(nRoots)
     {
         case INF_ROOTS:
@@ -318,17 +321,16 @@ void printf_roots(const struct roots *rts, int nRoots)
     }
 }
 
-void run_test(struct test_input *test)
+void run_test(const struct test_input *const test)
 {
-    struct coefficients coef = {test->a, test->b, test->c};
     struct roots rts = {0.0, 0.0};
 
-	int nRoots = solve_equation(&coef, &rts);
+	int nRoots = solve_equation(&test->coef_exp, &rts);
 
 	(*test->counter)++;
 
-    if((nRoots == test->nRoots_exp && ((float_cmp(rts.x1, test->x1_exp) && float_cmp(rts.x2, test->x2_exp)) ||
-                           (float_cmp(rts.x1, test->x2_exp) && float_cmp(rts.x2, test->x1_exp)))))
+    if((nRoots == test->nRoots_exp && ((float_cmp(rts.x1, test->rts_exp.x1) && float_cmp(rts.x2, test->rts_exp.x2)) ||
+                           (float_cmp(rts.x1, test->rts_exp.x2) && float_cmp(rts.x2, test->rts_exp.x1)))))
     {
         (*test->counter_true)++;
     }
@@ -337,7 +339,7 @@ void run_test(struct test_input *test)
         printf("FAILED TEST №%zu.\n"
                "EXPECTED: x1= %10lg, x2= %10lg, nRoots=%3d.\n"
                "RECEIVED: x1= %10lg, x2= %10lg, nRoots=%3d.\n",
-               *test->counter, test->x1_exp, test->x2_exp, test->nRoots_exp, rts.x1, rts.x2, nRoots);
+               *test->counter, test->rts_exp.x1, test->rts_exp.x2, test->nRoots_exp, rts.x1, rts.x2, nRoots);
     }
 }
 
@@ -363,19 +365,19 @@ void run_all_tests(void)
     size_t counter = 0;
 	size_t counter_true = 0;
     struct test_input test_arr[] = {
-                            {0,  0,  0,    0,    0,    INF_ROOTS, &counter, &counter_true},
-                            {0,  0,  5,    0,    0,   ZERO_ROOTS, &counter, &counter_true},
-                            {0,  5,  0,    0,    0,     ONE_ROOT, &counter, &counter_true},
-                            {0,  2,  5, -2.5, -2.5,     ONE_ROOT, &counter, &counter_true},
-                            {1,  0,  5,    0,    0,   ZERO_ROOTS, &counter, &counter_true},
-                            {1,  1,  0,   -1,    0,    TWO_ROOTS, &counter, &counter_true},
-                            {1, -4,  4,    2,    2,     ONE_ROOT, &counter, &counter_true},
-                            {1, -5,  6,    2,    3,    TWO_ROOTS, &counter, &counter_true},
-                            {1,  1,  1,    0,    0,   ZERO_ROOTS, &counter, &counter_true},
-                            {1,  0,  0,    0,    0,     ONE_ROOT, &counter, &counter_true},
-                            {1,  0, -1,   -1,    1,    TWO_ROOTS, &counter, &counter_true},
-                            {1,  0, -1,   -1,    1,    TWO_ROOTS, &counter, &counter_true},
-                            {1,  0, -1,    0,    1,    TWO_ROOTS, &counter, &counter_true} //Expectedly fails
+                            {{0,  0,  0},  {   0,    0},     INF_ROOTS, &counter, &counter_true},
+                            {{0,  0,  5},  {   0,    0},    ZERO_ROOTS, &counter, &counter_true},
+                            {{0,  5,  0},  {   0,    0},      ONE_ROOT, &counter, &counter_true},
+                            {{0,  2,  5},  {-2.5, -2.5},      ONE_ROOT, &counter, &counter_true},
+                            {{1,  0,  5},  {   0,    0},    ZERO_ROOTS, &counter, &counter_true},
+                            {{1,  1,  0},  {  -1,    0},     TWO_ROOTS, &counter, &counter_true},
+                            {{1, -4,  4},  {   2,    2},      ONE_ROOT, &counter, &counter_true},
+                            {{1, -5,  6},  {   2,    3},     TWO_ROOTS, &counter, &counter_true},
+                            {{1,  1,  1},  {   0,    0},    ZERO_ROOTS, &counter, &counter_true},
+                            {{1,  0,  0},  {   0,    0},      ONE_ROOT, &counter, &counter_true},
+                            {{1,  0, -1},  {  -1,    1},     TWO_ROOTS, &counter, &counter_true},
+                            {{1,  0, -1},  {  -1,    1},     TWO_ROOTS, &counter, &counter_true},
+                            {{1,  0, -1},  {   0,    1},     TWO_ROOTS, &counter, &counter_true} //Expectedly fails
                             };
 
     for(size_t i = 0; i < sizeof(test_arr)/sizeof(test_input); i++)
