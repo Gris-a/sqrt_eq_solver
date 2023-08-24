@@ -411,6 +411,7 @@ void args_check(int argc, char *argv[])
     if(flag_check(argc, argv, "--help"))
     {
         printf("--test to test the program.\n\n--uio to solve equation with user input-output.\n\n");
+        return;
     }
     if(flag_check(argc, argv, "--test"))
     {
