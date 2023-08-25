@@ -5,7 +5,7 @@
 */
 
 /**
- * @brief Function that tests programm on test_input.
+ * @brief Tests programm on test_input.
  * @param test Pointer to struct test_input.
  * @param counter Counter of runned tests.
  * @param counter_true Counter of successful tests.
@@ -18,6 +18,8 @@ void run_test(const struct test_input *const test, size_t *const counter, size_t
 void run_all_tests(void);
 
 /**
- *
+ * @brief Prints test results.
+ * @param counter Counter of tests.
+ * @param counter_true Counter of successful tests.
 */
 void printf_tests_results(const size_t *const counter, const size_t *const counter_true);

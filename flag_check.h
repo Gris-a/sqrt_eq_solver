@@ -9,6 +9,6 @@
  * @param argc Number of command line arguments.
  * @param argv Array with pointers to command line arguments.
  * @param arg Argument that is searching in @b argv.
- * @return @b 1 if @b arg in @b argv, otherwise @b 0.
+ * @return @b true if @b arg in @b argv, otherwise @b false.
 */
 int flag_check(int argc, char *argv[], const char arg[]);
