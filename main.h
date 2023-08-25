@@ -1,3 +1,5 @@
+#include "colors.h"
+
 /**
  * A measurement error. Used when comparing @a float type.
 */
@@ -11,18 +13,6 @@
                "Error code %d.\n"\
                "\n"), __LINE__, err_code);\
     }
-/**
- * Macros that makes text red.
-*/
-#define RED(expr) ("\033[1;31m" expr "\033[1;0m")
-/**
- * Macros that makes text green.
-*/
-#define GREEN(expr) ("\033[1;32m" expr "\033[1;0m")
-/**
- * Macros that makes text yellow.
-*/
-#define YELLOW(expr) ("\033[1;33m" expr "\033[1;0m")
 
 /**
  * @file main.h
