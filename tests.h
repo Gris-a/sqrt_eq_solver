@@ -13,7 +13,7 @@
 */
 void run_test(const struct test_input *const test, size_t *const counter, size_t *const counter_true);
 /**
- * @brief Runs all test and prints number of successful tests.
+ * @brief Runs all test from tests.txt and prints number of successful tests.
 */
 void run_all_tests(void);
 

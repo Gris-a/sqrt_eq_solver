@@ -12,8 +12,8 @@
  * Это документация для QES. Вы можете скачать её <a href="https://github.com/Gris-a/sqrt_eq_solver">здесь.</a>
  * @par About
  * Эта программа решает квадратное уравнение.
- *
- * @par Tests
+
+ * @par Self-testing
  *
  *
 */
