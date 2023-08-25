@@ -22,10 +22,12 @@
 int main(int argc, char *argv[])
 {
     printf("This programm solves quadratic equation.\n");
-    printf("ZAG, 2023.\n\n");
+    printf("ZAG, 2023.\n"
+           "\n");
     if(argc == 1)
     {
-        printf("--help for more info.\n\n");
+        printf("--help for more info.\n"
+               "\n");
         return 0;
     }
     if(flag_check(argc, argv, my_args.help))
@@ -42,7 +44,7 @@ int main(int argc, char *argv[])
     {
         run_all_tests();
     }
-    if(flag_check(argc, argv, my_args.uio))
+    if(flag_check(argc, argv, my_args.user))
     {
         solve_equation_user();
     }
