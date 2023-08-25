@@ -29,6 +29,27 @@ int solve_equation(const struct coefficients *const coef, struct roots *const rt
 
 int quadratic_equation(const struct coefficients *const coef, struct roots *const rts)
 {
+    if(float_cmp(coef->c, 0.0, M_ERR))
+    {
+        if(float_cmp(coef->b, 0.0, M_ERR))
+        {
+            rts->x1 = rts->x2 = 0.0;
+            return ONE_ROOT;
+        }
+        rts->x1 = 0.0;
+        rts->x2 = -(coef->b / coef->a);
+        return TWO_ROOTS;
+    }
+    if(float_cmp(coef->b, 0.0, M_ERR))
+    {
+        if((coef->a < 0) == (coef->c < 0.0))
+        {
+            return ZERO_ROOTS;
+        }
+        rts->x1 = sqrt(-(coef->c / coef->a));
+        rts->x2 = -rts->x1;
+        return TWO_ROOTS;
+    }
     double D = coef->b * coef->b - 4 * coef->a * coef->c;
     if(float_cmp(D, 0.0, M_ERR))
     {
