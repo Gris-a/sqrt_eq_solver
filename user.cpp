@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <assert.h>
 #include <math.h>
 #include "main.h"
 #include "solve.h"
@@ -27,7 +28,7 @@ void solve_equation_user(void)
 
 int get_coefficients(struct coefficients *const coef)
 {
-    SOFT_ASSERT(coef != NULL, IS_NULL);
+    assert(coef != NULL);
     printf("Введите коэффициент перед x^2: ");
     if(check_scanf_double(&coef->a))
     {
@@ -48,7 +49,7 @@ int get_coefficients(struct coefficients *const coef)
 
 int check_scanf_double(double *const dbl)
 {
-    SOFT_ASSERT(dbl != NULL, IS_NULL);
+    assert(dbl != NULL);
     char ncheck = '\0';
     int scanf_out = 0;
     while(1)
@@ -81,12 +82,12 @@ int clean_buff(void)
 
 void printf_roots(const struct roots *const rts, const int nRoots)
 {
-    SOFT_ASSERT(rts != NULL, IS_NULL);
-    SOFT_ASSERT(!isnan(rts->x1), IS_NAN);
-    SOFT_ASSERT(!isnan(rts->x2), IS_NAN);
-    SOFT_ASSERT(isfinite(rts->x1), IS_INFINITE);
-    SOFT_ASSERT(isfinite(rts->x2), IS_INFINITE);
-    SOFT_ASSERT(!isnan(nRoots), IS_NAN);
+    assert(rts != NULL);
+    assert(!isnan(rts->x1));
+    assert(!isnan(rts->x2));
+    assert(isfinite(rts->x1));
+    assert(isfinite(rts->x2));
+    assert(!isnan(nRoots));
     switch(nRoots)
     {
         case INF_ROOTS:

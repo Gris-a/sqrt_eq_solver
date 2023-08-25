@@ -15,15 +15,15 @@ void run_test(const struct test_input *const test, size_t *const counter, size_t
 	int nRoots = solve_equation(&test->coef_exp, &rts);
 	(*counter)++;
     if((nRoots == test->nRoots_exp && ((float_cmp(rts.x1, test->rts_exp.x1, M_ERR) && float_cmp(rts.x2, test->rts_exp.x2, M_ERR)) ||
-                           (float_cmp(rts.x1, test->rts_exp.x2, M_ERR) && float_cmp(rts.x2, test->rts_exp.x1, M_ERR)))))
+                                       (float_cmp(rts.x1, test->rts_exp.x2, M_ERR) && float_cmp(rts.x2, test->rts_exp.x1, M_ERR)))))
     {
         (*counter_true)++;
     }
     else
     {
-        PRINTF_R("FAILED TEST №%zu\n", *counter);
-        PRINTF_G("EXPECTED: x1= %10lg, x2= %10lg, nRoots=%3d\n", test->rts_exp.x1, test->rts_exp.x2, test->nRoots_exp);
-        PRINTF_R("RECEIVED: x1= %10lg, x2= %10lg, nRoots=%3d\n", rts.x1, rts.x2, nRoots);
+        printf(color_red("FAILED TEST №%zu\n"), *counter);
+        printf(color_green("EXPECTED: x1= %10lg, x2= %10lg, nRoots=%3d\n"), test->rts_exp.x1, test->rts_exp.x2, test->nRoots_exp);
+        printf(color_red("RECEIVED: x1= %10lg, x2= %10lg, nRoots=%3d\n"), rts.x1, rts.x2, nRoots);
     }
 }
 
@@ -50,17 +50,21 @@ void run_all_tests(void)
     {
         run_test(&test_arr[i], &counter, &counter_true);
     }
-    if(counter == counter_true)
+    printf_tests_results(&counter, &counter_true);
+}
+
+void printf_tests_results(const size_t *const counter, const size_t *const counter_true)
+{
+    if(*counter == *counter_true)
     {
-	    PRINTF_G("%zu/%zu tests passed\n", counter_true, counter);
+	    printf(color_red("%zu/%zu tests passed\n"), *counter_true, *counter);
     }
-    else if(counter == 0)
+    else if(*counter == 0)
     {
-        PRINTF_R("%zu/%zu tests passed\n", counter_true, counter);
+        printf(color_red("%zu/%zu tests passed\n"), *counter_true, *counter);
     }
     else
     {
-        PRINTF_Y("%zu/%zu tests passed\n", counter_true, counter);
+        printf(color_yellow("%zu/%zu tests passed\n"), *counter_true, *counter);
     }
-
 }

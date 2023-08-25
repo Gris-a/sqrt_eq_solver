@@ -4,15 +4,6 @@
  * A measurement error. Used when comparing @a float type.
 */
 #define M_ERR 1e-10
-/**
- * Макрос для проверки условия. Выводит код и линию ошибки. Не прерывает программу.
-*/
-# define SOFT_ASSERT(expr, err_code) if(!(expr))\
-    {\
-        PRINTF_R("Error in line %d.\n"\
-               "Error code %d.\n"\
-               "\n", __LINE__, err_code);\
-    }
 
 /**
  * @file main.h
@@ -30,15 +21,6 @@ enum nRoots
     ZERO_ROOTS = 0, ///< zero roots.
     ONE_ROOT = 1,   ///< one root.
     TWO_ROOTS = 2   ///< two roots.
-};
-/**
- * @brief Errors codes.
-*/
-enum errors
-{
-    IS_INFINITE = -1, ///< variable is @a infinite.
-    IS_NULL = 0,      ///< NULL pointer.
-    IS_NAN = 1        ///< Not a number.
 };
 
 /**

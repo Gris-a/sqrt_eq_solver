@@ -29,6 +29,6 @@ int quadratic_equation(const struct coefficients *const coef, struct roots *cons
 int linear_equation(const struct coefficients *const coef, struct roots *const rts);
 /**
  * @brief Compares @a float variables @a a and @a b with measurement еrror @b err.
- * @return @b 1 if @b a similar to @b b, otherwise @b 0.
+ * @return @b true if @b a close to @b b, otherwise @b false.
 */
-int float_cmp(const double a, const double b, const double err);
+bool float_cmp(const double a, const double b, const double err);

@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <assert.h>
 #include <math.h>
 #include "main.h"
 #include "solve.h"
@@ -11,14 +12,14 @@
 
 int solve_equation(const struct coefficients *const coef, struct roots *const rts)
 {
-    SOFT_ASSERT(isfinite(coef->a), IS_INFINITE);
-    SOFT_ASSERT(isfinite(coef->b), IS_INFINITE);
-    SOFT_ASSERT(isfinite(coef->c), IS_INFINITE);
-    SOFT_ASSERT(!isnan(coef->a), IS_NAN);
-    SOFT_ASSERT(!isnan(coef->b), IS_NAN);
-    SOFT_ASSERT(!isnan(coef->c), IS_NAN);
-    SOFT_ASSERT(coef != NULL, IS_NULL);
-    SOFT_ASSERT(rts != NULL, IS_NULL);
+    assert(isfinite(coef->a));
+    assert(isfinite(coef->b));
+    assert(isfinite(coef->c));
+    assert(!isnan(coef->a));
+    assert(!isnan(coef->b));
+    assert(!isnan(coef->c));
+    assert(coef != NULL);
+    assert(rts != NULL);
     int nRoots = (float_cmp(coef->a, 0.0, M_ERR)) ? linear_equation(coef, rts) : quadratic_equation(coef, rts);
     rts->x1 = (float_cmp(rts->x1, 0.0, M_ERR)) ? 0.0 : rts->x1;
     rts->x2 = (float_cmp(rts->x2, 0.0, M_ERR)) ? 0.0 : rts->x2;

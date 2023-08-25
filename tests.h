@@ -16,3 +16,8 @@ void run_test(const struct test_input *const test, size_t *const counter, size_t
  * @brief Runs all test and prints number of successful tests.
 */
 void run_all_tests(void);
+
+/**
+ *
+*/
+void printf_tests_results(const size_t *const counter, const size_t *const counter_true);
