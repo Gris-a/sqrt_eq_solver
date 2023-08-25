@@ -1,7 +1,7 @@
 /**
  * @file user.h
  * @author Gris-a
- * @brief Contains user.cpp functions declarations
+ * @brief Contains user.cpp functions declarations.
 */
 
 /**
@@ -11,22 +11,24 @@
 void solve_equation_user(void);
 /**
  * @brief Gets coefficients of equation from @b stdin.
- * @param coef Pointer on coefficients of equation.
+ * @param coef Pointer to coefficients of equation.
  * @return @b 1 if @b EOF, otherwise @b 0.
- * Calls check_scanf_double() three times for @b coef->a, @b coef->b and @b coef->c, breaks when check_scanf_double() finds @b EOF.
+ * Вызывает check_scanf_double() три раза для @b coef->a, @b coef->b и @b coef->c.
+ * Выход из функции когда check_scanf_double() находит @b EOF.
 */
 int get_coefficients(struct coefficients *const coef);
 /**
  * @brief Gets @a double from @b stdout and checks it.
- * @param dbl Pointer on coefficient of equation.
+ * @param dbl Pointer to coefficient of equation.
  * @return @b 1 If EOF, otherwise @b 0.
- * Checks input for @a double variable, otherwise calls clean_buff() and asks to repeat input, breaks when clean_buff() finds @b EOF.
+ * Проверяет ввод на переменную типа @a double, иначе вызывает clean_buff() и просит повторить вывод.
+ * Выход из функции когда clean_buff() находит @b EOF.
 */
 int check_scanf_double(double *const dbl);
 /**
  * @brief Clears @b stdin buffer.
  * @return First founded @b '\n' or @b EOF.
- * Calls getchar() until @b '\n' or @b EOF.
+ * Вызывает getchar() пока не найдёт @b '\n' или @b EOF.
 */
 int clean_buff(void);
 /**

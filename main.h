@@ -3,7 +3,7 @@
 */
 #define M_ERR 1e-10
 /**
- * Macros for soft assert of expression. Shows line and code of error.
+ * Макрос для мягкой проверки условия. Выводит код и линию ошибки. Не прерывает программу.
 */
 # define soft_assert(expr, err_code) if(!(expr))\
     {\
@@ -16,46 +16,44 @@
  * @file main.h
  * @author Gris-a
  * @brief Main header file.
- * Contains all global constants
+ * Contains all global constants.
 */
 
 /**
- * @brief Number of quadratic equasion's roots constants.
+ * @brief Constants that determine the number of roots.
 */
 enum nRoots
 {
-    INF_ROOTS = -1, ///< infinite number of roots
-    ZERO_ROOTS,     ///< zero roots
-    ONE_ROOT,       ///< one root
-    TWO_ROOTS       ///< two roots
+    INF_ROOTS = -1, ///< infinite number of roots.
+    ZERO_ROOTS,     ///< zero roots.
+    ONE_ROOT,       ///< one root.
+    TWO_ROOTS       ///< two roots.
 };
 /**
- * @brief Errors output code.
+ * @brief Errors codes.
 */
 enum errors
 {
-    IS_INFINITE, ///< variable is @a infinite
-    IS_NULL      ///< NULL pointer
+    IS_INFINITE, ///< variable is @a infinite.
+    IS_NULL      ///< NULL pointer.
 };
 
 /**
  * @brief Coefficients of the quadratic equation.
- * Contains three coefficients.
 */
 struct coefficients
 {
-    double a; ///< Coefficient before x^2
-    double b; ///< Coefficient before x
-    double c; ///< Free coefficient
+    double a; ///< Coefficient before x^2.
+    double b; ///< Coefficient before x.
+    double c; ///< Free coefficient.
 };
 /**
  * @brief Roots of the quadratic equation.
- * Contains two roots.
 */
 struct roots
 {
-    double x1; ///< Smallest root of the equation
-    double x2; ///< Biggest root of the equation
+    double x1; ///< First root of the equation.
+    double x2; ///< Second root of the equation.
 };
 /**
  * @brief Test input.
@@ -81,4 +79,4 @@ const struct arguments my_args = {"--help", "--test", "--user"}; ///< Struct obj
 /**
  * Max length of argument from my_args.
 */
-#define MAX_ARG_LEN 6 //чот не хорошо
+#define MAX_ARG_LEN 6
