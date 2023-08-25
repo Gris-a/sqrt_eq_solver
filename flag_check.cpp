@@ -6,10 +6,10 @@
 /**
  * @file flag_check.cpp
  * @author Gris-a
- * @brief File with flag processing functionsю
+ * @brief File with flag processing functions.
 */
 
-int flag_check(int argc, char *argv[], const char arg[]) //подумать о длине
+int flag_check(int argc, char *argv[], const char arg[])
 {
     int i = 0;
     if(argc > 1)
@@ -17,7 +17,7 @@ int flag_check(int argc, char *argv[], const char arg[]) //подумать о �
         while(--argc > 0)
         {
             i++;
-            if(!strncmp(arg, argv[i], MAX_ARG_LEN))
+            if(!strncmp(arg, argv[i], MAX_ARG_LEN)) //подумать о длине
             {
                 return 1;
             }
