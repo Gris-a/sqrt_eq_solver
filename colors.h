@@ -1,5 +1,6 @@
 /**
  * @file colors.h
+ * @author Gris-a
  * @brief Macros for highlighting text.
 */
 

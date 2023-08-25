@@ -1,11 +1,9 @@
-# *Quadratic Equation Solver*
+# Quadratic Equation Solver
 
 # Documentation
 
-- [aboba](#описание)
-Also, follow up with the post on
-
-
+- [Описание](#описание)
+-
 # <A name="имя"/> Описание
 
 ```C

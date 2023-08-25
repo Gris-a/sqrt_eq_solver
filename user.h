@@ -5,7 +5,7 @@
 */
 
 /**
- * @brief Solves quadratic equation with user input-output.\n
+ * @brief Solves quadratic equation with user input-output.
  * Calls get_coefficients(), checks on @b EOF, calls solve_equation() to solve equation and printf_roots() to print the solution.
 */
 void solve_equation_user(void);

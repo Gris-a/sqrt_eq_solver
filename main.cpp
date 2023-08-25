@@ -7,17 +7,28 @@
 
 /**
  * @mainpage Quadratic equation solver
- * @file quad_eq_solver.cpp
+ * @author Gris-a
+ *
+ * Это документация для QES. Вы можете скачать её <a href="https://github.com/Gris-a/sqrt_eq_solver">здесь.</a>
+ * @par About
+ * Эта программа решает квадратное уравнение.
+ *
+ * @par Tests
+ *
+ *
+*/
+
+/**
+ * @file main.cpp
  * @author Gris-a.
  * @brief Program solves quadratic equation.
 */
 
 /**
- * @brief Main function.
+ * @brief Main function that depends on command line arguments.
  * @param argc Number of command line arguments.
  * @param argv Array with pointers to command line arguments.
- * @return returns @b 0;
- * Function depends on command line arguments.
+ * @return
 */
 int main(const int argc, char *argv[])
 {
@@ -44,7 +55,7 @@ int main(const int argc, char *argv[])
                "\n"
                "--test          Run tests for program.\n"
                "\n"
-               "--uio           Solve equation with user input-output.\n"
+               "--user          Solve equation with user input-output.\n"
                "\n");
         return (undef_argc) ? 1 : 0;
     }

@@ -64,4 +64,4 @@ const struct arguments my_args = {"--help", "--test", "--user"}; ///< Struct obj
 /**
  * Max length of argument from my_args.
 */
-#define MAX_ARG_LEN 6 //мне не нравится
+#define MAX_ARG_LEN 6
