@@ -16,7 +16,8 @@ void solve_equation_user(void)
     int nRoots = 0;
     if(get_coefficients(&coef))
     {
-        printf("\nEnd of File.\n");
+        printf("\n"
+               "End of File.\n");
         return;
     }
     nRoots = solve_equation(&coef, &rts);

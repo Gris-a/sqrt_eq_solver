@@ -12,3 +12,4 @@ Doxyfile
 latex/Makefile
 *.pdf
 *.out
+*.o
