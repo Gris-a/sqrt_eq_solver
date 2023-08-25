@@ -14,6 +14,9 @@ int solve_equation(const struct coefficients *const coef, struct roots *const rt
     SOFT_ASSERT(isfinite(coef->a), IS_INFINITE);
     SOFT_ASSERT(isfinite(coef->b), IS_INFINITE);
     SOFT_ASSERT(isfinite(coef->c), IS_INFINITE);
+    SOFT_ASSERT(!isnan(coef->a), IS_NAN);
+    SOFT_ASSERT(!isnan(coef->b), IS_NAN);
+    SOFT_ASSERT(!isnan(coef->c), IS_NAN);
     SOFT_ASSERT(coef != NULL, IS_NULL);
     SOFT_ASSERT(rts != NULL, IS_NULL);
     int nRoots = (float_cmp(coef->a, 0.0, M_ERR)) ? linear_equation(coef, rts) : quadratic_equation(coef, rts);
@@ -86,7 +89,7 @@ int linear_equation(const struct coefficients *const coef, struct roots *const r
     }
 }
 
-int float_cmp(double a, double b, const double err)
+int float_cmp(const double a, const double b, const double err)
 {
     return fabs(a - b) < err;
 }

@@ -36,8 +36,9 @@ enum nRoots
 */
 enum errors
 {
-    IS_INFINITE = 0, ///< variable is @a infinite.
-    IS_NULL = 1      ///< NULL pointer.
+    IS_INFINITE = -1, ///< variable is @a infinite.
+    IS_NULL = 0,      ///< NULL pointer.
+    IS_NAN = 1        ///< Not a number.
 };
 
 /**

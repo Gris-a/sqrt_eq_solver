@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 #include "main.h"
 #include "solve.h"
 #include "user.h"
@@ -81,6 +82,11 @@ int clean_buff(void)
 void printf_roots(const struct roots *const rts, const int nRoots)
 {
     SOFT_ASSERT(rts != NULL, IS_NULL);
+    SOFT_ASSERT(!isnan(rts->x1), IS_NAN);
+    SOFT_ASSERT(!isnan(rts->x2), IS_NAN);
+    SOFT_ASSERT(isfinite(rts->x1), IS_INFINITE);
+    SOFT_ASSERT(isfinite(rts->x2), IS_INFINITE);
+    SOFT_ASSERT(!isnan(nRoots), IS_NAN);
     switch(nRoots)
     {
         case INF_ROOTS:
