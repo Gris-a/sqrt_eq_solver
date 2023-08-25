@@ -7,10 +7,22 @@
 */
 # define SOFT_ASSERT(expr, err_code) if(!(expr))\
     {\
-        printf("\033[1;31mError in line %d.\n"\
+        printf(RED("Error in line %d.\n"\
                "Error code %d.\n"\
-               "\n\033[1;0m", __LINE__, err_code);\
+               "\n"), __LINE__, err_code);\
     }
+/**
+ * Macros that makes text red.
+*/
+#define RED(expr) ("\033[1;31m" expr "\033[1;0m")
+/**
+ * Macros that makes text green.
+*/
+#define GREEN(expr) ("\033[1;32m" expr "\033[1;0m")
+/**
+ * Macros that makes text yellow.
+*/
+#define YELLOW(expr) ("\033[1;33m" expr "\033[1;0m")
 
 /**
  * @file main.h

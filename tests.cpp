@@ -21,10 +21,9 @@ void run_test(const struct test_input *const test, size_t *const counter, size_t
     }
     else
     {
-        printf("\033[1;31mFAILED TEST №%zu\033[1;0m.\n"
-               "\033[1;32mEXPECTED: x1= %10lg, x2= %10lg, nRoots=%3d\033[1;0m.\n"
-               "\033[1;31mRECEIVED: x1= %10lg, x2= %10lg, nRoots=%3d\033[1;0m.\n",
-               *counter, test->rts_exp.x1, test->rts_exp.x2, test->nRoots_exp, rts.x1, rts.x2, nRoots);
+        printf(RED("FAILED TEST №%zu\n"), *counter);
+        printf(GREEN("EXPECTED: x1= %10lg, x2= %10lg, nRoots=%3d\n"), test->rts_exp.x1, test->rts_exp.x2, test->nRoots_exp);
+        printf(RED("RECEIVED: x1= %10lg, x2= %10lg, nRoots=%3d\n"), rts.x1, rts.x2, nRoots);
     }
 }
 
@@ -53,15 +52,15 @@ void run_all_tests(void)
     }
     if(counter == counter_true)
     {
-	    printf("\033[1;32m%zu/%zu tests passed\033[1;0m\n", counter_true, counter);
+	    printf(GREEN("%zu/%zu tests passed\n"), counter_true, counter);
     }
     else if(counter == 0)
     {
-        printf("\033[1;31m%zu/%zu tests passed\033[1;0m\n", counter_true, counter);
+        printf(RED("%zu/%zu tests passed\n"), counter_true, counter);
     }
     else
     {
-        printf("\033[1;33m%zu/%zu tests passed\033[1;0m\n", counter_true, counter);
+        printf(YELLOW("%zu/%zu tests passed\n"), counter_true, counter);
     }
 
 }
