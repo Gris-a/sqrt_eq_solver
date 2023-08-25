@@ -33,10 +33,9 @@ void run_all_tests(void)
 	size_t counter_true = 0;
     FILE *test_file = fopen("tests.txt", "r");
     struct test_input testo;
-    for(int i = 0; i < N_TESTS; i++)
+    while(fscanf(test_file, "%lf, %lf, %lf, %lf, %lf, %d",&testo.coef_exp.a, &testo.coef_exp.b, &testo.coef_exp.c,
+                                                          &testo.rts_exp.x1, &testo.rts_exp.x2, &testo.nRoots_exp) == 6)
     {
-        fscanf(test_file, "%lf, %lf, %lf, %lf, %lf, %d", &testo.coef_exp.a, &testo.coef_exp.b, &testo.coef_exp.c,
-                                                         &testo.rts_exp.x1, &testo.rts_exp.x2, &testo.nRoots_exp);
         run_test(&testo, &counter, &counter_true);
     }
 
