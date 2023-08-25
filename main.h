@@ -9,9 +9,9 @@
 */
 # define SOFT_ASSERT(expr, err_code) if(!(expr))\
     {\
-        printf(RED("Error in line %d.\n"\
+        PRINTF_R("Error in line %d.\n"\
                "Error code %d.\n"\
-               "\n"), __LINE__, err_code);\
+               "\n", __LINE__, err_code);\
     }
 
 /**

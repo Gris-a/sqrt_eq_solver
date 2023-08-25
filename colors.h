@@ -1,3 +1,5 @@
+#include <stdio.h>
+
 /**
  * @file colors.h
  * @author Gris-a
@@ -5,14 +7,20 @@
 */
 
 /**
- * Macros that makes text red.
+ * Macro that prints text red.
 */
-#define RED(expr) ("\033[1;31m" expr "\033[1;0m")
+#define PRINTF_R(...)  printf("\033[1;31m");\
+                       printf(__VA_ARGS__);\
+                       printf("\033[1;0m")
 /**
- * Macros that makes text green.
+ * Macro that prints text green.
 */
-#define GREEN(expr) ("\033[1;32m" expr "\033[1;0m")
+#define PRINTF_G(...)  printf("\033[1;32m");\
+                       printf(__VA_ARGS__);\
+                       printf("\033[1;0m")
 /**
- * Macros that makes text yellow.
+ * Macro that prints text yellow.
 */
-#define YELLOW(expr) ("\033[1;33m" expr "\033[1;0m")
+#define PRINTF_Y(...)  printf("\033[1;33m");\
+                       printf(__VA_ARGS__);\
+                       printf("\033[1;0m")
