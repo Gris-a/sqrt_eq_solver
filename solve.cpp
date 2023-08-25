@@ -11,11 +11,11 @@
 
 int solve_equation(const struct coefficients *const coef, struct roots *const rts)
 {
-    soft_assert(isfinite(coef->a), IS_INFINITE);
-    soft_assert(isfinite(coef->b), IS_INFINITE);
-    soft_assert(isfinite(coef->c), IS_INFINITE);
-    soft_assert(coef != NULL, IS_NULL);
-    soft_assert(rts != NULL, IS_NULL);
+    SOFT_ASSERT(isfinite(coef->a), IS_INFINITE);
+    SOFT_ASSERT(isfinite(coef->b), IS_INFINITE);
+    SOFT_ASSERT(isfinite(coef->c), IS_INFINITE);
+    SOFT_ASSERT(coef != NULL, IS_NULL);
+    SOFT_ASSERT(rts != NULL, IS_NULL);
     int nRoots = (float_cmp(coef->a, 0.0, M_ERR)) ? linear_equation(coef, rts) : quadratic_equation(coef, rts);
     rts->x1 = (float_cmp(rts->x1, 0.0, M_ERR)) ? 0.0 : rts->x1;
     rts->x2 = (float_cmp(rts->x2, 0.0, M_ERR)) ? 0.0 : rts->x2;

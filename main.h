@@ -5,7 +5,7 @@
 /**
  * Макрос для проверки условия. Выводит код и линию ошибки. Не прерывает программу.
 */
-# define soft_assert(expr, err_code) if(!(expr))\
+# define SOFT_ASSERT(expr, err_code) if(!(expr))\
     {\
         printf("\033[1;31mError in line %d.\n"\
                "Error code %d.\n"\
@@ -25,17 +25,17 @@
 enum nRoots
 {
     INF_ROOTS = -1, ///< infinite number of roots.
-    ZERO_ROOTS,     ///< zero roots.
-    ONE_ROOT,       ///< one root.
-    TWO_ROOTS       ///< two roots.
+    ZERO_ROOTS = 0, ///< zero roots.
+    ONE_ROOT = 1,   ///< one root.
+    TWO_ROOTS = 2   ///< two roots.
 };
 /**
  * @brief Errors codes.
 */
 enum errors
 {
-    IS_INFINITE, ///< variable is @a infinite.
-    IS_NULL      ///< NULL pointer.
+    IS_INFINITE = 0, ///< variable is @a infinite.
+    IS_NULL = 1      ///< NULL pointer.
 };
 
 /**

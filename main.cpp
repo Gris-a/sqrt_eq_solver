@@ -32,7 +32,7 @@ int main(const int argc, char *argv[])
     }
     if(flag_check(argc, argv, my_args.help))
     {
-        printf("Usage: ./prog.out [options]\n"
+        printf("Usage: ./programm.out [options]\n"
                "Options:\n"
                "--test          Run tests for program.\n"
                "\n"
