@@ -86,7 +86,7 @@ int linear_equation(const struct coefficients *const coef, struct roots *const r
     }
 }
 
-int float_cmp(double a, double b, double err)
+int float_cmp(double a, double b, const double err)
 {
     return fabs(a - b) < err;
 }

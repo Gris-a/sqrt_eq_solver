@@ -12,7 +12,7 @@
  * Checks if parameters are valid, then if @b rts->a equal to zero, calls linear_equation(), otherwise quadratic_equation().
  * @note If two roots are close to eachother, returns output as one root.
 */
-int solve_equation(const struct coefficients *const coef, struct roots *rts);
+int solve_equation(const struct coefficients *const coef, struct roots *const rts);
 /**
  * @brief Solves quadratic equation.
  * @param coef Coefficients of the equation.
@@ -31,4 +31,4 @@ int linear_equation(const struct coefficients *const coef, struct roots *const r
  * @brief Compares @a float variables @a a and @a b with measurement еrror @b err.
  * @return @b 1 if @b a similar to @b b, otherwise @b 0.
 */
-int float_cmp(double a, double b, double err);
+int float_cmp(const double a, const double b, const double err);

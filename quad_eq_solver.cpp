@@ -19,7 +19,7 @@
  * @return returns @b 0;
  * Function depends on command line arguments.
 */
-int main(int argc, char *argv[])
+int main(const int argc, char *argv[])
 {
     printf("This programm solves quadratic equation.\n");
     printf("ZAG, 2023.\n"

@@ -59,16 +59,13 @@ struct roots
 };
 /**
  * @brief Test input.
- * Contains coefficients, expected output of programm and counters.
+ * Contains coefficients and expected output.
 */
 struct test_input
 {
     const struct coefficients coef_exp; ///< Coefficients of equation.
     const struct roots rts_exp;         ///< Expected roots of equation.
     const int nRoots_exp;               ///< Expected number of roots.
-
-    size_t *const counter;              ///< Counter of tested inputs.
-    size_t *const counter_true;         ///< Counter of successfully tested inputs.
 };
 /**
  * @brief Command line arguments for programm.
