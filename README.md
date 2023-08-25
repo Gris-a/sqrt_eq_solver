@@ -1,9 +1,6 @@
-# Quadratic Equation Solver
+# Quadratic equation solver
 
 This program solves quadratic equation.
 
-# Documentation
+## About The Project
 
-- [Описание](#описание)
--
-# <A name="имя"/> Описание
