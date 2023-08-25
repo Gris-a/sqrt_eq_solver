@@ -19,7 +19,7 @@
  * @return returns @b 0;
  * Function depends on command line arguments.
 */
-int main(const int argc, char *argv[]) //проверка всех аргументов
+int main(const int argc, char *argv[])
 {
     if(argc == 1)
     {
