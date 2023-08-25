@@ -31,25 +31,15 @@ void run_all_tests(void)
 {
     size_t counter = 0;
 	size_t counter_true = 0;
-    struct test_input test_arr[] = {
-                            {{0,  0,  0},  {   0,    0},     INF_ROOTS},
-                            {{0,  0,  5},  {   0,    0},    ZERO_ROOTS},
-                            {{0,  5,  0},  {   0,    0},      ONE_ROOT},
-                            {{0,  2,  5},  {-2.5, -2.5},      ONE_ROOT},
-                            {{1,  0,  5},  {   0,    0},    ZERO_ROOTS},
-                            {{1,  1,  0},  {  -1,    0},     TWO_ROOTS},
-                            {{1, -4,  4},  {   2,    2},      ONE_ROOT},
-                            {{1, -5,  6},  {   2,    3},     TWO_ROOTS},
-                            {{1,  1,  1},  {   0,    0},    ZERO_ROOTS},
-                            {{1,  0,  0},  {   0,    0},      ONE_ROOT},
-                            {{1,  0, -1},  {  -1,    1},     TWO_ROOTS},
-                            {{1,  0, -1},  {  -1,    1},     TWO_ROOTS},
-                            {{1,  0, -1},  {   0,    1},     TWO_ROOTS} //Expectedly fails
-                            };
-    for(size_t i = 0; i < sizeof(test_arr)/sizeof(test_input); i++)
+    FILE *test_file = fopen("tests.txt", "r");
+    struct test_input testo;
+    for(int i = 0; i < N_TESTS; i++)
     {
-        run_test(&test_arr[i], &counter, &counter_true);
+        fscanf(test_file, "%lf, %lf, %lf, %lf, %lf, %d", &testo.coef_exp.a, &testo.coef_exp.b, &testo.coef_exp.c,
+                                                         &testo.rts_exp.x1, &testo.rts_exp.x2, &testo.nRoots_exp);
+        run_test(&testo, &counter, &counter_true);
     }
+
     printf_tests_results(&counter, &counter_true);
 }
 

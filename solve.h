@@ -31,4 +31,4 @@ int linear_equation(const struct coefficients *const coef, struct roots *const r
  * @brief Compares @a float variables @a a and @a b with measurement еrror @b err.
  * @return @b true if @b a close to @b b, otherwise @b false.
 */
-bool float_cmp(const double a, const double b, const double err);
+int float_cmp(const double a, const double b, const double err);

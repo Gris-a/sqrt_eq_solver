@@ -46,9 +46,9 @@ struct roots
 */
 struct test_input
 {
-    const struct coefficients coef_exp; ///< Coefficients of equation.
-    const struct roots rts_exp;         ///< Expected roots of equation.
-    const int nRoots_exp;               ///< Expected number of roots.
+    struct coefficients coef_exp; ///< Coefficients of equation.
+    struct roots rts_exp;         ///< Expected roots of equation.
+    int nRoots_exp;               ///< Expected number of roots.
 };
 /**
  * @brief Command line arguments for programm.
@@ -65,3 +65,5 @@ const struct arguments my_args = {"--help", "--test", "--user"}; ///< Struct obj
  * Max length of argument from my_args.
 */
 #define MAX_ARG_LEN 6 //мне не нравится
+
+#define N_TESTS 13
