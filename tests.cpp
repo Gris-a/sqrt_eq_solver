@@ -12,7 +12,7 @@
 void run_test(const struct test_input *const test, size_t *const counter, size_t *const counter_true)
 {
     struct roots rts = {0.0, 0.0};
-	int nRoots = solve_equation(&test->coef_exp, &rts);
+	int nRoots = solve_equation(test->coef_exp, &rts);
 	(*counter)++;
     if((nRoots == test->nRoots_exp && ((float_cmp(rts.x1, test->rts_exp.x1, M_ERR) && float_cmp(rts.x2, test->rts_exp.x2, M_ERR)) ||
                                        (float_cmp(rts.x1, test->rts_exp.x2, M_ERR) && float_cmp(rts.x2, test->rts_exp.x1, M_ERR)))))

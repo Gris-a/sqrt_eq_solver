@@ -22,7 +22,7 @@ void solve_equation_user(void)
                "End of File.\n");
         return;
     }
-    nRoots = solve_equation(&coef, &rts);
+    nRoots = solve_equation(coef, &rts);
     printf_roots(&rts, nRoots);
 }
 
