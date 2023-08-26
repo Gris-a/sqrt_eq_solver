@@ -9,7 +9,7 @@
  * @file main.h
  * @author Gris-a
  * @brief Main header file.
- * Contains all global constants.
+ * Contains all global constants, structures and defines.
 */
 
 /**
@@ -41,7 +41,7 @@ struct roots
     double x2; ///< Second root of the equation.
 };
 /**
- * @brief Test input.
+ * @brief Test input.\n
  * Contains coefficients and expected output.
 */
 struct test_input

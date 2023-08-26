@@ -7,15 +7,14 @@
 
 /**
  * @mainpage Quadratic equation solver
- * @author Gris-a
+ *
+ * @author
+ * Gris-a
  *
  * Это документация для QES. Вы можете скачать её <a href="https://github.com/Gris-a/sqrt_eq_solver">здесь.</a>
  * @par About
  * Эта программа решает квадратное уравнение.
 
- * @par Self-testing
- *
- *
 */
 
 /**
@@ -28,7 +27,7 @@
  * @brief Main function that depends on command line arguments.
  * @param argc Number of command line arguments.
  * @param argv Array with pointers to command line arguments.
- * @return
+ * @return @b 0 if arguements are valid.
 */
 int main(const int argc, char *argv[])
 {

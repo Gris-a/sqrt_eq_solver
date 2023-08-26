@@ -5,7 +5,7 @@
 */
 
 /**
- * @brief Solves quadratic equation.
+ * @brief Solves equation.
  * @param coef Coefficients of the equation.
  * @param rts Pointer to roots of the equation.
  * @return Returns number of roots of the equation according to @b nRoots.
