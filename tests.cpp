@@ -39,21 +39,21 @@ void run_all_tests(void)
         run_test(&testo, &counter, &counter_true);
     }
 
-    printf_tests_results(&counter, &counter_true);
+    printf_tests_results(counter, counter_true);
 }
 
-void printf_tests_results(const size_t *const counter, const size_t *const counter_true)
+void printf_tests_results(const size_t counter, const size_t counter_true)
 {
-    if(*counter == *counter_true)
+    if(counter == counter_true)
     {
-	    printf(color_red("%zu/%zu tests passed\n"), *counter_true, *counter);
+	    printf(color_red("%zu/%zu tests passed\n"), counter_true, counter);
     }
-    else if(*counter == 0)
+    else if(counter == 0)
     {
-        printf(color_red("%zu/%zu tests passed\n"), *counter_true, *counter);
+        printf(color_red("%zu/%zu tests passed\n"), counter_true, counter);
     }
     else
     {
-        printf(color_yellow("%zu/%zu tests passed\n"), *counter_true, *counter);
+        printf(color_yellow("%zu/%zu tests passed\n"), counter_true, counter);
     }
 }

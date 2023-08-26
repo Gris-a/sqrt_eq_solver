@@ -22,4 +22,4 @@ void run_all_tests(void);
  * @param counter Counter of tests.
  * @param counter_true Counter of successful tests.
 */
-void printf_tests_results(const size_t *const counter, const size_t *const counter_true);
+void printf_tests_results(const size_t counter, const size_t counter_true);
