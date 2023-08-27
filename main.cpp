@@ -6,18 +6,6 @@
 #include "flag_check.h"
 
 /**
- * @mainpage Quadratic equation solver
- *
- * @author
- * Gris-a
- *
- * Это документация для QES. Вы можете скачать её <a href="https://github.com/Gris-a/sqrt_eq_solver">здесь.</a>
- * @par About
- * Эта программа решает квадратное уравнение.
-
-*/
-
-/**
  * @file main.cpp
  * @author Gris-a.
  * @brief Program solves quadratic equation.
