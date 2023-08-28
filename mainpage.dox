@@ -23,7 +23,7 @@
  * - Run program
  *
  * ```
- * <program path> [options]
+ * <program path> [options] [target]
  * ```
  *
  * ### Run options:
