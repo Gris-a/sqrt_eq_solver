@@ -13,7 +13,7 @@ git clone https://github.com/Gris-a/sqrt_eq_solver
 - Compile program
 
 ```
-cd sqrt_eq_solver
+cd sqrt_eq_solver/sources
 g++ flag_check.cpp main.cpp solve.cpp tests.cpp user.cpp -o solver.out
 ```
 
@@ -22,7 +22,7 @@ g++ flag_check.cpp main.cpp solve.cpp tests.cpp user.cpp -o solver.out
 - Run program
 
 ```
-./solver.out [options]
+./<program name> [options]
 ```
 
 ### Run options:
