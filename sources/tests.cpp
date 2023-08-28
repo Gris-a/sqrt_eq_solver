@@ -38,7 +38,7 @@ void run_all_tests(void)
     {
         run_test(&testo, &counter, &counter_true);
     }
-
+    fclose(test_file);
     printf_tests_results(counter, counter_true);
 }
 
