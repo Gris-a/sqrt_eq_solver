@@ -13,7 +13,7 @@ git clone https://github.com/Gris-a/sqrt_eq_solver
 - Compile program
 
 ```
-cd sqrt_eq_solver/sources
+cd sqrt_eq_solver/src
 g++ flag_check.cpp main.cpp solve.cpp tests.cpp user.cpp -o solver.out
 ```
 
@@ -39,7 +39,7 @@ g++ flag_check.cpp main.cpp solve.cpp tests.cpp user.cpp -o solver.out
 
 ### Solving equation
 
-Функции для вычислений определены в файле solve.cpp. При вычислениях погрешность считается равной M_ERR, определённой в main.h.\
+Функции для вычислений определены в файле solve.cpp. При вычислениях погрешность всех чисел считается равной M_ERR, определённой в main.h.\
 Если уравнение не имеет корней, то их значение равно значению при инициализации, то есть 0.\
 Если уравнение имеет один корень, то его значение присваивается обеим переменным в структуре.
 

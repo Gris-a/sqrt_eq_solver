@@ -13,7 +13,7 @@
  * - Compile program
  *
  * ```
- * cd sqrt_eq_solver/sources
+ * cd sqrt_eq_solver/src
  *
  * g++ flag_check.cpp main.cpp solve.cpp tests.cpp user.cpp -o solver.out
  * ```
