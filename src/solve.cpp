@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <assert.h>
 #include <math.h>
-#include "./include/main.h"
 #include "./include/solve.h"
 
 /**
@@ -10,7 +9,7 @@
  * @brief Functions for solving equation.
 */
 
-int solve_equation(const struct coefficients *const coef, struct roots *const rts)
+void solve_equation(const struct coefficients *const coef, struct roots *const rts)
 {
     assert(isfinite(coef->a));
     assert(isfinite(coef->b));
@@ -18,57 +17,60 @@ int solve_equation(const struct coefficients *const coef, struct roots *const rt
     assert(rts != NULL);
     assert(coef != NULL);
 
-    int nRoots = (float_cmp(coef->a, 0.0, M_ERR)) ? linear_equation(coef, rts) : quadratic_equation(coef, rts);
+    float_cmp(coef->a, 0.0, m_err) ? linear_equation(coef, rts) : quadratic_equation(coef, rts);
 
-    rts->x1 = (float_cmp(rts->x1, 0.0, M_ERR)) ? 0.0 : rts->x1;
-    rts->x2 = (float_cmp(rts->x2, 0.0, M_ERR)) ? 0.0 : rts->x2;
-    if(nRoots == 2 && float_cmp(rts->x1, rts->x2, M_ERR))
+    if(rts->n_roots == TWO_ROOTS && float_cmp(rts->x1, rts->x2, m_err))
     {
-        nRoots = 1;
+        rts->n_roots = ONE_ROOT;
         rts->x2 = rts->x1;
     }
-
-    return nRoots;
+    rts->x1 = (float_cmp(rts->x1, 0.0, m_err)) ? 0.0 : rts->x1;
+    rts->x2 = (float_cmp(rts->x2, 0.0, m_err)) ? 0.0 : rts->x2;
 }
 
-int quadratic_equation(const struct coefficients *const coef, struct roots *const rts)
+void quadratic_equation(const struct coefficients *const coef, struct roots *const rts)
 {
-    if(float_cmp(coef->c, 0.0, M_ERR))
+    if(float_cmp(coef->c, 0.0, m_err))
     {
-        if(float_cmp(coef->b, 0.0, M_ERR))
+        if(float_cmp(coef->b, 0.0, m_err))
         {
             rts->x1 = rts->x2 = 0.0;
+            rts->n_roots = ONE_ROOT;
 
-            return ONE_ROOT;
+            return;
         }
 
         rts->x1 = 0.0;
         rts->x2 = -(coef->b / coef->a);
+        rts->n_roots = TWO_ROOTS;
 
-        return TWO_ROOTS;
+        return;
     }
-    if(float_cmp(coef->b, 0.0, M_ERR))
+    if(float_cmp(coef->b, 0.0, m_err))
     {
         if((coef->a < 0) == (coef->c < 0.0))
         {
-            return ZERO_ROOTS;
+            rts->n_roots = ZERO_ROOTS;
+
+            return;
         }
 
         rts->x1 = sqrt(-(coef->c / coef->a));
         rts->x2 = -rts->x1;
+        rts->n_roots = TWO_ROOTS;
 
-        return TWO_ROOTS;
+        return;
     }
     double D = coef->b * coef->b - 4 * coef->a * coef->c;
-    if(float_cmp(D, 0.0, M_ERR))
+
+    if(float_cmp(D, 0.0, m_err))
     {
         rts->x1 = rts->x2 = - (coef->b / (2 * coef->a));
-
-        return ONE_ROOT;
+        rts->n_roots = ONE_ROOT;
     }
     else if(D < 0.0)
     {
-        return ZERO_ROOTS;
+        rts->n_roots = ZERO_ROOTS;
     }
     else
     {
@@ -76,27 +78,28 @@ int quadratic_equation(const struct coefficients *const coef, struct roots *cons
 
         rts->x1 = (-coef->b - D_sqrt) / (2 * coef->a);
         rts->x2 = (-coef->b + D_sqrt) / (2 * coef->a);
-
-        return TWO_ROOTS;
+        rts->n_roots = TWO_ROOTS;
     }
 }
 
-int linear_equation(const struct coefficients *const coef, struct roots *const rts)
+void linear_equation(const struct coefficients *const coef, struct roots *const rts)
 {
-    if(float_cmp(coef->b, 0.0, M_ERR))
+    if(float_cmp(coef->b, 0.0, m_err))
     {
-        if(float_cmp(coef->c, 0.0, M_ERR))
+        if(float_cmp(coef->c, 0.0, m_err))
         {
-            return INF_ROOTS;
+            rts->n_roots = INF_ROOTS;
+
+            return;
         }
 
-        return ZERO_ROOTS;
+        rts->n_roots = ZERO_ROOTS;
     }
     else
     {
         rts->x1 = rts->x2 = - (coef->c / coef->b);
 
-        return ONE_ROOT;
+        rts->n_roots = ONE_ROOT;
     }
 }
 

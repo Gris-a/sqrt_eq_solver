@@ -1,33 +1,31 @@
 #include <stdio.h>
 #include <assert.h>
 #include <math.h>
-#include "./include/main.h"
 #include "./include/solve.h"
 #include "./include/user.h"
+#include "./include/colors.h"
 
 /**
  * @file user.cpp
  * @author Gris-a
  * @brief Functions with user input-output.
 */
-
 void solve_equation_user(void)
 {
     struct coefficients coef = {0.0, 0.0, 0.0};
-    struct roots rts = {0.0, 0.0};
-    int nRoots = 0;
+    struct roots rts = {0.0, 0.0, ZERO_ROOTS};
 
     if(get_coefficients(&coef))
     {
         printf(color_red("\n"
-               "End of File.\n"));
+                         "End of File.\n"));
 
         return;
     }
 
-    nRoots = solve_equation(&coef, &rts);
+    solve_equation(&coef, &rts);
 
-    printf_roots(&rts, nRoots);
+    printf_roots(&rts);
 }
 
 int get_coefficients(struct coefficients *const coef)
@@ -68,7 +66,7 @@ int check_scanf_double(double *const dbl)
 
         if((scanf_out != 2) || (ncheck != '\n'))
         {
-            if(clean_buff())
+            if(clean_buff() == EOF)
             {
                 return 1;
             }
@@ -94,14 +92,13 @@ int clean_buff(void)
     return ch;
 }
 
-void printf_roots(const struct roots *const rts, const int nRoots)
+void printf_roots(const struct roots *const rts)
 {
     assert(rts != NULL);
     assert(isfinite(rts->x1));
     assert(isfinite(rts->x2));
-    assert(!isnan(nRoots));
 
-    switch(nRoots)
+    switch(rts->n_roots)
     {
         case INF_ROOTS:
             printf("Корнем может быть любое действительное число.\n");
@@ -110,13 +107,13 @@ void printf_roots(const struct roots *const rts, const int nRoots)
             printf("Нет корней.\n");
             break;
         case ONE_ROOT:
-            printf("%lg - корень уравнения.\n", rts->x1);
+            printf("%.*lf - корень уравнения.\n", digits, rts->x1);
             break;
         case TWO_ROOTS:
-            printf("%lg и %lg - корни уравнения.\n", rts->x1, rts->x2);
+            printf("%.*lf и %.*lf - корни уравнения.\n", digits, rts->x1, digits, rts->x2);
             break;
         default:
-            printf("Квадратное уравнение не может иметь %d корней.\n", nRoots);
+            printf("Не верное количество корней.\n");
             break;
     }
 }

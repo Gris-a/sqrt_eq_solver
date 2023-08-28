@@ -1,15 +1,25 @@
 /**
  * @file tests.h
  * @author Gris-a
- * @brief Contains tests.cpp functions declarations.
+ * @brief Testing the program.
 */
+
+/**
+ * @brief Test input.
+ * Contains coefficients and expected output.
+*/
+struct test_input
+{
+    struct coefficients coef_exp; ///< Coefficients of equation.
+    struct roots rts_exp;         ///< Expected roots of equation.
+};
 
 /**
  * @brief Tests program on test_input.
  * @param test Pointer to struct test_input.
  * @param counter Pointer to tests counter.
- * @return @b true if test is succeded, otherwise @b false.
- * Выводит информацию о тесте, если он не прошёл.\n
+ * @return @b true if test is succeded.
+ * Выводит информацию о тесте, если он не прошёл.
 */
 unsigned int run_test(const struct test_input *const test, const size_t *const counter);
 

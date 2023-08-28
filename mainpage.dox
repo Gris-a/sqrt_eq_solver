@@ -29,31 +29,29 @@
  * ### Run options:
  *
  * - --help&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-       Prints info about program usage.
+ * Prints info about program usage.
  *
- * - --test DIRECTORY&emsp;&nbsp;&nbsp;&nbsp;
-    Run tests from DIRECTORY.
+ * - --test FILE&emsp;&emsp;&emsp;&emsp;&emsp;
+ * Run tests from FILE.
  *
  * - --user&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-       Solve equation with user input-output.
+ * Solve equation with user input-output.
  *
  * ## About The Program
  *
- * Основные структуры(roots, coefficients и test_input, arguments) и константы(M_ERR, my_args, nRoots) определены в файле main.h.
- *
  * ### Solving equation
  *
- * Функции для вычислений определены в файле solve.cpp. При вычислениях погрешность считается равной M_ERR, определённой в main.h.
+ * Функции для вычислений определены в файле solve.cpp. При вычислениях погрешность считается равной m_err, определённой в solve.h.
  * Если уравнение не имеет корней, то их значение равно значению при инициализации, то есть 0.
  * Если уравнение имеет один корень, то его значение присваивается обеим переменным в структуре.
  *
- * #### Note: Если у уравнения два корня, отличающихся менее, чем на M_ERR, то считается, что уравнение имеет один корень.
+ * #### Note: Если у уравнения два корня, отличающихся менее, чем на m_err, то считается, что уравнение имеет один корень.
  *
  * ### Testing program(- -test)
  *
  * Тестирующие функции определены в файле tests.cpp.
- * Программа тестирует значения, указанные в DIRECTORY.
- * Значения в файле упорядочены согласно структуре test_input.
+ * Программа тестирует значения, указанные в FILE.
+ * Значения в файле упорядочены согласно структуре test_input из tests.h.
  * По завершении тестирования выводятся провальные тесты и количество успешно прошедших.
  *
  * ### User interface(- -user)
