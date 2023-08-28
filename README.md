@@ -57,9 +57,6 @@ g++ flag_check.cpp main.cpp solve.cpp tests.cpp user.cpp -o solver.out
 
 ## Author
 Идея: [ДЕД](https://vk.com/ded32_ru)\
-Разработал: [Gris-a](https://github.com/Gris-a/)\
+Реализация: [Gris-a](https://github.com/Gris-a/)\
 Telegram: [GraY](https://t.me/qgrayq)
 
-## Project status
-
-Closed
