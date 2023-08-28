@@ -20,7 +20,7 @@ struct arguments
 } const my_args = {"--help", "--test", "--user"}; ///< Arguments.
 
 /**
- * @brief Struct for searching arguments from my_args in argv.
+ * @brief Struct for detecting if arguments from my_args in argv.
 */
 struct arguments_check
 {

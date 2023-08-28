@@ -27,7 +27,7 @@ unsigned int run_test(const struct test_input *const test, const size_t *const c
                                                                              test->rts_exp.n_roots);
         printf(color_red  ("RECEIVED: x1= %.*lf, x2= %.*lf, n_roots=%3d\n"), digits, rts.x1,
                                                                              digits, rts.x2,
-                                                                             rts.n_roots);//TODO: красивый вывод
+                                                                             rts.n_roots);
 
         return 0;
     }
