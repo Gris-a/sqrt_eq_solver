@@ -13,6 +13,11 @@
 */
 
 /**
+ * Length of command line arguments.
+*/
+#define ARG_LEN 7
+
+/**
  * @brief Constants that determine the number of roots.
 */
 enum nRoots
@@ -55,13 +60,9 @@ struct test_input
 */
 struct arguments
 {
-    char help[7]; ///< For more info.
-    char test[7]; ///< For testing.
-    char user[7]; ///< For user input-output.
+    char help[ARG_LEN]; ///< For more info.
+    char test[ARG_LEN]; ///< For testing.
+    char user[ARG_LEN]; ///< For user input-output.
 };
 const struct arguments my_args = {"--help", "--test", "--user"}; ///< Struct object with command line arguments.
 
-/**
- * Max length of argument from my_args.
-*/
-#define MAX_ARG_LEN 6

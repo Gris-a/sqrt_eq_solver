@@ -17,7 +17,7 @@ int flag_check(int argc, char *argv[], const char arg[])
         while(--argc > 0)
         {
             i++;
-            if(!strncmp(arg, argv[i], MAX_ARG_LEN))
+            if(!strncmp(arg, argv[i], ARG_LEN))
             {
                 return 1;
             }

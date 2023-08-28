@@ -46,7 +46,7 @@ void printf_tests_results(const size_t counter, const size_t counter_true)
 {
     if(counter == counter_true)
     {
-	    printf(color_red("%zu/%zu tests passed\n"), counter_true, counter);
+	    printf(color_green("%zu/%zu tests passed\n"), counter_true, counter);
     }
     else if(counter == 0)
     {
