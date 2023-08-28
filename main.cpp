@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include "main.h"
-#include "solve.h"
-#include "user.h"
-#include "tests.h"
-#include "flag_check.h"
+#include "./include/main.h"
+#include "./include/solve.h"
+#include "./include/user.h"
+#include "./include/tests.h"
+#include "./include/flag_check.h"
 
 /**
  * @file main.cpp

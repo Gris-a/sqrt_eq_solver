@@ -1,7 +1,7 @@
 #include <stdio.h>
-#include "main.h"
-#include "solve.h"
-#include "tests.h"
+#include "./include/main.h"
+#include "./include/solve.h"
+#include "./include/tests.h"
 
 /**
  * @file tests.cpp

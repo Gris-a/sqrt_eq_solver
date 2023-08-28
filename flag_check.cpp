@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-#include "main.h"
-#include "flag_check.h"
+#include "./include/main.h"
+#include "./include/flag_check.h"
 
 /**
  * @file flag_check.cpp

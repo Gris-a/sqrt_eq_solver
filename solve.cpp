@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <assert.h>
 #include <math.h>
-#include "main.h"
-#include "solve.h"
+#include "./include/main.h"
+#include "./include/solve.h"
 
 /**
  * @file solve.cpp
