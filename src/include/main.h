@@ -59,7 +59,7 @@ struct test_input
 };
 
 /**
- * @brief Command line arguments for programm.
+ * @brief Command line arguments for program.
 */
 struct arguments
 {
@@ -68,3 +68,13 @@ struct arguments
     char user[ARG_LEN]; ///< For user input-output.
 };
 const struct arguments my_args = {"--help", "--test", "--user"}; ///< Struct object with command line arguments.
+
+/**
+ * @brief Индексы вхождения аргументов my_args в argv.
+*/
+struct arguments_check
+{
+    int help; ///< Индекс вхождения my_args.help
+    int test; ///< Индекс вхождения аути к файлу с тестами.
+    int user; ///< Индекс вхождения my_args.user
+};

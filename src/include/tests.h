@@ -15,9 +15,9 @@ unsigned int run_test(const struct test_input *const test, const size_t *const c
 
 /**
  * @brief Runs all test from file and prints number of successful tests.
- * @param test_file File with test inputs;
+ * @param test_file Pointer to name of the file with test inputs.
 */
-void run_all_tests(FILE *test_file);
+void run_all_tests(const char *const file_name);
 
 /**
  * @brief Prints test results.

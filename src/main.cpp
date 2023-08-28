@@ -1,9 +1,9 @@
 #include <stdio.h>
-#include <string.h>
 #include "./include/main.h"
 #include "./include/solve.h"
 #include "./include/user.h"
 #include "./include/tests.h"
+#include "./include/args_check.h"
 
 /**
  * @file main.cpp
@@ -17,54 +17,28 @@
  * @param argv Array with pointers to command line arguments.
  * @return @b 0 if arguements are valid.
 */
-int main(const int argc, char *argv[])
+int main(const int argc, const char *argv[])
 {
     if(argc == 1)
     {
-        printf("This programm solves quadratic equation.\n");
+        printf("This program solves quadratic equation.\n");
         printf("ZAG, 2023.\n"
                 "\n");
 
         return 0;
     }
 
-    int test = 0;
-    int help = 0;
-    int user = 0;
-    int undef_arg = 0;
+    struct arguments_check check_arg= {0, 0, 0};
+    int undef_arg = args_check(argc, argv, &check_arg);
 
-    for(int i = 1; i < argc; i++)
-    {
-        if(!strncmp(my_args.help, argv[i], ARG_LEN))
-            {
-                help = 1;
-                break;
-            }
-
-        if(!strncmp(my_args.test, argv[i], ARG_LEN))
-            {
-                test = ++i;
-                continue;
-            }
-
-        if(!strncmp(my_args.user, argv[i], ARG_LEN))
-            {
-                user = 1;
-                continue;
-            }
-
-        undef_arg = 1;
-        break;
-    }
-
-    if(undef_arg || help)
+    if(undef_arg || check_arg.help)
     {
         if(undef_arg)
         {
             printf("Undefined options.\n");
         }
 
-        printf("Usage: <program path> [options]\n"
+        printf("Usage: <program path> [options] [target]\n"
                "Options:\n"
                "--help              Print this message and exit.\n"
                "\n"
@@ -76,12 +50,12 @@ int main(const int argc, char *argv[])
         return (undef_arg) ? 1 : 0;
     }
 
-    if(test)
+    if(check_arg.test != 0)
     {
-        run_all_tests(fopen(argv[test], "r"));
+        run_all_tests(argv[check_arg.test]);
     }
 
-    if(user)
+    if(check_arg.user)
     {
         solve_equation_user();
     }

@@ -29,12 +29,17 @@ unsigned int run_test(const struct test_input *const test, const size_t *const c
     }
 }
 
-void run_all_tests(FILE *test_file)
+void run_all_tests(const char *const file_name)
 {
+    FILE *test_file = fopen(file_name, "r");
+    if(test_file == NULL)
+    {
+        printf(color_red("No targets specified.\n"));
+        return;
+    }
     size_t counter = 0;
 	size_t counter_true = 0;
     struct test_input test_in;
-
     while(fscanf(test_file, "%lf, %lf, %lf, %lf, %lf, %d",&test_in.coef_exp.a, &test_in.coef_exp.b, &test_in.coef_exp.c,
                                                           &test_in.rts_exp.x1, &test_in.rts_exp.x2, &test_in.nRoots_exp) == 6)
     {
