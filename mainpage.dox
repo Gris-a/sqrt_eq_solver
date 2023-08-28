@@ -28,13 +28,13 @@
  *
  * ### Run options:
  *
- * - --help&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+ * - - -help&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
  * Prints info about program usage.
  *
- * - --test FILE&emsp;&emsp;&emsp;&emsp;&emsp;
+ * - - -test FILE&emsp;&emsp;&emsp;&emsp;&emsp;
  * Run tests from FILE.
  *
- * - --user&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+ * - - -user&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
  * Solve equation with user input-output.
  *
  * ## About The Program
