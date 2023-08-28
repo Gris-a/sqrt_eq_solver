@@ -24,9 +24,9 @@ struct arguments
 */
 struct arguments_check
 {
-    int help;   ///< @b true if my_args.help in @b argv.
+    int help;         ///< @b true if my_args.help in @b argv.
     const char *test; ///< Pointer to string that contains path to file with tests.
-    int user;   ///< @b true if my_args.user in @b argv.
+    int user;         ///< @b true if my_args.user in @b argv.
 };
 
 /**
