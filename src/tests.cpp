@@ -22,10 +22,10 @@ unsigned int run_test(const struct test_input *const test, const size_t *const c
     else
     {
         printf(color_red  ("FAILED TEST №%zu\n"), *counter);
-        printf(color_green("EXPECTED: x1= %.*lf, x2= %.*lf, n_roots=%3d\n"), digits, test->rts_exp.x1,
+        printf(color_green("EXPECTED: x1= %.*lg, x2= %.*lg, n_roots=%3d\n"), digits, test->rts_exp.x1,
                                                                              digits, test->rts_exp.x2,
                                                                              test->rts_exp.n_roots);
-        printf(color_red  ("RECEIVED: x1= %.*lf, x2= %.*lf, n_roots=%3d\n"), digits, rts.x1,
+        printf(color_red  ("RECEIVED: x1= %.*lg, x2= %.*lg, n_roots=%3d\n"), digits, rts.x1,
                                                                              digits, rts.x2,
                                                                              rts.n_roots);
 

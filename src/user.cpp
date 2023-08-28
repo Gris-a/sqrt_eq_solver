@@ -107,10 +107,10 @@ void printf_roots(const struct roots *const rts)
             printf("Нет корней.\n");
             break;
         case ONE_ROOT:
-            printf("%.*lf - корень уравнения.\n", digits, rts->x1);
+            printf("%.*lg - корень уравнения.\n", digits, rts->x1);
             break;
         case TWO_ROOTS:
-            printf("%.*lf и %.*lf - корни уравнения.\n", digits, rts->x1, digits, rts->x2);
+            printf("%.*lg и %.*lg - корни уравнения.\n", digits, rts->x1, digits, rts->x2);
             break;
         default:
             printf("Не верное количество корней.\n");
