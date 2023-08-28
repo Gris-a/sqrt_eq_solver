@@ -35,7 +35,7 @@ g++ flag_check.cpp main.cpp solve.cpp tests.cpp user.cpp -o solver.out
 
 ## About The Program
 
-Основные структуры(roots, coefficients и test_input, arguments) и константы(M_ERR, my_args, nRoots) определены в файле main.h.\
+Основные структуры(roots, coefficients и test_input, arguments) и константы(M_ERR, my_args, nRoots) определены в файле main.h.
 
 ### Solving equation
 
