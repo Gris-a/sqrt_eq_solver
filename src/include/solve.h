@@ -17,7 +17,7 @@ const int digits = 10;
 /**
  * @brief Constants that determine the number of roots.
 */
-enum nRoots
+enum NRoots
 {
     INF_ROOTS = -1, ///< infinite number of roots.
     ZERO_ROOTS = 0, ///< zero roots.
@@ -42,7 +42,7 @@ struct roots
 {
     double x1;           ///< First root of the equation.
     double x2;           ///< Second root of the equation.
-    enum nRoots n_roots; ///< Number of roots.
+    enum NRoots n_roots; ///< Number of roots.
 };
 
 /**
