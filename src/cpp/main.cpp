@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include "./include/solve.h"
-#include "./include/user.h"
-#include "./include/tests.h"
-#include "./include/args_check.h"
+#include "../include/solve.h"
+#include "../include/user.h"
+#include "../include/tests.h"
+#include "../include/args_check.h"
 
 /**
  * @file main.cpp

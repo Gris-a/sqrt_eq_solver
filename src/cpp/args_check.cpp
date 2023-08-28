@@ -1,5 +1,5 @@
 #include<string.h>
-#include "./include/args_check.h"
+#include "../include/args_check.h"
 
 /**
  * @file args_check.cpp

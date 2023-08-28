@@ -1,9 +1,9 @@
 #include <stdio.h>
 #include <assert.h>
 #include <math.h>
-#include "./include/solve.h"
-#include "./include/user.h"
-#include "./include/colors.h"
+#include "../include/solve.h"
+#include "../include/user.h"
+#include "../include/colors.h"
 
 /**
  * @file user.cpp
