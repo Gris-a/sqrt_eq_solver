@@ -13,6 +13,7 @@
  * @note Если два корня близки друг к другу, возвращает вывод как один корень.
 */
 int solve_equation(const struct coefficients * const coef, struct roots *const rts);
+
 /**
  * @brief Solves quadratic equation.
  * @param coef Pointer to coefficients of the equation.
@@ -20,6 +21,7 @@ int solve_equation(const struct coefficients * const coef, struct roots *const r
  * @return Returns number of roots of the equation  according to @b nRoots.
 */
 int quadratic_equation(const struct coefficients * const coef, struct roots *const rts);
+
 /**
  * @brief Solves linear equation.
  * @param coef Pointer to coefficients of the equation.
@@ -27,6 +29,7 @@ int quadratic_equation(const struct coefficients * const coef, struct roots *con
  * @return Returns number of roots of the equation according to @b nRoots.
 */
 int linear_equation(const struct coefficients * const coef, struct roots *const rts);
+
 /**
  * @brief Compares @a float variables @a a and @a b with measurement еrror @b err.
  * @return @b true if @b a close to @b b, otherwise @b false.

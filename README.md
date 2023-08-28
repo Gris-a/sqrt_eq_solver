@@ -14,7 +14,7 @@ git clone https://github.com/Gris-a/sqrt_eq_solver
 
 ```
 cd sqrt_eq_solver/src
-g++ flag_check.cpp main.cpp solve.cpp tests.cpp user.cpp -o solver.out
+g++ main.cpp solve.cpp tests.cpp user.cpp -o solver.out
 ```
 
 ## Usage
@@ -22,16 +22,19 @@ g++ flag_check.cpp main.cpp solve.cpp tests.cpp user.cpp -o solver.out
 - Run program
 
 ```
-<program path> [options]
+<program path> [options] [target]
 ```
 
 ### Run options:
 
-- --help&emsp;&emsp;&emsp;Prints info about program usage.
+- --help&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+    Prints info about program usage.
 
-- --test&emsp;&emsp;&emsp;Run tests from tests.txt.
+- --test DIRECTORY&emsp;&nbsp;&nbsp;&nbsp;
+    Run tests from DIRECTORY.
 
-- --user&emsp;&emsp;&emsp;Solve equation with user input-output.
+- --user&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+    Solve equation with user input-output.
 
 ## About The Program
 
@@ -47,7 +50,7 @@ g++ flag_check.cpp main.cpp solve.cpp tests.cpp user.cpp -o solver.out
 
 ### Testing program(--test)
 
-Тестирующие функции определены в файле tests.cpp. Программа тестирует значения, указанные в файле tests.txt. Значения в файле упорядочены согласно структуре test_input.\
+Тестирующие функции определены в файле tests.cpp. Программа тестирует значения, указанные в DIRECTORY. Значения в файле упорядочены согласно структуре test_input.\
 По завершении тестирования выводятся провальные тесты и количество успешно прошедших.
 
 ### User interface(--user)

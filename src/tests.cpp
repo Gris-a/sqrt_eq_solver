@@ -9,36 +9,41 @@
  * @brief Functions for testing.
 */
 
-void run_test(const struct test_input *const test, size_t *const counter, size_t *const counter_true)
+unsigned int run_test(const struct test_input *const test, const size_t *const counter)
 {
     struct roots rts = {0.0, 0.0};
 	int nRoots = solve_equation(&test->coef_exp, &rts);
-	(*counter)++;
+
     if((nRoots == test->nRoots_exp && ((float_cmp(rts.x1, test->rts_exp.x1, M_ERR) && float_cmp(rts.x2, test->rts_exp.x2, M_ERR)) ||
                                        (float_cmp(rts.x1, test->rts_exp.x2, M_ERR) && float_cmp(rts.x2, test->rts_exp.x1, M_ERR)))))
     {
-        (*counter_true)++;
+        return 1;
     }
     else
     {
-        printf(color_red("FAILED TEST №%zu\n"), *counter);
+        printf(color_red  ("FAILED TEST №%zu\n"), *counter);
         printf(color_green("EXPECTED: x1= %10lg, x2= %10lg, nRoots=%3d\n"), test->rts_exp.x1, test->rts_exp.x2, test->nRoots_exp);
-        printf(color_red("RECEIVED: x1= %10lg, x2= %10lg, nRoots=%3d\n"), rts.x1, rts.x2, nRoots);
+        printf(color_red  ("RECEIVED: x1= %10lg, x2= %10lg, nRoots=%3d\n"), rts.x1, rts.x2, nRoots);
+
+        return 0;
     }
 }
 
-void run_all_tests(void)
+void run_all_tests(FILE *test_file)
 {
     size_t counter = 0;
 	size_t counter_true = 0;
-    FILE *test_file = fopen("tests.txt", "r");
-    struct test_input testo;
-    while(fscanf(test_file, "%lf, %lf, %lf, %lf, %lf, %d",&testo.coef_exp.a, &testo.coef_exp.b, &testo.coef_exp.c,
-                                                          &testo.rts_exp.x1, &testo.rts_exp.x2, &testo.nRoots_exp) == 6)
+    struct test_input test_in;
+
+    while(fscanf(test_file, "%lf, %lf, %lf, %lf, %lf, %d",&test_in.coef_exp.a, &test_in.coef_exp.b, &test_in.coef_exp.c,
+                                                          &test_in.rts_exp.x1, &test_in.rts_exp.x2, &test_in.nRoots_exp) == 6)
     {
-        run_test(&testo, &counter, &counter_true);
+        counter++;
+        counter_true += run_test(&test_in, &counter);
     }
+
     fclose(test_file);
+
     printf_tests_results(counter, counter_true);
 }
 

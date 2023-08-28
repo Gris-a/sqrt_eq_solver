@@ -16,51 +16,63 @@ void solve_equation_user(void)
     struct coefficients coef = {0.0, 0.0, 0.0};
     struct roots rts = {0.0, 0.0};
     int nRoots = 0;
+
     if(get_coefficients(&coef))
     {
         printf(color_red("\n"
                "End of File.\n"));
+
         return;
     }
+
     nRoots = solve_equation(&coef, &rts);
+
     printf_roots(&rts, nRoots);
 }
 
 int get_coefficients(struct coefficients *const coef)
 {
     assert(coef != NULL);
+
     printf("Введите коэффициент перед x^2: ");
     if(check_scanf_double(&coef->a))
     {
         return 1;
     }
+
     printf("Введите коэффициент перед x: ");
     if(check_scanf_double(&coef->b))
     {
         return 1;
     }
+
     printf("Введите свободный член: ");
     if(check_scanf_double(&coef->c))
     {
         return 1;
     }
+
     return 0;
 }
 
 int check_scanf_double(double *const dbl)
 {
     assert(dbl != NULL);
+
     char ncheck = '\0';
     int scanf_out = 0;
+
     while(1)
     {
         scanf_out = scanf("%lg%c", dbl, &ncheck);
+
         if((scanf_out != 2) || (ncheck != '\n'))
         {
             if(clean_buff())
             {
                 return 1;
             }
+
             printf("Некорректный ввод, попробуйте снова: ");
         }
         else
@@ -73,21 +85,22 @@ int check_scanf_double(double *const dbl)
 int clean_buff(void)
 {
     int ch = 0;
+
     while((ch = getchar()) != '\n' && ch != EOF)
     {
         ;
     }
+
     return ch;
 }
 
 void printf_roots(const struct roots *const rts, const int nRoots)
 {
     assert(rts != NULL);
-    assert(!isnan(rts->x1));
-    assert(!isnan(rts->x2));
     assert(isfinite(rts->x1));
     assert(isfinite(rts->x2));
     assert(!isnan(nRoots));
+
     switch(nRoots)
     {
         case INF_ROOTS:

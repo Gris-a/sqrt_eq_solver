@@ -1,9 +1,9 @@
 #include <stdio.h>
+#include <string.h>
 #include "./include/main.h"
 #include "./include/solve.h"
 #include "./include/user.h"
 #include "./include/tests.h"
-#include "./include/flag_check.h"
 
 /**
  * @file main.cpp
@@ -24,35 +24,67 @@ int main(const int argc, char *argv[])
         printf("This programm solves quadratic equation.\n");
         printf("ZAG, 2023.\n"
                 "\n");
+
         return 0;
     }
-    int test = flag_check(argc, argv, my_args.test);
-    int user = flag_check(argc, argv, my_args.user);
-    int help = flag_check(argc, argv, my_args.help);
-    int undef_argc = (argc - 1 - test - user - help) != 0;
-    if(undef_argc || help)
+
+    int test = 0;
+    int help = 0;
+    int user = 0;
+    int undef_arg = 0;
+
+    for(int i = 1; i < argc; i++)
     {
-        if(undef_argc)
+        if(!strncmp(my_args.help, argv[i], ARG_LEN))
+            {
+                help = 1;
+                break;
+            }
+
+        if(!strncmp(my_args.test, argv[i], ARG_LEN))
+            {
+                test = ++i;
+                continue;
+            }
+
+        if(!strncmp(my_args.user, argv[i], ARG_LEN))
+            {
+                user = 1;
+                continue;
+            }
+
+        undef_arg = 1;
+        break;
+    }
+
+    if(undef_arg || help)
+    {
+        if(undef_arg)
         {
             printf("Undefined options.\n");
         }
+
         printf("Usage: <program path> [options]\n"
                "Options:\n"
-               "--help          Print this message and exit.\n"
+               "--help              Print this message and exit.\n"
                "\n"
-               "--test          Run tests for program.\n"
+               "--test DIRECTORY    Run tests for program.\n"
                "\n"
-               "--user          Solve equation with user input-output.\n"
+               "--user              Solve equation with user input-output.\n"
                "\n");
-        return (undef_argc) ? 1 : 0;
+
+        return (undef_arg) ? 1 : 0;
     }
+
     if(test)
     {
-        run_all_tests();
+        run_all_tests(fopen(argv[test], "r"));
     }
+
     if(user)
     {
         solve_equation_user();
     }
+
     return 0;
 }
