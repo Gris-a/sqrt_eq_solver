@@ -22,7 +22,7 @@ g++ flag_check.cpp main.cpp solve.cpp tests.cpp user.cpp -o solver.out
 - Run program
 
 ```
-./<program name> [options]
+<program path> [options]
 ```
 
 ### Run options:

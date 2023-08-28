@@ -10,3 +10,4 @@
 *.pdf
 *.out
 *.o
+string_functions.cpp

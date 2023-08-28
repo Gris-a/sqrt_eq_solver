@@ -36,7 +36,7 @@ int main(const int argc, char *argv[])
         {
             printf("Undefined options.\n");
         }
-        printf("Usage: ./programm.out [options]\n"
+        printf("Usage: <program path> [options]\n"
                "Options:\n"
                "--help          Print this message and exit.\n"
                "\n"
