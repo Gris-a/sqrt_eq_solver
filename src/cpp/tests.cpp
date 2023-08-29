@@ -1,7 +1,11 @@
-#include <stdio.h>
 #include "../include/tests.h"
-#include "../include/solve.h" //TODO:можно неявно?
+
+#include <assert.h>
+#include <math.h>
+#include <stdio.h>
+
 #include "../include/colors.h"
+#include "../include/solve.h"
 
 /**
  * @file tests.cpp
@@ -11,6 +15,10 @@
 
 unsigned int run_test(const struct test_input *const test, const size_t *const counter)
 {
+    assert(!isnan(*counter));
+    assert(test != NULL);
+    assert(counter != NULL);
+
     struct roots rts = {0.0, 0.0, ZERO_ROOTS};
 	solve_equation(&test->coef_exp, &rts);
 
@@ -56,6 +64,9 @@ void run_all_tests(const char *const file_name)
 
 void printf_tests_results(const size_t counter, const size_t counter_true)
 {
+    assert(!isnan(counter));
+    assert(!isnan(counter_true));
+
     if(counter == counter_true)
     {
 	    printf(color_green ("%zu/%zu tests passed\n"), counter_true, counter);
