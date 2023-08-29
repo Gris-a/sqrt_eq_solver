@@ -4,6 +4,9 @@
  * @brief Processing command line arguments.
 */
 
+#ifndef ARGS_CHECK_H
+#define ARGS_CHECK_H
+
 /**
  * Max length of args in my_args.
 */
@@ -37,3 +40,5 @@ struct arguments_check
  * @return @b true if there is undefined arguments.
 */
 int args_check(const int argc, const char *argv[], struct arguments_check *const check_arg);
+
+#endif //ARGS_CHECK_H

@@ -4,6 +4,11 @@
  * @brief Testing the program.
 */
 
+#ifndef TESTS_H
+#define TESTS_H
+
+#include "solve.h" //TODO: если убрать, то порядок подключения в tests.cpp влияет на компиляцию, что делать.
+
 /**
  * @brief Test input.
  * Contains coefficients and expected output.
@@ -35,3 +40,5 @@ void run_all_tests(const char *const file_name);
  * @param counter_true Counter of successful tests.
 */
 void printf_tests_results(const size_t counter, const size_t counter_true);
+
+#endif //TESTS_H

@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include "../include/solve.h"
+#include "../include/args_check.h"
+#include "../include/solve.h" //TODO: можно убрать
 #include "../include/user.h"
 #include "../include/tests.h"
-#include "../include/args_check.h"
 
 /**
  * @file main.cpp
@@ -27,7 +27,7 @@ int main(const int argc, const char *argv[])
         return 0;
     }
 
-    struct arguments_check check_arg= {0, NULL, 0};
+    struct arguments_check check_arg = {0, NULL, 0};
     int undef_arg = args_check(argc, argv, &check_arg);
 
     if(undef_arg || check_arg.help)

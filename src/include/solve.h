@@ -4,6 +4,10 @@
  * @brief Solving equation.
 */
 
+#ifndef SOLVE_H
+#define SOLVE_H
+
+
 /**
  * A measurement error. Used when comparing @a float type.
 */
@@ -73,3 +77,5 @@ void linear_equation(const struct coefficients * const coef, struct roots *const
  * @return @b true if @b a is equal to @b b with an error of @b err.
 */
 int float_cmp(const double a, const double b, const double err);
+
+#endif //SOLVE_H

@@ -4,6 +4,9 @@
  * @brief User input-output.
 */
 
+#ifndef USER_H
+#define USER_H
+
 /**
  * @brief Solves quadratic equation with user input-output.
  * Calls get_coefficients(), calls solve_equation() to solve equation and printf_roots() to print the solution.
@@ -40,3 +43,5 @@ int clean_buff(void);
  * @param rts Pointer to roots of the equation.
 */
 void printf_roots(const struct roots *const rts);
+
+#endif //USER_H

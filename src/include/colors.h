@@ -4,6 +4,9 @@
  * @brief Macros for highlighting text.
 */
 
+#ifndef COLORS_H
+#define COLORS_H
+
 /**
  * Red color escape-sequence.
 */
@@ -38,3 +41,5 @@
  * Yellow colored text.
 */
 #define color_yellow(str) YELLOW_ESCAPE_SEQUENCE str RESET_ESCAPE_SEQUENCE
+
+#endif //COLORS_H
