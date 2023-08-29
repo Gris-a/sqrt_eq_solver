@@ -1,7 +1,8 @@
-#include <stdio.h>
+#include "../include/solve.h"
+
 #include <assert.h>
 #include <math.h>
-#include "../include/solve.h"
+#include <stdio.h>
 
 /**
  * @file solve.cpp
@@ -30,6 +31,12 @@ void solve_equation(const struct coefficients *const coef, struct roots *const r
 
 void quadratic_equation(const struct coefficients *const coef, struct roots *const rts)
 {
+    assert(isfinite(coef->a));
+    assert(isfinite(coef->b));
+    assert(isfinite(coef->c));
+    assert(rts != NULL);
+    assert(coef != NULL);
+
     if(float_cmp(coef->c, 0.0, m_err))
     {
         if(float_cmp(coef->b, 0.0, m_err))
@@ -84,6 +91,12 @@ void quadratic_equation(const struct coefficients *const coef, struct roots *con
 
 void linear_equation(const struct coefficients *const coef, struct roots *const rts)
 {
+    assert(isfinite(coef->a));
+    assert(isfinite(coef->b));
+    assert(isfinite(coef->c));
+    assert(rts != NULL);
+    assert(coef != NULL);
+
     if(float_cmp(coef->b, 0.0, m_err))
     {
         if(float_cmp(coef->c, 0.0, m_err))
@@ -105,5 +118,8 @@ void linear_equation(const struct coefficients *const coef, struct roots *const 
 
 int float_cmp(const double a, const double b, const double err)
 {
+    assert(isfinite(a));
+    assert(isfinite(b));
+
     return fabs(a - b) < err;
 }
