@@ -7,6 +7,8 @@
 #ifndef USER_H
 #define USER_H
 
+#include "solve.h"
+
 /**
  * @brief Solves quadratic equation with user input-output.
  * Calls get_coefficients(), calls solve_equation() to solve equation and printf_roots() to print the solution.
