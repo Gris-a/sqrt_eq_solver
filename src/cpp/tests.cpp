@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include "../include/tests.h"
-#include "../include/solve.h" //TODO:можно убрать
+#include "../include/solve.h" //TODO:можно неявно?
 #include "../include/colors.h"
 
 /**
