@@ -1,8 +1,9 @@
 #include <stdio.h>
+
 #include "../include/args_check.h"
-#include "../include/solve.h" //TODO: можно неявно?
-#include "../include/user.h"
+#include "../include/solve.h"
 #include "../include/tests.h"
+#include "../include/user.h"
 
 /**
  * @file main.cpp
@@ -10,12 +11,6 @@
  * @brief Program solves quadratic equation.
 */
 
-/**
- * @brief Main function that depends on command line arguments.
- * @param argc Number of command line arguments.
- * @param argv Array with pointers to command line arguments.
- * @return @b 0 if arguements are valid.
-*/
 int main(const int argc, const char *argv[])
 {
     if(argc == 1)
