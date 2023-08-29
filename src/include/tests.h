@@ -7,7 +7,8 @@
 #ifndef TESTS_H
 #define TESTS_H
 
-#include "solve.h" //TODO: если убрать, то порядок подключения в tests.cpp влияет на компиляцию, что делать.
+#include "solve.h"
+#include <stddef.h>
 
 /**
  * @brief Test input.
