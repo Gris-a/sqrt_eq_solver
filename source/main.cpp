@@ -17,6 +17,8 @@ int main(const int argc, const char *argv[])
     {
         printf("This program solves quadratic equation.\n");
         printf("ZAG, 2023.\n"
+               "\n"
+               "--help for more info.\n"
                "\n");
 
         return 0;
