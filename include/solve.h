@@ -7,14 +7,13 @@
 #ifndef SOLVE_H
 #define SOLVE_H
 
-
 /**
  * A measurement error. Used when comparing @a float type.
 */
 const double m_err = 1e-10;
 
 /**
- * Количество отображаемых цифр после запятой.
+ * Максимальное количество отображаемых цифр после запятой.
 */
 const int digits = 10;
 
@@ -23,10 +22,10 @@ const int digits = 10;
 */
 enum NRoots
 {
-    INF_ROOTS = -1, ///< infinite number of roots.
-    ZERO_ROOTS = 0, ///< zero roots.
-    ONE_ROOT = 1,   ///< one root.
-    TWO_ROOTS = 2   ///< two roots.
+    INF_ROOTS  = -1, ///< infinite number of roots.
+    ZERO_ROOTS =  0, ///< zero roots.
+    ONE_ROOT   =  1, ///< one root.
+    TWO_ROOTS  =  2  ///< two roots.
 };
 
 /**
