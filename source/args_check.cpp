@@ -1,8 +1,8 @@
-#include "../include/args_check.h"
-
 #include <assert.h>
 #include <math.h>
 #include <string.h>
+
+#include "../include/args_check.h"
 
 /**
  * @file args_check.cpp

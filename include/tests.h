@@ -7,8 +7,8 @@
 #ifndef TESTS_H
 #define TESTS_H
 
-#include "solve.h"
 #include <stddef.h>
+#include "solve.h"
 
 /**
  * @brief Test input.

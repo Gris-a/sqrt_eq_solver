@@ -1,8 +1,8 @@
-#include "../include/tests.h"
-
 #include <assert.h>
 #include <math.h>
 #include <stdio.h>
+
+#include "../include/tests.h"
 
 #include "../include/colors.h"
 #include "../include/solve.h"
