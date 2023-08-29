@@ -1,5 +1,8 @@
-#include <string.h>
 #include "../include/args_check.h"
+
+#include <assert.h>
+#include <math.h>
+#include <string.h>
 
 /**
  * @file args_check.cpp
@@ -9,6 +12,10 @@
 
 int args_check(const int argc, const char *argv[], struct arguments_check *const check_arg)
 {
+    assert(!isnan(argc));
+    assert(argv != NULL);
+    assert(check_arg != NULL);
+
     for(int i = 1; i < argc; i++)
     {
         if(!strncmp(my_args.help, argv[i], max_arg_len))
