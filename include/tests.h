@@ -7,6 +7,7 @@
 #ifndef TESTS_H
 #define TESTS_H
 
+#include <stdbool.h>
 #include <stddef.h>
 #include "solve.h"
 

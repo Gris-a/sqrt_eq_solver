@@ -7,6 +7,7 @@
 #ifndef USER_H
 #define USER_H
 
+#include <stdbool.h>
 #include "solve.h"
 
 /**
@@ -19,8 +20,8 @@ void solve_equation_user(void);
  * @brief Gets coefficients of equation from @b stdin.
  * @param coef Pointer to coefficients of equation.
  * @return @b true if @b EOF.
- * Вызывает check_scanf_double() три раза для @b coef->a, @b coef->b и @b coef->c.
- * Выход из функции если check_scanf_double() находит @b EOF.
+ * Вызывает scnaf_check_double() три раза для @b coef->a, @b coef->b и @b coef->c.
+ * Выход из функции если scnaf_check_double() находит @b EOF.
 */
 bool get_coefficients(struct Coefficients *const coef);
 
@@ -31,7 +32,7 @@ bool get_coefficients(struct Coefficients *const coef);
  * Проверяет ввод на переменную типа @a double, иначе вызывает clean_buff() и просит повторить вывод.
  * Выход из функции если clean_buff() находит @b EOF.
 */
-bool check_scanf_double(double *const dbl);
+bool scnaf_check_double(double *const dbl);
 
 /**
  * @brief Clears @b stdin buffer.

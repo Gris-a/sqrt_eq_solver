@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <math.h>
+#include <stdbool.h>
 #include <stdio.h>
 
 #include "../include/user.h"
@@ -35,19 +36,19 @@ bool get_coefficients(struct Coefficients *const coef)
     assert(coef != NULL);
 
     printf("Введите коэффициент перед x^2: ");
-    if(check_scanf_double(&coef->a))
+    if(scnaf_check_double(&coef->a))
     {
         return true;
     }
 
     printf("Введите коэффициент перед x: ");
-    if(check_scanf_double(&coef->b))
+    if(scnaf_check_double(&coef->b))
     {
         return true;
     }
 
     printf("Введите свободный член: ");
-    if(check_scanf_double(&coef->c))
+    if(scnaf_check_double(&coef->c))
     {
         return true;
     }
@@ -55,7 +56,7 @@ bool get_coefficients(struct Coefficients *const coef)
     return false;
 }
 
-bool check_scanf_double(double *const dbl)
+bool scnaf_check_double(double *const dbl)
 {
     assert(dbl != NULL);
 

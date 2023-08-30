@@ -1,4 +1,5 @@
 #include <assert.h>
+#include <stdbool.h>
 #include <string.h>
 
 #include "../include/args_check.h"
@@ -12,7 +13,6 @@
 bool check_args(const int argc, const char *argv[], struct Config_settings *const config_settings)
 {
     assert(argv != NULL);
-    assert(config_settings != NULL);
 
     for(int i = 1; i < argc; i++)
     {

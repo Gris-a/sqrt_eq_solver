@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <math.h>
+#include <stdbool.h>
 #include <stdio.h>
 
 #include "../include/solve.h"
@@ -66,7 +67,7 @@ void quadratic_equation(const struct Coefficients *const coef, struct Roots *con
 
     double D = coef->b * coef->b - 4 * coef->a * coef->c;
 
-    if(float_cmp(D / coef->a / coef->a, 0, M_ERR))
+    if(float_cmp(D / coef->a / coef->a, 0, M_ERR * M_ERR))
     {
         rts->x1 = rts->x2 = - (coef->b / (2 * coef->a));
         rts->n_roots = ONE_ROOT;
@@ -110,7 +111,7 @@ void linear_equation(const struct Coefficients *const coef, Roots *const rts)
         rts->n_roots = ONE_ROOT;
     }
 }
-
+//TODO: нормальное сравнение чисел
 bool float_cmp(const double a, const double b, const double ERR)
 {
     assert(isfinite(a));

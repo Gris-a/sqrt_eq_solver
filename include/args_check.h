@@ -7,10 +7,12 @@
 #ifndef ARGS_CHECK_H
 #define ARGS_CHECK_H
 
+#include <stdbool.h>
+
 /**
  * Max length of args in MY_ARGS.
 */
-const int MAX_ARG_LEN = 32;
+const size_t MAX_ARG_LEN = 32;
 
 /**
  * @brief Command line arguments of the program.

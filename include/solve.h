@@ -7,6 +7,8 @@
 #ifndef SOLVE_H
 #define SOLVE_H
 
+#include <stdbool.h>
+
 /**
  * A measurement error. Used when comparing @a float type.
 */
