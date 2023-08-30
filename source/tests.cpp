@@ -13,27 +13,26 @@
  * @brief Functions for testing.
 */
 
-unsigned int run_test(const struct test_input *const test, const size_t *const counter)
+bool run_test(const struct Test_input *const test, const size_t *const counter)
 {
-    assert(!isnan(*counter));
     assert(test != NULL);
     assert(counter != NULL);
 
-    struct roots rts = {0.0, 0.0, ZERO_ROOTS};
+    struct Roots rts = {0, 0, ZERO_ROOTS};
 	solve_equation(&test->coef_exp, &rts);
 
-    if((rts.n_roots == test->rts_exp.n_roots && ((float_cmp(rts.x1, test->rts_exp.x1, m_err) && float_cmp(rts.x2, test->rts_exp.x2, m_err)) ||
-                                                 (float_cmp(rts.x1, test->rts_exp.x2, m_err) && float_cmp(rts.x2, test->rts_exp.x1, m_err)))))
+    if((rts.n_roots == test->rts_exp.n_roots && ((float_cmp(rts.x1, test->rts_exp.x1, M_ERR) && float_cmp(rts.x2, test->rts_exp.x2, M_ERR)) ||
+                                                 (float_cmp(rts.x1, test->rts_exp.x2, M_ERR) && float_cmp(rts.x2, test->rts_exp.x1, M_ERR)))))
     {
         return 1;
     }
 
     printf(color_red  ("FAILED TEST №%zu\n"), *counter);
-    printf(color_green("EXPECTED: x1= %.*lg, x2= %.*lg, n_roots=%3d\n"), digits, test->rts_exp.x1,
-                                                                         digits, test->rts_exp.x2,
+    printf(color_green("EXPECTED: x1= %.*lg, x2= %.*lg, n_roots=%3d\n"), DIGITS, test->rts_exp.x1,
+                                                                         DIGITS, test->rts_exp.x2,
                                                                          test->rts_exp.n_roots);
-    printf(color_red  ("RECEIVED: x1= %.*lg, x2= %.*lg, n_roots=%3d\n"), digits, rts.x1,
-                                                                         digits, rts.x2,
+    printf(color_red  ("RECEIVED: x1= %.*lg, x2= %.*lg, n_roots=%3d\n"), DIGITS, rts.x1,
+                                                                         DIGITS, rts.x2,
                                                                          rts.n_roots);
 
     return 0;
@@ -49,7 +48,7 @@ void run_all_tests(const char *const file_name)
     }
     size_t counter = 0;
 	size_t counter_true = 0;
-    struct test_input test_in;
+    struct Test_input test_in;
     while(fscanf(test_file, "%lf, %lf, %lf, %lf, %lf, %d",&test_in.coef_exp.a, &test_in.coef_exp.b, &test_in.coef_exp.c,
                                                           &test_in.rts_exp.x1, &test_in.rts_exp.x2, (int *)&test_in.rts_exp.n_roots) == 6)
     {
@@ -64,9 +63,6 @@ void run_all_tests(const char *const file_name)
 
 void printf_tests_results(const size_t counter, const size_t counter_true)
 {
-    assert(!isnan(counter));
-    assert(!isnan(counter_true));
-
     if(counter == counter_true)
     {
 	    printf(color_green ("%zu/%zu tests passed\n"), counter_true, counter);

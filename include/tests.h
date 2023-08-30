@@ -14,10 +14,10 @@
  * @brief Test input.
  * Contains coefficients and expected output.
 */
-struct test_input
+struct Test_input
 {
-    struct coefficients coef_exp; ///< Coefficients of equation.
-    struct roots rts_exp;         ///< Expected roots of equation.
+    struct Coefficients coef_exp; ///< Coefficients of equation.
+    struct Roots rts_exp;         ///< Expected roots of equation.
 };
 
 /**
@@ -27,7 +27,7 @@ struct test_input
  * @return @b true if test is succeded.
  * Выводит информацию о тесте, если он не прошёл.
 */
-unsigned int run_test(const struct test_input *const test, const size_t *const counter);
+bool run_test(const struct Test_input *const test, const size_t *const counter);
 
 /**
  * @brief Runs all test from file and prints number of successful tests.

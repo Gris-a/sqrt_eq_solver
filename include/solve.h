@@ -10,12 +10,12 @@
 /**
  * A measurement error. Used when comparing @a float type.
 */
-const double m_err = 1e-10;
+const double M_ERR = 1e-10;
 
 /**
  * Максимальное количество отображаемых цифр после запятой.
 */
-const int digits = 10;
+const int DIGITS = 10; // MAX_DIGITS
 
 /**
  * @brief Constants that determine the number of roots.
@@ -31,7 +31,7 @@ enum NRoots
 /**
  * @brief Coefficients of the quadratic equation.
 */
-struct coefficients
+struct Coefficients
 {
     double a; ///< Coefficient before x^2.
     double b; ///< Coefficient before x.
@@ -41,7 +41,7 @@ struct coefficients
 /**
  * @brief Roots of the quadratic equation.
 */
-struct roots
+struct Roots
 {
     double x1;           ///< First root of the equation.
     double x2;           ///< Second root of the equation.
@@ -53,28 +53,27 @@ struct roots
  * @param coef Pointer to coefficients of the equation.
  * @param rts Pointer to roots of the equation.
  * Если @b rts->a равно нулю, вызывает linear_equation(), иначе quadratic_equation().
- * @note Если два корня близки друг к другу, возвращает вывод как один корень.
 */
-void solve_equation(const struct coefficients * const coef, struct roots *const rts);
+void solve_equation(const struct Coefficients * const coef, struct Roots *const rts);
 
 /**
  * @brief Solves quadratic equation.
  * @param coef Pointer to coefficients of the equation.
  * @param rts Pointer to roots of the equation.
 */
-void quadratic_equation(const struct coefficients * const coef, struct roots *const rts);
+void quadratic_equation(const struct Coefficients * const coef, struct Roots *const rts);
 
 /**
  * @brief Solves linear equation.
  * @param coef Pointer to coefficients of the equation.
  * @param rts Pointer to roots of the equation.
 */
-void linear_equation(const struct coefficients * const coef, struct roots *const rts);
+void linear_equation(const struct Coefficients * const coef, struct Roots *const rts);
 
 /**
- * @brief Compares @a float variables @a a and @a b with measurement еrror @b err.
- * @return @b true if @b a is equal to @b b with an error of @b err.
+ * @brief Compares @a float variables @a a and @a b with measurement еrror @b ERR.
+ * @return @b true if @b a is equal to @b b with an error of @b ERR.
 */
-int float_cmp(const double a, const double b, const double err);
+bool float_cmp(const double a, const double b, const double ERR);
 
 #endif //SOLVE_H

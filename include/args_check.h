@@ -8,37 +8,40 @@
 #define ARGS_CHECK_H
 
 /**
- * Max length of args in my_args.
+ * Max length of args in MY_ARGS.
 */
-const int max_arg_len = 32;
+const int MAX_ARG_LEN = 32;
 
 /**
  * @brief Command line arguments of the program.
 */
-struct arguments
+struct Arguments
 {
-    char help[max_arg_len]; ///< For more info.
-    char test[max_arg_len]; ///< For testing.
-    char user[max_arg_len]; ///< For user input-output.
-} const my_args = {"--help", "--test", "--user"}; ///< Arguments.
+    char help[MAX_ARG_LEN]; ///< For more info.
+    char test[MAX_ARG_LEN]; ///< For testing.
+    char user[MAX_ARG_LEN]; ///< For user input-output.
+} const MY_ARGS = {"--help", "--test", "--user"}; ///< Arguments.
 
 /**
- * @brief Struct for detecting if arguments from my_args in argv.
+ * @brief Struct for detecting if arguments from MY_ARGS in argv.
 */
-struct arguments_check
+struct Config_settings
 {
-    int help;         ///< @b true if my_args.help in @b argv.
-    const char *test; ///< Pointer to string that contains path to file with tests.
-    int user;         ///< @b true if my_args.user in @b argv.
+    bool is_help;          ///< @b true if MY_ARGS.help in @b argv.
+
+    const char *test_path; ///< Pointer to string that contains path to file with tests.
+
+    bool is_interactive;   ///< @b true if MY_ARGS.user in @b argv.
 };
 
 /**
- * @brief Search arguments from my_args in argv.
+ * @brief Search arguments from MY_ARGS in argv.
  * @param argc Number of arguments of command line.
  * @param argv Array with pointers to command line arguments.
- * @param check_arg Pointer to struct that checks arguments.
+ * @param config_settings Pointer to struct that checks arguments.
  * @return @b true if there is undefined arguments.
 */
-int args_check(const int argc, const char *argv[], struct arguments_check *const check_arg);
+
+bool check_args(const int argc, const char *argv[], struct Config_settings *const config_settings);
 
 #endif //ARGS_CHECK_H

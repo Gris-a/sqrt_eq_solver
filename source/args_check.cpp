@@ -1,5 +1,4 @@
 #include <assert.h>
-#include <math.h>
 #include <string.h>
 
 #include "../include/args_check.h"
@@ -7,37 +6,39 @@
 /**
  * @file args_check.cpp
  * @author Gris-a
- * @brief
+ * @brief Processing command line arguments.
 */
 
-int args_check(const int argc, const char *argv[], struct arguments_check *const check_arg)
+bool check_args(const int argc, const char *argv[], struct Config_settings *const config_settings)
 {
-    assert(!isnan(argc));
     assert(argv != NULL);
-    assert(check_arg != NULL);
+    assert(config_settings != NULL);
 
     for(int i = 1; i < argc; i++)
     {
-        if(!strncmp(my_args.help, argv[i], max_arg_len))
-            {
-                check_arg->help = 1;
-                break;
-            }
+        if(!strncmp(MY_ARGS.help, argv[i], MAX_ARG_LEN))
+        {
+            config_settings->is_help = true;
 
-        if(!strncmp(my_args.test, argv[i], max_arg_len))
-            {
-                check_arg->test = argv[++i];
-                continue;
-            }
+            continue;
+        }
 
-        if(!strncmp(my_args.user, argv[i], max_arg_len))
-            {
-                check_arg->user = 1;
-                continue;
-            }
+        if(!strncmp(MY_ARGS.test, argv[i], MAX_ARG_LEN))
+        {
+            config_settings->test_path = argv[++i];
 
-        return 1;
+            continue;
+        }
+
+        if(!strncmp(MY_ARGS.user, argv[i], MAX_ARG_LEN))
+        {
+            config_settings->is_interactive = true;
+
+            continue;
+        }
+
+        return true;
     }
 
-    return 0;
+    return false;
 }

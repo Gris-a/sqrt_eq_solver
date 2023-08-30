@@ -14,8 +14,8 @@
 */
 void solve_equation_user(void)
 {
-    struct coefficients coef = {0.0, 0.0, 0.0};
-    struct roots rts = {0.0, 0.0, ZERO_ROOTS};
+    struct Coefficients coef = {0, 0, 0};
+    struct Roots rts = {0, 0, ZERO_ROOTS};
 
     if(get_coefficients(&coef))
     {
@@ -30,39 +30,39 @@ void solve_equation_user(void)
     printf_roots(&rts);
 }
 
-int get_coefficients(struct coefficients *const coef)
+bool get_coefficients(struct Coefficients *const coef)
 {
     assert(coef != NULL);
 
     printf("Введите коэффициент перед x^2: ");
     if(check_scanf_double(&coef->a))
     {
-        return 1;
+        return true;
     }
 
     printf("Введите коэффициент перед x: ");
     if(check_scanf_double(&coef->b))
     {
-        return 1;
+        return true;
     }
 
     printf("Введите свободный член: ");
     if(check_scanf_double(&coef->c))
     {
-        return 1;
+        return true;
     }
 
-    return 0;
+    return false;
 }
 
-int check_scanf_double(double *const dbl)
+bool check_scanf_double(double *const dbl)
 {
     assert(dbl != NULL);
 
     char ncheck = '\0';
     int scanf_out = 0;
 
-    while(1)
+    while(true)
     {
         scanf_out = scanf("%lg%c", dbl, &ncheck);
 
@@ -70,14 +70,14 @@ int check_scanf_double(double *const dbl)
         {
             if(clean_buff() == EOF)
             {
-                return 1;
+                return true;
             }
 
             printf("Некорректный ввод, попробуйте снова: ");
         }
         else
         {
-            return 0;
+            return false;
         }
     }
 }
@@ -94,7 +94,7 @@ int clean_buff(void)
     return ch;
 }
 
-void printf_roots(const struct roots *const rts)
+void printf_roots(const struct Roots *const rts)
 {
     assert(rts != NULL);
     assert(isfinite(rts->x1));
@@ -109,10 +109,10 @@ void printf_roots(const struct roots *const rts)
             printf("Нет корней.\n");
             break;
         case ONE_ROOT:
-            printf("%.*lg - корень уравнения.\n", digits, rts->x1);
+            printf("%.*lg - корень уравнения.\n", DIGITS, rts->x1);
             break;
         case TWO_ROOTS:
-            printf("%.*lg и %.*lg - корни уравнения.\n", digits, rts->x1, digits, rts->x2);
+            printf("%.*lg и %.*lg - корни уравнения.\n", DIGITS, rts->x1, DIGITS, rts->x2);
             break;
         default:
             printf("Не верное количество корней.\n");

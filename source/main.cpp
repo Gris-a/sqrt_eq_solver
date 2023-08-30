@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 #include "../include/args_check.h"
 #include "../include/solve.h"
@@ -21,20 +22,20 @@ int main(const int argc, const char *argv[])
                "--help for more info.\n"
                "\n");
 
-        return 0;
+        return EXIT_SUCCESS;
     }
 
-    struct arguments_check check_arg = {0, NULL, 0};
-    int undef_arg = args_check(argc, argv, &check_arg);
+    struct Config_settings config_settings = {0, NULL, 0};
+    bool undef_arg = check_args(argc, argv, &config_settings);
 
-    if(undef_arg || check_arg.help)
+    if(undef_arg || config_settings.is_help)
     {
         if(undef_arg)
         {
             printf("Undefined options.\n");
         }
 
-        printf("Usage: <program path> [options] [target]\n"
+        printf("Usage: ./solver.out [options] [target]\n"
                "Options:\n"
                "--help              Print this message and exit.\n"
                "\n"
@@ -43,18 +44,18 @@ int main(const int argc, const char *argv[])
                "--user              Solve equation with user input-output.\n"
                "\n");
 
-        return (undef_arg) ? 1 : 0;
+        return (undef_arg) ? EXIT_FAILURE : EXIT_SUCCESS;
     }
 
-    if(check_arg.test != NULL)
+    if(config_settings.test_path != NULL)
     {
-        run_all_tests(check_arg.test);
+        run_all_tests(config_settings.test_path);
     }
 
-    if(check_arg.user)
+    if(config_settings.is_interactive)
     {
         solve_equation_user();
     }
 
-    return 0;
+    return EXIT_SUCCESS;
 }
