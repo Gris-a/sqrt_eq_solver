@@ -10,7 +10,7 @@
 git clone https://github.com/Gris-a/sqrt_eq_solver
 ```
 
-- Compile program
+- Compile program from sqrt_eq_solver folder
 
 ```
 make solver.out
