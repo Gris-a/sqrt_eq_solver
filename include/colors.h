@@ -23,6 +23,11 @@
 #define YELLOW_ESCAPE_SEQUENCE "\033[1;33m"
 
 /**
+ * Purple color escape-sequence.
+*/
+#define PURPLE_ESCAPE_SEQUENCE "\033[1;35m"
+
+/**
  * Reset color escape-sequence.
 */
 #define RESET_ESCAPE_SEQUENCE "\033[1;0m"
@@ -41,5 +46,10 @@
  * Yellow colored text.
 */
 #define color_yellow(str) YELLOW_ESCAPE_SEQUENCE str RESET_ESCAPE_SEQUENCE
+
+/**
+ * Purple colored text.
+*/
+#define color_purple(str) PURPLE_ESCAPE_SEQUENCE str RESET_ESCAPE_SEQUENCE
 
 #endif //COLORS_H

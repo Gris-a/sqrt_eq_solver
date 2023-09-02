@@ -51,7 +51,7 @@ void quadratic_equation(const struct Coefficients *const coef, struct Roots *con
     }
     if(float_cmp(coef->b, 0, M_ERR))
     {
-        if((coef->a < 0) == (coef->c < 0))
+        if(coef->a * coef->c > 0)
         {
             rts->n_roots = ZERO_ROOTS;
 
@@ -67,7 +67,7 @@ void quadratic_equation(const struct Coefficients *const coef, struct Roots *con
 
     double D = coef->b * coef->b - 4 * coef->a * coef->c;
 
-    if(float_cmp(D / coef->a / coef->a, 0, M_ERR * M_ERR))
+    if(float_cmp(D, 0, M_ERR))
     {
         rts->x1 = rts->x2 = - (coef->b / (2 * coef->a));
         rts->n_roots = ONE_ROOT;

@@ -42,9 +42,16 @@ bool scnaf_check_double(double *const dbl);
 int clean_buff(void);
 
 /**
- * @brief Analyzes the number of roots and prints them properly.
+ * @brief Prints solved equation, analyzes the number of roots and prints them properly.
+ * @param coef Pointer to coefficients of the equation.
  * @param rts Pointer to roots of the equation.
 */
-void printf_roots(const struct Roots *const rts);
+void printf_roots(const struct Coefficients *const coef, const struct Roots *const rts);
+
+/**
+ * @brief Prints equation.
+ * @param coef Coefficients of the equation.
+*/
+void printf_eq(const struct Coefficients *const coef);
 
 #endif //USER_H

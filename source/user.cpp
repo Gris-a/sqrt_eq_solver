@@ -13,6 +13,7 @@
  * @author Gris-a
  * @brief Functions with user input-output.
 */
+
 void solve_equation_user(void)
 {
     struct Coefficients coef = {0, 0, 0};
@@ -28,7 +29,7 @@ void solve_equation_user(void)
 
     solve_equation(&coef, &rts);
 
-    printf_roots(&rts);
+    printf_roots(&coef, &rts);
 }
 
 bool get_coefficients(struct Coefficients *const coef)
@@ -95,28 +96,56 @@ int clean_buff(void)
     return ch;
 }
 
-void printf_roots(const struct Roots *const rts)
+void printf_roots(const struct Coefficients *const coef, const struct Roots *const rts)
 {
     assert(rts != NULL);
+    assert(coef != NULL);
     assert(isfinite(rts->x1));
     assert(isfinite(rts->x2));
+    assert(isfinite(coef->a));
+    assert(isfinite(coef->b));
+    assert(isfinite(coef->c));
+
+    printf_eq(coef);
 
     switch(rts->n_roots)
     {
         case INF_ROOTS:
             printf("Корнем может быть любое действительное число.\n");
             break;
+
         case ZERO_ROOTS:
             printf("Нет корней.\n");
             break;
+
         case ONE_ROOT:
             printf("%.*lg - корень уравнения.\n", DIGITS, rts->x1);
             break;
+
         case TWO_ROOTS:
             printf("%.*lg и %.*lg - корни уравнения.\n", DIGITS, rts->x1, DIGITS, rts->x2);
             break;
+
         default:
             printf("Не верное количество корней.\n");
             break;
     }
+}
+//TODO No "1" if it is first. No sign of first element.
+void printf_eq(const struct Coefficients *const coef)
+{
+    assert(coef != NULL);
+    assert(isfinite(coef->a));
+    assert(isfinite(coef->b));
+    assert(isfinite(coef->c));
+
+    if(!float_cmp(coef->a, 0, M_ERR)) printf(color_purple("%+lg")"x^2", coef->a);
+    if(!float_cmp(coef->b, 0, M_ERR)) printf(color_purple("%+lg")"x" , coef->b);
+    if(!float_cmp(coef->c, 0, M_ERR)) printf(color_purple("%+lg")    , coef->c);
+
+    if(float_cmp(coef->a, 0, M_ERR) &&
+       float_cmp(coef->b, 0, M_ERR) &&
+       float_cmp(coef->c, 0, M_ERR))  printf(color_purple("0"));
+
+    printf(" = 0\n");
 }
