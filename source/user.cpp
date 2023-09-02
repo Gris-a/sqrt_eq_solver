@@ -143,9 +143,10 @@ void printf_eq(const struct Coefficients *const coef)
     if(!float_cmp(coef->b, 0, M_ERR)) printf(color_purple("%+lg")"x" , coef->b);
     if(!float_cmp(coef->c, 0, M_ERR)) printf(color_purple("%+lg")    , coef->c);
 
-    if(float_cmp(coef->a, 0, M_ERR) &&
-       float_cmp(coef->b, 0, M_ERR) &&
-       float_cmp(coef->c, 0, M_ERR))  printf(color_purple("0"));
+    if(float_cmp(coef->a, 0, M_ERR) && float_cmp(coef->b, 0, M_ERR) && float_cmp(coef->c, 0, M_ERR))
+    {
+        printf(color_purple("0"));
+    }
 
     printf(" = 0\n");
 }
