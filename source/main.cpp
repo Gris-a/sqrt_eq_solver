@@ -27,6 +27,7 @@ int main(const int argc, const char *argv[])
     }
 
     struct Config_settings config_settings = {0, NULL, 0};
+
     bool undef_arg = check_args(argc, argv, &config_settings);
 
     if(undef_arg || config_settings.is_help)

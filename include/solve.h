@@ -76,6 +76,6 @@ void linear_equation(const struct Coefficients * const coef, struct Roots *const
  * @brief Compares @a float variables @a a and @a b with measurement еrror @b ERR.
  * @return @b true if @b a is equal to @b b with an error of @b ERR.
 */
-bool float_cmp(const double a, const double b, const double ERR);
+bool float_cmp(const double a, const double b, const double ERR = M_ERR);
 
 #endif //SOLVE_H

@@ -139,11 +139,11 @@ void printf_eq(const struct Coefficients *const coef)
     assert(isfinite(coef->b));
     assert(isfinite(coef->c));
 
-    if(!float_cmp(coef->a, 0, M_ERR)) printf(color_purple("%+lg")"x^2", coef->a);
-    if(!float_cmp(coef->b, 0, M_ERR)) printf(color_purple("%+lg")"x" , coef->b);
-    if(!float_cmp(coef->c, 0, M_ERR)) printf(color_purple("%+lg")    , coef->c);
+    if(!float_cmp(coef->a, 0)) printf(color_purple("%+lg")"x^2", coef->a);
+    if(!float_cmp(coef->b, 0)) printf(color_purple("%+lg")"x" , coef->b);
+    if(!float_cmp(coef->c, 0)) printf(color_purple("%+lg")    , coef->c);
 
-    if(float_cmp(coef->a, 0, M_ERR) && float_cmp(coef->b, 0, M_ERR) && float_cmp(coef->c, 0, M_ERR))
+    if(float_cmp(coef->a, 0) && float_cmp(coef->b, 0) && float_cmp(coef->c, 0))
     {
         printf(color_purple("0"));
     }

@@ -1,5 +1,6 @@
 #include <assert.h>
 #include <stdbool.h>
+#include <stdlib.h>
 #include <string.h>
 
 #include "../include/args_check.h"
@@ -37,8 +38,8 @@ bool check_args(const int argc, const char *argv[], struct Config_settings *cons
             continue;
         }
 
-        return true;
+        return EXIT_FAILURE;
     }
 
-    return false;
+    return EXIT_SUCCESS;
 }
